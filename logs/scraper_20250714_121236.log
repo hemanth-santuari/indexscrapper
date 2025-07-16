@@ -1,0 +1,133 @@
+2025-07-14 12:12:36,881 - property_scraper - INFO - Starting property scraper...
+2025-07-14 12:12:36,881 - property_scraper - INFO - Using DEMO MODE for reliable operation.
+2025-07-14 12:12:36,881 - property_scraper - INFO - Starting property scraper in DEMO MODE...
+2025-07-14 12:12:36,882 - property_scraper - INFO - Skipping taluka Mumbai City as it's already processed.
+2025-07-14 12:12:36,882 - property_scraper - INFO - Skipping village Andheri as it's already processed.
+2025-07-14 12:12:36,882 - property_scraper - INFO - Skipping doc number 0 as it's already processed.
+2025-07-14 12:12:36,882 - property_scraper - INFO - Skipping doc number 1 as it's already processed.
+2025-07-14 12:12:36,882 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai Suburban_Bandra_2
+2025-07-14 12:12:37,181 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai Suburban, Village=Bandra, Doc#=2
+2025-07-14 12:12:37,182 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:12:37,697 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:12:37,705 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:12:37,706 - property_scraper - INFO - Simulating selecting Taluka: Mumbai Suburban
+2025-07-14 12:12:37,706 - property_scraper - INFO - Simulating selecting Village: Bandra
+2025-07-14 12:12:37,706 - property_scraper - INFO - Simulating entering Document Number: 2
+2025-07-14 12:12:37,707 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:12:38,709 - property_scraper - INFO - Captcha solved: SLE830
+2025-07-14 12:12:38,709 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:12:39,220 - property_scraper - INFO - Found 1 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:12:39,220 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:12:40,021 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL3-1330-2025
+2025-07-14 12:12:40,021 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:12:41,224 - property_scraper - INFO - Downloaded PDF: 1330-2025-IndexII_copy.pdf
+2025-07-14 12:12:41,224 - property_scraper - INFO - Successfully downloaded 1 PDFs from 'List No. 2' buttons
+2025-07-14 12:12:41,224 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai Suburban_Bandra_2
+2025-07-14 12:12:41,225 - property_scraper - INFO - Daily requests: 1/5
+2025-07-14 12:12:41,225 - property_scraper - INFO - Waiting 5.63 seconds before next request...
+2025-07-14 12:12:46,854 - property_scraper - INFO - Processing combination: 2025_Pune_Pune City_Shivajinagar_0
+2025-07-14 12:12:46,854 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Pune, Taluka=Pune City, Village=Shivajinagar, Doc#=0
+2025-07-14 12:12:46,855 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:12:47,356 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:12:47,356 - property_scraper - INFO - Simulating selecting District: Pune
+2025-07-14 12:12:47,357 - property_scraper - INFO - Simulating selecting Taluka: Pune City
+2025-07-14 12:12:47,357 - property_scraper - INFO - Simulating selecting Village: Shivajinagar
+2025-07-14 12:12:47,357 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-14 12:12:47,358 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:12:48,359 - property_scraper - INFO - Captcha solved: 98E2HZ
+2025-07-14 12:12:48,359 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:12:48,861 - property_scraper - INFO - Found 4 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:12:48,861 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:12:49,662 - property_scraper - WARNING - Failed to open PDF for entry #1 in new tab. The link may be broken.
+2025-07-14 12:12:49,662 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:12:50,468 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-14 12:12:50,468 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:12:51,270 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND2-9532-2025
+2025-07-14 12:12:51,270 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:12:52,472 - property_scraper - INFO - Downloaded PDF: 9532-2025-IndexII_copy.pdf
+2025-07-14 12:12:52,472 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 12:12:53,274 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL9-8350-2025
+2025-07-14 12:12:53,274 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:12:54,494 - property_scraper - INFO - Downloaded PDF: 8350-2025-IndexII_copy.pdf
+2025-07-14 12:12:54,494 - property_scraper - INFO - Successfully downloaded 2 PDFs from 'List No. 2' buttons
+2025-07-14 12:12:54,500 - property_scraper - INFO - Successfully processed combination: 2025_Pune_Pune City_Shivajinagar_0
+2025-07-14 12:12:54,502 - property_scraper - INFO - Daily requests: 2/5
+2025-07-14 12:12:54,503 - property_scraper - INFO - Waiting 4.30 seconds before next request...
+2025-07-14 12:12:58,802 - property_scraper - INFO - Processing combination: 2025_Pune_Pune City_Shivajinagar_1
+2025-07-14 12:12:58,802 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Pune, Taluka=Pune City, Village=Shivajinagar, Doc#=1
+2025-07-14 12:12:58,803 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:12:59,304 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:12:59,304 - property_scraper - INFO - Simulating selecting District: Pune
+2025-07-14 12:12:59,305 - property_scraper - INFO - Simulating selecting Taluka: Pune City
+2025-07-14 12:12:59,305 - property_scraper - INFO - Simulating selecting Village: Shivajinagar
+2025-07-14 12:12:59,305 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-14 12:12:59,305 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:13:00,307 - property_scraper - INFO - Captcha solved: A9EGO6
+2025-07-14 12:13:00,307 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:13:00,808 - property_scraper - INFO - Found 1 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:13:00,808 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:13:01,609 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN4-7744-2025
+2025-07-14 12:13:01,609 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:02,810 - property_scraper - INFO - Downloaded PDF: 7744-2025-IndexII_copy.pdf
+2025-07-14 12:13:02,811 - property_scraper - INFO - Successfully downloaded 1 PDFs from 'List No. 2' buttons
+2025-07-14 12:13:02,811 - property_scraper - INFO - Successfully processed combination: 2025_Pune_Pune City_Shivajinagar_1
+2025-07-14 12:13:02,812 - property_scraper - INFO - Daily requests: 3/5
+2025-07-14 12:13:02,812 - property_scraper - INFO - Waiting 4.32 seconds before next request...
+2025-07-14 12:13:07,133 - property_scraper - INFO - Processing combination: 2025_Pune_Pune City_Shivajinagar_2
+2025-07-14 12:13:07,134 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Pune, Taluka=Pune City, Village=Shivajinagar, Doc#=2
+2025-07-14 12:13:07,134 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:13:07,635 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:13:07,636 - property_scraper - INFO - Simulating selecting District: Pune
+2025-07-14 12:13:07,636 - property_scraper - INFO - Simulating selecting Taluka: Pune City
+2025-07-14 12:13:07,636 - property_scraper - INFO - Simulating selecting Village: Shivajinagar
+2025-07-14 12:13:07,637 - property_scraper - INFO - Simulating entering Document Number: 2
+2025-07-14 12:13:07,637 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:13:08,638 - property_scraper - INFO - Captcha solved: 55VEM8
+2025-07-14 12:13:08,638 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:13:09,139 - property_scraper - INFO - Found 4 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:13:09,139 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:13:09,940 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND4-6469-2025
+2025-07-14 12:13:09,940 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:11,142 - property_scraper - INFO - Downloaded PDF: 6469-2025-IndexII_copy.pdf
+2025-07-14 12:13:11,142 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:13:11,943 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-14 12:13:11,943 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:13:12,744 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-6470-2025
+2025-07-14 12:13:12,744 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:13,946 - property_scraper - INFO - Downloaded PDF: 6470-2025-IndexII_copy.pdf
+2025-07-14 12:13:13,946 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 12:13:14,747 - property_scraper - WARNING - Failed to open PDF for entry #4 in new tab. The link may be broken.
+2025-07-14 12:13:14,747 - property_scraper - INFO - Successfully downloaded 2 PDFs from 'List No. 2' buttons
+2025-07-14 12:13:14,748 - property_scraper - INFO - Successfully processed combination: 2025_Pune_Pune City_Shivajinagar_2
+2025-07-14 12:13:14,748 - property_scraper - INFO - Daily requests: 4/5
+2025-07-14 12:13:14,748 - property_scraper - INFO - Waiting 5.20 seconds before next request...
+2025-07-14 12:13:19,954 - property_scraper - INFO - Skipping village Kothrud as it's already processed.
+2025-07-14 12:13:19,955 - property_scraper - INFO - Skipping taluka Haveli as it's already processed.
+2025-07-14 12:13:19,955 - property_scraper - INFO - Skipping district Nagpur as it's already processed.
+2025-07-14 12:13:19,955 - property_scraper - INFO - Processing combination: 2025_Thane_Thane_Naupada_0
+2025-07-14 12:13:19,956 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Thane, Taluka=Thane, Village=Naupada, Doc#=0
+2025-07-14 12:13:19,956 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:13:20,465 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:13:20,496 - property_scraper - INFO - Simulating selecting District: Thane
+2025-07-14 12:13:20,505 - property_scraper - INFO - Simulating selecting Taluka: Thane
+2025-07-14 12:13:20,517 - property_scraper - INFO - Simulating selecting Village: Naupada
+2025-07-14 12:13:20,522 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-14 12:13:20,522 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:13:21,524 - property_scraper - INFO - Captcha solved: 72QRTG
+2025-07-14 12:13:21,524 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:13:22,026 - property_scraper - INFO - Found 4 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:13:22,026 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:13:22,828 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN1-7616-2025
+2025-07-14 12:13:22,828 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:24,029 - property_scraper - INFO - Downloaded PDF: 7616-2025-IndexII_copy.pdf
+2025-07-14 12:13:24,029 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:13:24,830 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL5-2352-2025
+2025-07-14 12:13:24,830 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:26,031 - property_scraper - INFO - Downloaded PDF: 2352-2025-IndexII_copy.pdf
+2025-07-14 12:13:26,032 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:13:26,833 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN8-1780-2025
+2025-07-14 12:13:26,833 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:13:28,035 - property_scraper - INFO - Downloaded PDF: 1780-2025-IndexII_copy.pdf
+2025-07-14 12:13:28,035 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 12:13:28,837 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL1-3442-2025
+2025-07-14 12:13:28,837 - property_scraper - INFO - Downloading PDF from new tab...

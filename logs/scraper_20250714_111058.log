@@ -1,0 +1,4 @@
+2025-07-14 11:10:58,068 - property_scraper - INFO - Starting property scraper...
+2025-07-14 11:10:58,113 - WDM - INFO - ====== WebDriver manager ======
+2025-07-14 11:10:58,589 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "138.0.7204" in cache
+2025-07-14 11:10:58,589 - WDM - INFO - Get LATEST chromedriver version for google-chrome

@@ -1,0 +1,43 @@
+2025-07-14 13:27:39,284 - property_scraper - INFO - Starting property scraper with automated dropdown selection...
+2025-07-14 13:27:39,285 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-14 13:27:39,285 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55
+2025-07-14 13:27:39,316 - property_scraper - INFO - Trying to use webdriver_manager to get the correct ChromeDriver
+2025-07-14 13:27:39,317 - WDM - INFO - ====== WebDriver manager ======
+2025-07-14 13:27:39,879 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "138.0.7204" in cache
+2025-07-14 13:27:41,422 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-07-14 13:27:42,374 - property_scraper - WARNING - Could not use webdriver_manager: There is no such driver by url https://chromedriver.storage.googleapis.com/LATEST_RELEASE_138.0.7204
+2025-07-14 13:27:42,518 - property_scraper - INFO - Trying to use undetected_chromedriver
+2025-07-14 13:27:43,628 - property_scraper - INFO - Successfully created Chrome driver using undetected_chromedriver
+2025-07-14 13:27:43,761 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-14 13:27:45,777 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:46,612 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:46,613 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:47,334 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:47,908 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:47,909 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:48,648 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:49,260 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:49,261 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:50,036 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:50,585 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:50,585 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:51,383 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:51,965 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:51,966 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:53,047 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:53,620 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:53,620 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:54,734 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:55,303 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:55,304 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:56,471 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:56,974 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:56,975 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:58,039 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:27:58,575 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:27:58,576 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:27:59,696 - property_scraper - INFO - Looking for captcha...
+2025-07-14 13:28:00,264 - property_scraper - ERROR - Error handling captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-14 13:28:00,265 - property_scraper - ERROR - Failed to handle captcha. Skipping this attempt.
+2025-07-14 13:28:00,398 - property_scraper - INFO - Property scraper completed.
+2025-07-14 13:28:00,400 - uc - INFO - ensuring close

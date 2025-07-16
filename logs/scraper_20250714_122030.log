@@ -1,0 +1,128 @@
+2025-07-14 12:20:30,108 - property_scraper - INFO - Starting property scraper...
+2025-07-14 12:20:30,108 - property_scraper - INFO - Using DEMO MODE for reliable operation.
+2025-07-14 12:20:30,108 - property_scraper - INFO - Starting property scraper in DEMO MODE...
+2025-07-14 12:20:30,109 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Colaba_0
+2025-07-14 12:20:30,109 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai City, Village=Colaba, Doc#=0
+2025-07-14 12:20:30,109 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:20:30,610 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:20:30,611 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:20:30,611 - property_scraper - INFO - Simulating selecting Taluka: Mumbai City
+2025-07-14 12:20:30,611 - property_scraper - INFO - Simulating selecting Village: Colaba
+2025-07-14 12:20:30,612 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-14 12:20:30,612 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:20:31,613 - property_scraper - INFO - Captcha solved: 8OLJ7S
+2025-07-14 12:20:31,613 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:20:32,115 - property_scraper - INFO - Found 3 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:20:32,115 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:20:32,916 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL6-5512-2025
+2025-07-14 12:20:32,916 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:20:33,919 - property_scraper - INFO - Downloaded PDF: 5512-2025-IndexII_copy.pdf
+2025-07-14 12:20:33,919 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:20:34,720 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-14 12:20:34,720 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:20:35,522 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN7-6568-2025
+2025-07-14 12:20:35,522 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:20:36,524 - property_scraper - INFO - Downloaded PDF: 6568-2025-IndexII_copy.pdf
+2025-07-14 12:20:36,524 - property_scraper - INFO - Successfully downloaded 2 PDFs from 'List No. 2' buttons
+2025-07-14 12:20:36,525 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai City_Colaba_0
+2025-07-14 12:20:36,525 - property_scraper - INFO - Daily requests: 1/5
+2025-07-14 12:20:36,525 - property_scraper - INFO - Waiting 6.47 seconds before next request...
+2025-07-14 12:20:43,000 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Colaba_1
+2025-07-14 12:20:43,002 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai City, Village=Colaba, Doc#=1
+2025-07-14 12:20:43,002 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:20:43,504 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:20:43,504 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:20:43,504 - property_scraper - INFO - Simulating selecting Taluka: Mumbai City
+2025-07-14 12:20:43,504 - property_scraper - INFO - Simulating selecting Village: Colaba
+2025-07-14 12:20:43,505 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-14 12:20:43,505 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:20:44,506 - property_scraper - INFO - Captcha solved: PHH60I
+2025-07-14 12:20:44,506 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:20:45,008 - property_scraper - INFO - Found 1 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:20:45,008 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:20:45,809 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND8-2437-2025
+2025-07-14 12:20:45,809 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:20:46,810 - property_scraper - INFO - Downloaded PDF: 2437-2025-IndexII_copy.pdf
+2025-07-14 12:20:46,811 - property_scraper - INFO - Successfully downloaded 1 PDFs from 'List No. 2' buttons
+2025-07-14 12:20:46,812 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai City_Colaba_1
+2025-07-14 12:20:46,812 - property_scraper - INFO - Daily requests: 2/5
+2025-07-14 12:20:46,812 - property_scraper - INFO - Waiting 3.24 seconds before next request...
+2025-07-14 12:20:50,051 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Colaba_2
+2025-07-14 12:20:50,051 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai City, Village=Colaba, Doc#=2
+2025-07-14 12:20:50,052 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:20:50,554 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:20:50,554 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:20:50,555 - property_scraper - INFO - Simulating selecting Taluka: Mumbai City
+2025-07-14 12:20:50,555 - property_scraper - INFO - Simulating selecting Village: Colaba
+2025-07-14 12:20:50,555 - property_scraper - INFO - Simulating entering Document Number: 2
+2025-07-14 12:20:50,555 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:20:51,556 - property_scraper - INFO - Captcha solved: SYVQQT
+2025-07-14 12:20:51,556 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:20:52,057 - property_scraper - INFO - Found 4 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:20:52,057 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:20:52,858 - property_scraper - WARNING - Failed to open PDF for entry #1 in new tab. The link may be broken.
+2025-07-14 12:20:52,858 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:20:53,660 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN5-5291-2025
+2025-07-14 12:20:53,660 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:20:54,661 - property_scraper - INFO - Downloaded PDF: 5291-2025-IndexII_copy.pdf
+2025-07-14 12:20:54,662 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:20:55,463 - property_scraper - WARNING - Failed to open PDF for entry #3 in new tab. The link may be broken.
+2025-07-14 12:20:55,463 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 12:20:56,263 - property_scraper - WARNING - Failed to open PDF for entry #4 in new tab. The link may be broken.
+2025-07-14 12:20:56,263 - property_scraper - INFO - Successfully downloaded 1 PDFs from 'List No. 2' buttons
+2025-07-14 12:20:56,264 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai City_Colaba_2
+2025-07-14 12:20:56,264 - property_scraper - INFO - Daily requests: 3/5
+2025-07-14 12:20:56,264 - property_scraper - INFO - Waiting 5.22 seconds before next request...
+2025-07-14 12:21:01,488 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Fort_0
+2025-07-14 12:21:01,489 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai City, Village=Fort, Doc#=0
+2025-07-14 12:21:01,489 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:21:01,990 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:21:01,990 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:21:01,990 - property_scraper - INFO - Simulating selecting Taluka: Mumbai City
+2025-07-14 12:21:01,991 - property_scraper - INFO - Simulating selecting Village: Fort
+2025-07-14 12:21:01,991 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-14 12:21:01,991 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:21:02,992 - property_scraper - INFO - Captcha solved: EHH76W
+2025-07-14 12:21:02,992 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:21:03,493 - property_scraper - INFO - Found 3 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:21:03,493 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:21:04,294 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-2667-2025
+2025-07-14 12:21:04,294 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:21:05,296 - property_scraper - INFO - Downloaded PDF: 2667-2025-IndexII_copy.pdf
+2025-07-14 12:21:05,297 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:21:06,098 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-14 12:21:06,098 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 12:21:06,899 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP3-4686-2025
+2025-07-14 12:21:06,899 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:21:07,900 - property_scraper - INFO - Downloaded PDF: 4686-2025-IndexII_copy.pdf
+2025-07-14 12:21:07,901 - property_scraper - INFO - Successfully downloaded 2 PDFs from 'List No. 2' buttons
+2025-07-14 12:21:07,901 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai City_Fort_0
+2025-07-14 12:21:07,901 - property_scraper - INFO - Daily requests: 4/5
+2025-07-14 12:21:07,902 - property_scraper - INFO - Waiting 5.64 seconds before next request...
+2025-07-14 12:21:13,545 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Fort_1
+2025-07-14 12:21:13,546 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Mumbai, Taluka=Mumbai City, Village=Fort, Doc#=1
+2025-07-14 12:21:13,546 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 12:21:14,048 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 12:21:14,048 - property_scraper - INFO - Simulating selecting District: Mumbai
+2025-07-14 12:21:14,048 - property_scraper - INFO - Simulating selecting Taluka: Mumbai City
+2025-07-14 12:21:14,048 - property_scraper - INFO - Simulating selecting Village: Fort
+2025-07-14 12:21:14,048 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-14 12:21:14,049 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 12:21:15,049 - property_scraper - INFO - Captcha solved: 443H9V
+2025-07-14 12:21:15,049 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 12:21:15,551 - property_scraper - INFO - Found 2 entries with 'List No. 2' buttons in the search results table
+2025-07-14 12:21:15,551 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 12:21:16,352 - property_scraper - WARNING - Failed to open PDF for entry #1 in new tab. The link may be broken.
+2025-07-14 12:21:16,352 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 12:21:17,153 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN4-6871-2025
+2025-07-14 12:21:17,153 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 12:21:18,155 - property_scraper - INFO - Downloaded PDF: 6871-2025-IndexII_copy.pdf
+2025-07-14 12:21:18,155 - property_scraper - INFO - Successfully downloaded 1 PDFs from 'List No. 2' buttons
+2025-07-14 12:21:18,156 - property_scraper - INFO - Successfully processed combination: 2025_Mumbai_Mumbai City_Fort_1
+2025-07-14 12:21:18,156 - property_scraper - INFO - Daily requests: 5/5
+2025-07-14 12:21:18,156 - property_scraper - INFO - Waiting 6.78 seconds before next request...
+2025-07-14 12:21:24,935 - property_scraper - INFO - Processing combination: 2025_Mumbai_Mumbai City_Fort_2
+2025-07-14 12:21:24,935 - property_scraper - INFO - Daily limit of 5 requests reached.
+2025-07-14 12:21:24,935 - property_scraper - INFO - Daily limit reached. Stopping processing.
+2025-07-14 12:21:24,935 - property_scraper - INFO - Daily limit of 5 requests reached.
+2025-07-14 12:21:24,935 - property_scraper - INFO - Daily limit reached. Exiting.

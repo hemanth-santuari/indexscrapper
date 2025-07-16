@@ -1,0 +1,319 @@
+2025-07-14 13:19:17,895 - property_scraper - INFO - Starting property scraper with automated dropdown selection...
+2025-07-14 13:19:17,896 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-14 13:19:17,896 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55
+2025-07-14 13:19:20,421 - property_scraper - ERROR - Error setting up Chrome WebDriver: Message: Unable to obtain chromedriver using Selenium Manager; Message: Unsuccessful command executed: C:\Users\Pamarthi\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json.
+The chromedriver version cannot be discovered
+; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2025-07-14 13:19:20,422 - property_scraper - WARNING - Falling back to demo mode
+2025-07-14 13:19:20,422 - property_scraper - WARNING - Browser automation failed. Running in DEMO MODE.
+2025-07-14 13:19:20,423 - property_scraper - INFO - Starting property scraper in DEMO MODE with automatic dropdown selection...
+2025-07-14 13:19:20,423 - property_scraper - INFO - Automatically selecting values from dropdowns...
+2025-07-14 13:19:20,423 - property_scraper - INFO - Fetching options for dropdown 'year'...
+2025-07-14 13:19:20,423 - property_scraper - WARNING - No driver provided for 'year'. Using demo mode options.
+2025-07-14 13:19:20,424 - property_scraper - INFO - Selected Year: 2024
+2025-07-14 13:19:20,424 - property_scraper - INFO - Fetching options for dropdown 'district'...
+2025-07-14 13:19:20,424 - property_scraper - WARNING - No driver provided for 'district'. Using demo mode options.
+2025-07-14 13:19:20,425 - property_scraper - INFO - Selected District: Pune
+2025-07-14 13:19:20,425 - property_scraper - INFO - Fetching options for dropdown 'taluka'...
+2025-07-14 13:19:20,425 - property_scraper - WARNING - No driver provided for 'taluka'. Using demo mode options.
+2025-07-14 13:19:20,425 - property_scraper - INFO - Selected Taluka: Pune City
+2025-07-14 13:19:20,426 - property_scraper - INFO - Fetching options for dropdown 'village'...
+2025-07-14 13:19:20,426 - property_scraper - WARNING - No driver provided for 'village'. Using demo mode options.
+2025-07-14 13:19:20,426 - property_scraper - INFO - Selected Village: Kothrud
+2025-07-14 13:19:20,426 - property_scraper - INFO - Selected Document Number: 2
+2025-07-14 13:19:20,426 - property_scraper - INFO - Processing combination: 2024_Pune_Pune City_Kothrud_2
+2025-07-14 13:19:20,427 - property_scraper - INFO - Processing in DEMO MODE: Year=2024, District=Pune, Taluka=Pune City, Village=Kothrud, Doc#=2
+2025-07-14 13:19:20,427 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 13:19:20,929 - property_scraper - INFO - Simulating selecting Year: 2024
+2025-07-14 13:19:20,930 - property_scraper - INFO - Simulating selecting District: Pune
+2025-07-14 13:19:20,930 - property_scraper - INFO - Simulating selecting Taluka: Pune City
+2025-07-14 13:19:20,930 - property_scraper - INFO - Simulating selecting Village: Kothrud
+2025-07-14 13:19:20,931 - property_scraper - INFO - Simulating entering Document Number: 2
+2025-07-14 13:19:20,931 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 13:19:21,931 - property_scraper - INFO - Captcha solved: 055YNA
+2025-07-14 13:19:21,931 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 13:19:22,433 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-14 13:19:22,934 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-14 13:19:23,735 - property_scraper - INFO - Found 1594 entries with 'List No. 2' buttons in the search results table
+2025-07-14 13:19:23,735 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1594 entries
+2025-07-14 13:19:23,735 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-14 13:19:23,735 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 13:19:24,536 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP2-9378-2024
+2025-07-14 13:19:24,536 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:25,538 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:25,539 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\9378-2024-IndexII_copy.pdf
+2025-07-14 13:19:25,540 - property_scraper - INFO - Downloaded PDF: 9378-2024-IndexII_copy.pdf
+2025-07-14 13:19:25,540 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 13:19:26,341 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN1-5431-2024
+2025-07-14 13:19:26,341 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:27,341 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:27,342 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\5431-2024-IndexII_copy.pdf
+2025-07-14 13:19:27,343 - property_scraper - INFO - Downloaded PDF: 5431-2024-IndexII_copy.pdf
+2025-07-14 13:19:27,343 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 13:19:28,144 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND7-1356-2024
+2025-07-14 13:19:28,144 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:29,145 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:29,146 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\1356-2024-IndexII_copy.pdf
+2025-07-14 13:19:29,146 - property_scraper - INFO - Downloaded PDF: 1356-2024-IndexII_copy.pdf
+2025-07-14 13:19:29,147 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 13:19:29,948 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP3-4460-2024
+2025-07-14 13:19:29,948 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:30,949 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:30,950 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\4460-2024-IndexII_copy.pdf
+2025-07-14 13:19:30,950 - property_scraper - INFO - Downloaded PDF: 4460-2024-IndexII_copy.pdf
+2025-07-14 13:19:30,950 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-14 13:19:31,752 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL3-8016-2024
+2025-07-14 13:19:31,752 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:32,753 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:32,754 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\8016-2024-IndexII_copy.pdf
+2025-07-14 13:19:32,754 - property_scraper - INFO - Downloaded PDF: 8016-2024-IndexII_copy.pdf
+2025-07-14 13:19:32,755 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-14 13:19:32,755 - property_scraper - INFO - Successfully processed combination: 2024_Pune_Pune City_Kothrud_2
+2025-07-14 13:19:32,756 - property_scraper - INFO - Daily requests: 1/5
+2025-07-14 13:19:32,756 - property_scraper - INFO - Waiting 3.09 seconds before next request...
+2025-07-14 13:19:35,842 - property_scraper - INFO - Automatically selecting values from dropdowns...
+2025-07-14 13:19:35,842 - property_scraper - INFO - Fetching options for dropdown 'year'...
+2025-07-14 13:19:35,842 - property_scraper - WARNING - No driver provided for 'year'. Using demo mode options.
+2025-07-14 13:19:35,842 - property_scraper - INFO - Selected Year: 2023
+2025-07-14 13:19:35,843 - property_scraper - INFO - Fetching options for dropdown 'district'...
+2025-07-14 13:19:35,843 - property_scraper - WARNING - No driver provided for 'district'. Using demo mode options.
+2025-07-14 13:19:35,843 - property_scraper - INFO - Selected District: Nagpur
+2025-07-14 13:19:35,843 - property_scraper - INFO - Fetching options for dropdown 'taluka'...
+2025-07-14 13:19:35,843 - property_scraper - WARNING - No driver provided for 'taluka'. Using demo mode options.
+2025-07-14 13:19:35,844 - property_scraper - INFO - Selected Taluka: Nagpur Rural
+2025-07-14 13:19:35,844 - property_scraper - INFO - Fetching options for dropdown 'village'...
+2025-07-14 13:19:35,844 - property_scraper - WARNING - No driver provided for 'village'. Using demo mode options.
+2025-07-14 13:19:35,844 - property_scraper - INFO - Selected Village: Wadi
+2025-07-14 13:19:35,844 - property_scraper - INFO - Selected Document Number: 5
+2025-07-14 13:19:35,845 - property_scraper - INFO - Processing combination: 2023_Nagpur_Nagpur Rural_Wadi_5
+2025-07-14 13:19:35,845 - property_scraper - INFO - Processing in DEMO MODE: Year=2023, District=Nagpur, Taluka=Nagpur Rural, Village=Wadi, Doc#=5
+2025-07-14 13:19:35,845 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 13:19:36,347 - property_scraper - INFO - Simulating selecting Year: 2023
+2025-07-14 13:19:36,347 - property_scraper - INFO - Simulating selecting District: Nagpur
+2025-07-14 13:19:36,347 - property_scraper - INFO - Simulating selecting Taluka: Nagpur Rural
+2025-07-14 13:19:36,348 - property_scraper - INFO - Simulating selecting Village: Wadi
+2025-07-14 13:19:36,348 - property_scraper - INFO - Simulating entering Document Number: 5
+2025-07-14 13:19:36,348 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 13:19:37,349 - property_scraper - INFO - Captcha solved: 4EIACA
+2025-07-14 13:19:37,349 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 13:19:37,850 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-14 13:19:38,351 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-14 13:19:39,151 - property_scraper - INFO - Found 1875 entries with 'List No. 2' buttons in the search results table
+2025-07-14 13:19:39,151 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1875 entries
+2025-07-14 13:19:39,152 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-14 13:19:39,152 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 13:19:39,953 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL3-9935-2023
+2025-07-14 13:19:39,953 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:40,954 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:40,955 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\9935-2023-IndexII_copy.pdf
+2025-07-14 13:19:40,955 - property_scraper - INFO - Downloaded PDF: 9935-2023-IndexII_copy.pdf
+2025-07-14 13:19:40,955 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 13:19:41,757 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND5-1126-2023
+2025-07-14 13:19:41,757 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:42,758 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:42,759 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\1126-2023-IndexII_copy.pdf
+2025-07-14 13:19:42,759 - property_scraper - INFO - Downloaded PDF: 1126-2023-IndexII_copy.pdf
+2025-07-14 13:19:42,759 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 13:19:43,560 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP5-7099-2023
+2025-07-14 13:19:43,560 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:44,562 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:44,563 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\7099-2023-IndexII_copy.pdf
+2025-07-14 13:19:44,564 - property_scraper - INFO - Downloaded PDF: 7099-2023-IndexII_copy.pdf
+2025-07-14 13:19:44,564 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 13:19:45,365 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN2-2129-2023
+2025-07-14 13:19:45,365 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:46,366 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:46,367 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\2129-2023-IndexII_copy.pdf
+2025-07-14 13:19:46,367 - property_scraper - INFO - Downloaded PDF: 2129-2023-IndexII_copy.pdf
+2025-07-14 13:19:46,367 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-14 13:19:47,171 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN3-1415-2023
+2025-07-14 13:19:47,172 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:48,172 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:48,173 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\1415-2023-IndexII_copy.pdf
+2025-07-14 13:19:48,174 - property_scraper - INFO - Downloaded PDF: 1415-2023-IndexII_copy.pdf
+2025-07-14 13:19:48,174 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-14 13:19:48,174 - property_scraper - INFO - Successfully processed combination: 2023_Nagpur_Nagpur Rural_Wadi_5
+2025-07-14 13:19:48,175 - property_scraper - INFO - Daily requests: 2/5
+2025-07-14 13:19:48,175 - property_scraper - INFO - Waiting 4.86 seconds before next request...
+2025-07-14 13:19:53,034 - property_scraper - INFO - Automatically selecting values from dropdowns...
+2025-07-14 13:19:53,034 - property_scraper - INFO - Fetching options for dropdown 'year'...
+2025-07-14 13:19:53,034 - property_scraper - WARNING - No driver provided for 'year'. Using demo mode options.
+2025-07-14 13:19:53,034 - property_scraper - INFO - Selected Year: 2025
+2025-07-14 13:19:53,035 - property_scraper - INFO - Fetching options for dropdown 'district'...
+2025-07-14 13:19:53,035 - property_scraper - WARNING - No driver provided for 'district'. Using demo mode options.
+2025-07-14 13:19:53,036 - property_scraper - INFO - Selected District: Thane
+2025-07-14 13:19:53,036 - property_scraper - INFO - Fetching options for dropdown 'taluka'...
+2025-07-14 13:19:53,037 - property_scraper - WARNING - No driver provided for 'taluka'. Using demo mode options.
+2025-07-14 13:19:53,037 - property_scraper - INFO - Selected Taluka: Thane
+2025-07-14 13:19:53,038 - property_scraper - INFO - Fetching options for dropdown 'village'...
+2025-07-14 13:19:53,038 - property_scraper - WARNING - No driver provided for 'village'. Using demo mode options.
+2025-07-14 13:19:53,039 - property_scraper - INFO - Selected Village: Naupada
+2025-07-14 13:19:53,039 - property_scraper - INFO - Selected Document Number: 1
+2025-07-14 13:19:53,040 - property_scraper - INFO - Processing combination: 2025_Thane_Thane_Naupada_1
+2025-07-14 13:19:53,041 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Thane, Taluka=Thane, Village=Naupada, Doc#=1
+2025-07-14 13:19:53,043 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 13:19:53,545 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 13:19:53,545 - property_scraper - INFO - Simulating selecting District: Thane
+2025-07-14 13:19:53,545 - property_scraper - INFO - Simulating selecting Taluka: Thane
+2025-07-14 13:19:53,545 - property_scraper - INFO - Simulating selecting Village: Naupada
+2025-07-14 13:19:53,546 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-14 13:19:53,546 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 13:19:54,547 - property_scraper - INFO - Captcha solved: SX5DRV
+2025-07-14 13:19:54,547 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 13:19:55,048 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-14 13:19:55,560 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-14 13:19:56,364 - property_scraper - INFO - Found 2497 entries with 'List No. 2' buttons in the search results table
+2025-07-14 13:19:56,364 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2497 entries
+2025-07-14 13:19:56,364 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-14 13:19:56,364 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 13:19:57,166 - property_scraper - WARNING - Failed to open PDF for entry #1 in new tab. The link may be broken.
+2025-07-14 13:19:57,166 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 13:19:57,967 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN5-4827-2025
+2025-07-14 13:19:57,967 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:19:58,968 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:19:58,969 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\4827-2025-IndexII_copy.pdf
+2025-07-14 13:19:58,969 - property_scraper - INFO - Downloaded PDF: 4827-2025-IndexII_copy.pdf
+2025-07-14 13:19:58,970 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 13:19:59,771 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP2-7190-2025
+2025-07-14 13:19:59,771 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:00,772 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:00,773 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\7190-2025-IndexII_copy.pdf
+2025-07-14 13:20:00,774 - property_scraper - INFO - Downloaded PDF: 7190-2025-IndexII_copy.pdf
+2025-07-14 13:20:00,774 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 13:20:01,575 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN7-3893-2025
+2025-07-14 13:20:01,575 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:02,577 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:02,578 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\3893-2025-IndexII_copy.pdf
+2025-07-14 13:20:02,578 - property_scraper - INFO - Downloaded PDF: 3893-2025-IndexII_copy.pdf
+2025-07-14 13:20:02,578 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-14 13:20:03,380 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND5-8831-2025
+2025-07-14 13:20:03,380 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:04,380 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:04,381 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\8831-2025-IndexII_copy.pdf
+2025-07-14 13:20:04,381 - property_scraper - INFO - Downloaded PDF: 8831-2025-IndexII_copy.pdf
+2025-07-14 13:20:04,382 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-14 13:20:04,382 - property_scraper - INFO - Successfully processed combination: 2025_Thane_Thane_Naupada_1
+2025-07-14 13:20:04,383 - property_scraper - INFO - Daily requests: 3/5
+2025-07-14 13:20:04,383 - property_scraper - INFO - Waiting 5.08 seconds before next request...
+2025-07-14 13:20:09,469 - property_scraper - INFO - Automatically selecting values from dropdowns...
+2025-07-14 13:20:09,469 - property_scraper - INFO - Fetching options for dropdown 'year'...
+2025-07-14 13:20:09,469 - property_scraper - WARNING - No driver provided for 'year'. Using demo mode options.
+2025-07-14 13:20:09,469 - property_scraper - INFO - Selected Year: 2025
+2025-07-14 13:20:09,470 - property_scraper - INFO - Fetching options for dropdown 'district'...
+2025-07-14 13:20:09,470 - property_scraper - WARNING - No driver provided for 'district'. Using demo mode options.
+2025-07-14 13:20:09,470 - property_scraper - INFO - Selected District: Pune
+2025-07-14 13:20:09,470 - property_scraper - INFO - Fetching options for dropdown 'taluka'...
+2025-07-14 13:20:09,471 - property_scraper - WARNING - No driver provided for 'taluka'. Using demo mode options.
+2025-07-14 13:20:09,471 - property_scraper - INFO - Selected Taluka: Pune City
+2025-07-14 13:20:09,471 - property_scraper - INFO - Fetching options for dropdown 'village'...
+2025-07-14 13:20:09,471 - property_scraper - WARNING - No driver provided for 'village'. Using demo mode options.
+2025-07-14 13:20:09,472 - property_scraper - INFO - Selected Village: Kothrud
+2025-07-14 13:20:09,472 - property_scraper - INFO - Selected Document Number: 1
+2025-07-14 13:20:09,472 - property_scraper - INFO - Processing combination: 2025_Pune_Pune City_Kothrud_1
+2025-07-14 13:20:09,473 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=Pune, Taluka=Pune City, Village=Kothrud, Doc#=1
+2025-07-14 13:20:09,473 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 13:20:09,974 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-14 13:20:09,974 - property_scraper - INFO - Simulating selecting District: Pune
+2025-07-14 13:20:09,974 - property_scraper - INFO - Simulating selecting Taluka: Pune City
+2025-07-14 13:20:09,975 - property_scraper - INFO - Simulating selecting Village: Kothrud
+2025-07-14 13:20:09,975 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-14 13:20:09,975 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 13:20:10,977 - property_scraper - INFO - Captcha solved: 90K8JN
+2025-07-14 13:20:10,977 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 13:20:11,478 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-14 13:20:11,979 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-14 13:20:12,779 - property_scraper - INFO - Found 1974 entries with 'List No. 2' buttons in the search results table
+2025-07-14 13:20:12,779 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1974 entries
+2025-07-14 13:20:12,779 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-14 13:20:12,779 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 13:20:13,581 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN7-5805-2025
+2025-07-14 13:20:13,581 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:14,582 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:14,583 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\5805-2025-IndexII_copy.pdf
+2025-07-14 13:20:14,584 - property_scraper - INFO - Downloaded PDF: 5805-2025-IndexII_copy.pdf
+2025-07-14 13:20:14,584 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 13:20:15,385 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP1-4973-2025
+2025-07-14 13:20:15,385 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:16,387 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:16,388 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\4973-2025-IndexII_copy.pdf
+2025-07-14 13:20:16,389 - property_scraper - INFO - Downloaded PDF: 4973-2025-IndexII_copy.pdf
+2025-07-14 13:20:16,389 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 13:20:17,190 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN8-9562-2025
+2025-07-14 13:20:17,190 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:18,190 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:18,191 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\9562-2025-IndexII_copy.pdf
+2025-07-14 13:20:18,191 - property_scraper - INFO - Downloaded PDF: 9562-2025-IndexII_copy.pdf
+2025-07-14 13:20:18,192 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 13:20:18,993 - property_scraper - WARNING - Failed to open PDF for entry #4 in new tab. The link may be broken.
+2025-07-14 13:20:18,993 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-14 13:20:19,794 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN3-1997-2025
+2025-07-14 13:20:19,794 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:20,795 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:20,796 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\1997-2025-IndexII_copy.pdf
+2025-07-14 13:20:20,797 - property_scraper - INFO - Downloaded PDF: 1997-2025-IndexII_copy.pdf
+2025-07-14 13:20:20,797 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-14 13:20:20,798 - property_scraper - INFO - Successfully processed combination: 2025_Pune_Pune City_Kothrud_1
+2025-07-14 13:20:20,798 - property_scraper - INFO - Daily requests: 4/5
+2025-07-14 13:20:20,798 - property_scraper - INFO - Waiting 4.54 seconds before next request...
+2025-07-14 13:20:25,340 - property_scraper - INFO - Automatically selecting values from dropdowns...
+2025-07-14 13:20:25,340 - property_scraper - INFO - Fetching options for dropdown 'year'...
+2025-07-14 13:20:25,340 - property_scraper - WARNING - No driver provided for 'year'. Using demo mode options.
+2025-07-14 13:20:25,341 - property_scraper - INFO - Selected Year: 2023
+2025-07-14 13:20:25,341 - property_scraper - INFO - Fetching options for dropdown 'district'...
+2025-07-14 13:20:25,341 - property_scraper - WARNING - No driver provided for 'district'. Using demo mode options.
+2025-07-14 13:20:25,342 - property_scraper - INFO - Selected District: Nagpur
+2025-07-14 13:20:25,342 - property_scraper - INFO - Fetching options for dropdown 'taluka'...
+2025-07-14 13:20:25,342 - property_scraper - WARNING - No driver provided for 'taluka'. Using demo mode options.
+2025-07-14 13:20:25,343 - property_scraper - INFO - Selected Taluka: Nagpur Rural
+2025-07-14 13:20:25,343 - property_scraper - INFO - Fetching options for dropdown 'village'...
+2025-07-14 13:20:25,343 - property_scraper - WARNING - No driver provided for 'village'. Using demo mode options.
+2025-07-14 13:20:25,343 - property_scraper - INFO - Selected Village: Hingna
+2025-07-14 13:20:25,344 - property_scraper - INFO - Selected Document Number: 5
+2025-07-14 13:20:25,344 - property_scraper - INFO - Processing combination: 2023_Nagpur_Nagpur Rural_Hingna_5
+2025-07-14 13:20:25,345 - property_scraper - INFO - Processing in DEMO MODE: Year=2023, District=Nagpur, Taluka=Nagpur Rural, Village=Hingna, Doc#=5
+2025-07-14 13:20:25,345 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-14 13:20:25,846 - property_scraper - INFO - Simulating selecting Year: 2023
+2025-07-14 13:20:25,846 - property_scraper - INFO - Simulating selecting District: Nagpur
+2025-07-14 13:20:25,846 - property_scraper - INFO - Simulating selecting Taluka: Nagpur Rural
+2025-07-14 13:20:25,846 - property_scraper - INFO - Simulating selecting Village: Hingna
+2025-07-14 13:20:25,847 - property_scraper - INFO - Simulating entering Document Number: 5
+2025-07-14 13:20:25,847 - property_scraper - INFO - Simulating captcha solving...
+2025-07-14 13:20:26,848 - property_scraper - INFO - Captcha solved: QASHX7
+2025-07-14 13:20:26,848 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-14 13:20:27,349 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-14 13:20:27,849 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-14 13:20:28,650 - property_scraper - INFO - Found 2244 entries with 'List No. 2' buttons in the search results table
+2025-07-14 13:20:28,650 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2244 entries
+2025-07-14 13:20:28,650 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-14 13:20:28,650 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-14 13:20:29,451 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL9-4338-2023
+2025-07-14 13:20:29,451 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:30,453 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:30,454 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\4338-2023-IndexII_copy.pdf
+2025-07-14 13:20:30,454 - property_scraper - INFO - Downloaded PDF: 4338-2023-IndexII_copy.pdf
+2025-07-14 13:20:30,455 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-14 13:20:31,256 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-14 13:20:31,256 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-14 13:20:32,057 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP6-1278-2023
+2025-07-14 13:20:32,057 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:33,058 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:33,059 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\1278-2023-IndexII_copy.pdf
+2025-07-14 13:20:33,060 - property_scraper - INFO - Downloaded PDF: 1278-2023-IndexII_copy.pdf
+2025-07-14 13:20:33,060 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-14 13:20:33,862 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL1-4681-2023
+2025-07-14 13:20:33,862 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:34,863 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:34,864 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\4681-2023-IndexII_copy.pdf
+2025-07-14 13:20:34,864 - property_scraper - INFO - Downloaded PDF: 4681-2023-IndexII_copy.pdf
+2025-07-14 13:20:34,865 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-14 13:20:35,666 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-5195-2023
+2025-07-14 13:20:35,666 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-14 13:20:36,667 - property_scraper - INFO - Using real PDF template: 6177-2024-IndexII_copy.pdf
+2025-07-14 13:20:36,668 - property_scraper - INFO - Successfully copied template PDF to D:\new scrap\property_scraper\downloads\5195-2023-IndexII_copy.pdf
+2025-07-14 13:20:36,668 - property_scraper - INFO - Downloaded PDF: 5195-2023-IndexII_copy.pdf
+2025-07-14 13:20:36,669 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-14 13:20:36,669 - property_scraper - INFO - Successfully processed combination: 2023_Nagpur_Nagpur Rural_Hingna_5
+2025-07-14 13:20:36,669 - property_scraper - INFO - Daily requests: 5/5
+2025-07-14 13:20:36,670 - property_scraper - INFO - Waiting 3.82 seconds before next request...
+2025-07-14 13:20:40,491 - property_scraper - INFO - Demo scraper completed.

@@ -1,0 +1,33 @@
+2025-07-14 11:32:14,009 - property_scraper - INFO - Starting property scraper...
+2025-07-14 11:32:14,042 - property_scraper - INFO - Trying Chrome with specific ChromeDriver version (114.0.5735.90)...
+2025-07-14 11:32:14,043 - property_scraper - ERROR - Error setting up Chrome with specific ChromeDriver version: No module named 'webdriver_manager.core.os_manager'
+2025-07-14 11:32:14,043 - property_scraper - INFO - Trying undetected-chromedriver...
+2025-07-14 11:32:15,280 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\Pamarthi\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-07-14 11:32:16,765 - uc - INFO - setting properties for headless
+2025-07-14 11:32:29,649 - property_scraper - ERROR - Error getting options from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0xd644a3+62419]
+	GetHandleVerifier [0x0xd644e4+62484]
+	(No symbol) [0x0xba2133]
+	(No symbol) [0x0xbea8fe]
+	(No symbol) [0x0xbeac9b]
+	(No symbol) [0x0xc33052]
+	(No symbol) [0x0xc0f4b4]
+	(No symbol) [0x0xc3087a]
+	(No symbol) [0x0xc0f266]
+	(No symbol) [0x0xbde852]
+	(No symbol) [0x0xbdf6f4]
+	GetHandleVerifier [0x0xfd4793+2619075]
+	GetHandleVerifier [0x0xfcfbaa+2599642]
+	GetHandleVerifier [0x0xd8b04a+221050]
+	GetHandleVerifier [0x0xd7b2c8+156152]
+	GetHandleVerifier [0x0xd81c7d+183213]
+	GetHandleVerifier [0x0xd6c388+94904]
+	GetHandleVerifier [0x0xd6c512+95298]
+	GetHandleVerifier [0x0xd5766a+9626]
+	BaseThreadInitThunk [0x0x76d1fcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x775882ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7758827e+238]
+
+2025-07-14 11:32:29,649 - property_scraper - ERROR - Failed to get years. Exiting.
+2025-07-14 11:32:30,311 - uc - INFO - ensuring close

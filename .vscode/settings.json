@@ -1,0 +1,13 @@
+{
+    "python.analysis.extraPaths": [
+        "${env:APPDATA}\\Python\\Python312\\site-packages",
+        "${env:USERPROFILE}\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages",
+        "./sources"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${env:APPDATA}\\Python\\Python312\\site-packages",
+        "${env:USERPROFILE}\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+}

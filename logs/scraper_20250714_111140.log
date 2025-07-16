@@ -1,0 +1,38 @@
+2025-07-14 11:11:40,797 - property_scraper - INFO - Starting property scraper...
+2025-07-14 11:11:40,826 - WDM - INFO - ====== WebDriver manager ======
+2025-07-14 11:11:41,247 - WDM - INFO - There is no [win32] chromedriver "114.0.5735.90" for browser google-chrome "138.0.7204" in cache
+2025-07-14 11:11:41,247 - WDM - INFO - About to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-07-14 11:11:42,437 - WDM - INFO - Driver has been saved in cache [C:\Users\Pamarthi\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-07-14 11:11:46,038 - property_scraper - ERROR - Error setting up ChromeDriver with version 114.0.5735.90: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+Current browser version is 138.0.7204.101 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x004DA813+48355]
+	(No symbol) [0x0046C4B1]
+	(No symbol) [0x00375358]
+	(No symbol) [0x003961AC]
+	(No symbol) [0x00391EF3]
+	(No symbol) [0x00390579]
+	(No symbol) [0x003C0C55]
+	(No symbol) [0x003C093C]
+	(No symbol) [0x003BA536]
+	(No symbol) [0x003982DC]
+	(No symbol) [0x003993DD]
+	GetHandleVerifier [0x0073AABD+2539405]
+	GetHandleVerifier [0x0077A78F+2800735]
+	GetHandleVerifier [0x0077456C+2775612]
+	GetHandleVerifier [0x005651E0+616112]
+	(No symbol) [0x00475F8C]
+	(No symbol) [0x00472328]
+	(No symbol) [0x0047240B]
+	(No symbol) [0x00464FF7]
+	BaseThreadInitThunk [0x76D1FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x775882AE+286]
+	RtlGetAppContainerNamedObjectPath [0x7758827E+238]
+
+2025-07-14 11:11:46,040 - property_scraper - INFO - Trying with the latest available ChromeDriver version...
+2025-07-14 11:11:46,040 - WDM - INFO - ====== WebDriver manager ======
+2025-07-14 11:11:46,480 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "138.0.7204" in cache
+2025-07-14 11:11:46,480 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-07-14 11:11:49,338 - property_scraper - ERROR - Error setting up ChromeDriver with latest version: There is no such driver by url https://chromedriver.storage.googleapis.com/LATEST_RELEASE_138.0.7204
+2025-07-14 11:11:49,340 - property_scraper - INFO - Trying with default Selenium setup...
