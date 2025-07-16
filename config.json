@@ -25,11 +25,10 @@
     "use_cloud_storage": true,
     "cloud_storage_type": "s3",
     "cloud_storage_config": {
-        "bucket_name": "property-scraper-progress",
-        "progress_key": "progress.json",
-        "aws_access_key_id": "YOUR_ACCESS_KEY",
-        "aws_secret_access_key": "YOUR_SECRET_KEY",
-        "region_name": "us-east-1"
+        "repository": "hemanth-santuari/indexscrapper",
+    "token": "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",
+    "progress_key": "progress.json"
     },
+    
     "comments": "Set use_free_proxies to true to automatically fetch and use free proxies. Set captcha_service to 'ocr' to use OCR-based captcha solving, or 'manual' for manual solving. Set use_cloud_storage to true to enable distributed scraping across multiple VMs."
 }
