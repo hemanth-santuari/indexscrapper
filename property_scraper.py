@@ -11,6 +11,7 @@ import boto3
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup, NavigableString, Tag
 import concurrent.futures
+from github_storage import GitHubStorage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -74,22 +75,31 @@ class PropertyScraper:
                 self.cloud_storage_type = config.get('cloud_storage_type', 's3')
                 self.cloud_storage_config = config.get('cloud_storage_config', {})
                 
-                # If using S3, get bucket and key
-                if self.use_cloud_storage and self.cloud_storage_type == 's3':
-                    self.s3_bucket = self.cloud_storage_config.get('bucket_name', '')
-                    self.s3_progress_key = self.cloud_storage_config.get('progress_key', 'progress.json')
-                    
-                    # Initialize S3 client if credentials are provided
-                    if 'aws_access_key_id' in self.cloud_storage_config and 'aws_secret_access_key' in self.cloud_storage_config:
-                        self.s3_client = boto3.client(
-                            's3',
-                            aws_access_key_id=self.cloud_storage_config.get('aws_access_key_id'),
-                            aws_secret_access_key=self.cloud_storage_config.get('aws_secret_access_key'),
-                            region_name=self.cloud_storage_config.get('region_name', 'us-east-1')
-                        )
-                    else:
-                        # Use default credentials from environment or instance profile
-                        self.s3_client = boto3.client('s3')
+                # Initialize cloud storage client based on type
+                if self.use_cloud_storage:
+                    if self.cloud_storage_type == 's3':
+                        self.s3_bucket = self.cloud_storage_config.get('bucket_name', '')
+                        self.s3_progress_key = self.cloud_storage_config.get('progress_key', 'progress.json')
+                        
+                        # Initialize S3 client if credentials are provided
+                        if 'aws_access_key_id' in self.cloud_storage_config and 'aws_secret_access_key' in self.cloud_storage_config:
+                            self.s3_client = boto3.client(
+                                's3',
+                                aws_access_key_id=self.cloud_storage_config.get('aws_access_key_id'),
+                                aws_secret_access_key=self.cloud_storage_config.get('aws_secret_access_key'),
+                                region_name=self.cloud_storage_config.get('region_name', 'us-east-1')
+                            )
+                        else:
+                            # Use default credentials from environment or instance profile
+                            self.s3_client = boto3.client('s3')
+                    elif self.cloud_storage_type == 'github':
+                        # Initialize GitHub storage client
+                        self.github_repo = self.cloud_storage_config.get('repository', '')
+                        self.github_token = self.cloud_storage_config.get('token', '')
+                        self.github_progress_key = self.cloud_storage_config.get('progress_key', 'progress.json')
+                        self.github_client = GitHubStorage(self.github_repo, self.github_token)
+                        self.github_sha = None  # Will be set when loading the file
+                        logger.info(f"Initialized GitHub storage for repository: {self.github_repo}")
         else:
             self.proxies = []
             self.user_agents = [
@@ -122,6 +132,8 @@ class PropertyScraper:
             try:
                 if self.cloud_storage_type == 's3':
                     return self._load_progress_from_s3()
+                elif self.cloud_storage_type == 'github':
+                    return self._load_progress_from_github()
             except Exception as e:
                 logger.error(f"Error loading progress from cloud storage: {str(e)}")
                 logger.warning("Falling back to local progress file")
@@ -190,6 +202,8 @@ class PropertyScraper:
             try:
                 if self.cloud_storage_type == 's3':
                     self._save_progress_to_s3()
+                elif self.cloud_storage_type == 'github':
+                    self._save_progress_to_github()
             except Exception as e:
                 logger.error(f"Error saving progress to cloud storage: {str(e)}")
                 logger.warning("Progress was only saved locally")
@@ -228,6 +242,68 @@ class PropertyScraper:
             logger.info(f"Progress saved to S3 bucket: {self.s3_bucket}, key: {self.s3_progress_key}")
         except Exception as e:
             logger.error(f"Error saving progress to S3: {str(e)}")
+            raise
+    
+    def _load_progress_from_github(self):
+        """Load progress from GitHub repository."""
+        try:
+            logger.info(f"Loading progress from GitHub repository: {self.github_repo}, file: {self.github_progress_key}")
+            progress_data, self.github_sha = self.github_client.get_file(self.github_progress_key)
+            
+            if progress_data:
+                logger.info(f"Successfully loaded progress from GitHub")
+                return progress_data
+            else:
+                logger.warning(f"Progress file not found in GitHub repository: {self.github_progress_key}")
+                return {
+                    'last_run': None,
+                    'completed': [],
+                    'current': {
+                        'year': None,
+                        'district': None,
+                        'taluka': None,
+                        'village': None,
+                        'doc_number': None
+                    },
+                    'vm_tasks': {}  # Track which VM is working on what
+                }
+        except Exception as e:
+            logger.error(f"Error loading progress from GitHub: {str(e)}")
+            raise
+    
+    def _save_progress_to_github(self):
+        """Save progress to GitHub repository with locking mechanism to prevent race conditions."""
+        try:
+            # First, try to get the latest version from GitHub to avoid overwriting other VM's changes
+            try:
+                latest_progress, latest_sha = self.github_client.get_file(self.github_progress_key)
+                
+                if latest_progress:
+                    # Use the GitHub client's merge function to merge the progress files
+                    merged_progress = self.github_client.merge_progress_files(self.progress, latest_progress)
+                    # Update the SHA to the latest one
+                    self.github_sha = latest_sha
+                else:
+                    merged_progress = self.progress
+            except Exception as e:
+                logger.warning(f"Could not load latest progress from GitHub for merging: {str(e)}")
+                merged_progress = self.progress
+            
+            # Upload the merged progress to GitHub
+            success, new_sha = self.github_client.update_file(
+                self.github_progress_key,
+                merged_progress,
+                self.github_sha
+            )
+            
+            if success:
+                # Update the SHA for future updates
+                self.github_sha = new_sha
+                logger.info(f"Progress saved to GitHub repository: {self.github_repo}, file: {self.github_progress_key}")
+            else:
+                logger.error("Failed to save progress to GitHub")
+        except Exception as e:
+            logger.error(f"Error saving progress to GitHub: {str(e)}")
             raise
     
     def get_free_proxies(self, min_proxies=5, max_workers=10, timeout=5):
@@ -2012,15 +2088,22 @@ class PropertyScraper:
         # First, try to load the latest progress from cloud storage
         if self.use_cloud_storage:
             try:
-                latest_progress = self._load_progress_from_s3()
-                # Merge completed tasks
-                for task in latest_progress['completed']:
-                    if task not in self.progress['completed']:
-                        self.progress['completed'].append(task)
-                # Update VM tasks
-                if 'vm_tasks' in latest_progress:
-                    self.progress['vm_tasks'] = latest_progress['vm_tasks']
-                logger.info("Successfully loaded and merged latest progress from cloud storage")
+                if self.cloud_storage_type == 's3':
+                    latest_progress = self._load_progress_from_s3()
+                elif self.cloud_storage_type == 'github':
+                    latest_progress = self._load_progress_from_github()
+                else:
+                    latest_progress = None
+                    
+                if latest_progress:
+                    # Merge completed tasks
+                    for task in latest_progress['completed']:
+                        if task not in self.progress['completed']:
+                            self.progress['completed'].append(task)
+                    # Update VM tasks
+                    if 'vm_tasks' in latest_progress:
+                        self.progress['vm_tasks'] = latest_progress['vm_tasks']
+                    logger.info("Successfully loaded and merged latest progress from cloud storage")
             except Exception as e:
                 logger.warning(f"Could not load latest progress from cloud storage: {str(e)}")
         
@@ -2109,15 +2192,22 @@ class PropertyScraper:
         # First, try to load the latest progress from cloud storage
         if self.use_cloud_storage:
             try:
-                latest_progress = self._load_progress_from_s3()
-                # Merge completed tasks
-                for task in latest_progress['completed']:
-                    if task not in self.progress['completed']:
-                        self.progress['completed'].append(task)
-                # Update VM tasks
-                if 'vm_tasks' in latest_progress:
-                    self.progress['vm_tasks'] = latest_progress['vm_tasks']
-                logger.info("Successfully loaded and merged latest progress from cloud storage")
+                if self.cloud_storage_type == 's3':
+                    latest_progress = self._load_progress_from_s3()
+                elif self.cloud_storage_type == 'github':
+                    latest_progress = self._load_progress_from_github()
+                else:
+                    latest_progress = None
+                    
+                if latest_progress:
+                    # Merge completed tasks
+                    for task in latest_progress['completed']:
+                        if task not in self.progress['completed']:
+                            self.progress['completed'].append(task)
+                    # Update VM tasks
+                    if 'vm_tasks' in latest_progress:
+                        self.progress['vm_tasks'] = latest_progress['vm_tasks']
+                    logger.info("Successfully loaded and merged latest progress from cloud storage")
             except Exception as e:
                 logger.warning(f"Could not load latest progress from cloud storage: {str(e)}")
         
