@@ -1,4 +1,3 @@
-# Core dependencies
 selenium==4.10.0
 webdriver-manager==3.8.6
 requests==2.31.0
@@ -7,35 +6,18 @@ pillow==10.0.0
 python-dotenv==1.0.0
 schedule==1.2.0
 
-# Optional OCR dependencies - comment out if causing installation issues
 pytesseract==0.3.10
-# Try this alternative if opencv-python causes installation issues
 opencv-python-headless==4.8.0.74
-# opencv-python==4.8.0.74
 
-# XML parsing
 lxml==4.9.3
 
-# Logging and file handling
 concurrent-log-handler==0.9.24
 fpdf==1.7.2
 
-# Browser automation
 undetected-chromedriver==3.5.0
 
-# PDF generation
 reportlab==4.0.4
 
-# Numerical processing - try different versions if installation fails
-# numpy==1.24.3  # Uncomment this line if you want to use this specific version
-numpy  # This will install the latest version compatible with your Python version
-# If the above fails, try a specific version known to have pre-built wheels:
-# numpy==1.21.6  # For Python 3.7-3.10
-# numpy==1.19.5  # For older Python versions
+numpy
 
-# AWS S3 integration for distributed scraping
 boto3==1.28.0
-
-# Note: Some packages may require additional system dependencies:
-# - pytesseract requires tesseract-ocr to be installed on the system
-# - opencv and lxml may require additional build tools

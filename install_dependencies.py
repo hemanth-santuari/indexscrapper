@@ -43,14 +43,12 @@ def check_system_dependencies():
     system = platform.system()
     
     if system == "Linux":
-        # Check for build essentials on Linux
         print("Checking for build-essential...")
         success, _ = run_command(["dpkg", "-s", "build-essential"])
         if not success:
             print("⚠️  build-essential not found. This may be needed for some packages.")
             print("   Try: sudo apt-get install build-essential python3-dev")
         
-        # Check for tesseract on Linux
         print("Checking for tesseract-ocr...")
         success, _ = run_command(["which", "tesseract"])
         if not success:
@@ -58,7 +56,6 @@ def check_system_dependencies():
             print("   Try: sudo apt-get install tesseract-ocr")
     
     elif system == "Windows":
-        # Check for tesseract on Windows
         print("Checking for Tesseract OCR...")
         tesseract_path = os.environ.get("TESSERACT_PATH")
         if not tesseract_path or not os.path.exists(tesseract_path):
@@ -67,7 +64,6 @@ def check_system_dependencies():
             print("   Then set TESSERACT_PATH environment variable to the installation directory.")
     
     elif system == "Darwin":  # macOS
-        # Check for tesseract on macOS
         print("Checking for tesseract...")
         success, _ = run_command(["which", "tesseract"])
         if not success:
@@ -78,22 +74,18 @@ def install_dependencies():
     """Install all dependencies from requirements.txt with error handling."""
     print_step("Installing dependencies")
     
-    # Upgrade pip first
     print("Upgrading pip...")
     run_command([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
     
-    # Read requirements file
     with open("requirements.txt", "r") as f:
         requirements = f.readlines()
     
-    # Filter out comments and empty lines
     packages = []
     for line in requirements:
         line = line.strip()
         if line and not line.startswith("#"):
             packages.append(line)
     
-    # Install core dependencies first
     core_deps = [
         "requests",
         "beautifulsoup4",
@@ -113,7 +105,6 @@ def install_dependencies():
                 print(f"⚠️  Failed to install core dependency: {matching_packages[0]}")
                 print("   This may affect the functionality of the scraper.")
     
-    # Install potentially problematic packages with alternatives
     problematic_packages = {
         "opencv-python": "opencv-python-headless",
         "pytesseract": None,  # No direct alternative
@@ -129,7 +120,6 @@ def install_dependencies():
             # Special handling for numpy
             if package == "numpy":
                 print(f"Installing {package} (with special handling)...")
-                # Try installing numpy without version constraint first
                 if not install_package("numpy"):
                     print("Trying numpy with specific version...")
                     if not install_package("numpy==1.21.6"):
@@ -143,14 +133,12 @@ def install_dependencies():
                             elif platform.system() == "Windows":
                                 print("   Try installing a pre-built wheel from: https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy")
             else:
-                # Normal handling for other packages
                 if not install_package(matching_packages[0]) and alternative:
                     print(f"Trying alternative: {alternative}...")
                     if not install_package(alternative):
                         print(f"⚠️  Failed to install both {package} and its alternative.")
                         print("   This may affect some functionality of the scraper.")
     
-    # Install remaining packages
     print("\nInstalling remaining packages...")
     remaining = [p for p in packages if not any(p.startswith(core) for core in core_deps) and 
                                        not any(p.startswith(prob) for prob in problematic_packages)]
@@ -165,10 +153,8 @@ def main():
     print_step("Property Scraper Dependency Installer")
     print("This script will install all required dependencies for the property scraper.")
     
-    # Check system dependencies
     check_system_dependencies()
     
-    # Install Python dependencies
     install_dependencies()
     
     print_step("Installation Complete")

@@ -11,7 +11,6 @@ from io import BytesIO
 import tkinter as tk
 from tkinter import Label, Entry, Button, StringVar
 
-# Import pytesseract if available, otherwise set to None
 try:
     import pytesseract
     PYTESSERACT_AVAILABLE = True
@@ -32,7 +31,6 @@ class CaptchaSolver:
             logger.warning(f"Unsupported captcha service: {self.service}. Falling back to OCR or manual mode.")
             self.service = 'ocr' if PYTESSERACT_AVAILABLE else 'manual'
         
-        # If service is OCR but pytesseract is not available, fall back to manual
         if self.service == 'ocr' and not PYTESSERACT_AVAILABLE:
             logger.warning("OCR service selected but pytesseract not installed. Falling back to manual mode.")
             self.service = 'manual'
@@ -48,24 +46,20 @@ class CaptchaSolver:
         Returns:
             The solved captcha text or None if failed
         """
-        # If OCR is selected or no API key is provided, try OCR first
         if self.service == 'ocr' or not self.api_key:
             if PYTESSERACT_AVAILABLE:
                 ocr_result = self._solve_with_ocr(image_data)
-                if ocr_result and len(ocr_result) >= 4:  # Assuming captcha is at least 4 chars
+                if ocr_result and len(ocr_result) >= 4:
                     logger.info(f"Captcha solved with OCR: {ocr_result}")
                     return ocr_result
                 logger.warning("OCR failed to solve captcha or result too short.")
             
-            # If OCR is not available or fails, and no API key is provided, use manual solving
             if not self.api_key:
                 return self._solve_manually(image_data)
         
-        # If manual solving is selected, use it directly
         if self.service == 'manual':
             return self._solve_manually(image_data)
         
-        # Try to solve using the selected API service
         for attempt in range(max_retries):
             try:
                 if self.service == '2captcha':
@@ -76,7 +70,6 @@ class CaptchaSolver:
                 logger.error(f"Error solving captcha with {self.service} (attempt {attempt+1}/{max_retries}): {str(e)}")
                 time.sleep(2)  # Wait before retry
         
-        # If all API attempts fail, try OCR if available
         if PYTESSERACT_AVAILABLE:
             logger.warning(f"All {max_retries} attempts with {self.service} failed. Trying OCR.")
             ocr_result = self._solve_with_ocr(image_data)
@@ -84,7 +77,6 @@ class CaptchaSolver:
                 logger.info(f"Captcha solved with OCR after API failure: {ocr_result}")
                 return ocr_result
         
-        # If OCR fails or is not available, fall back to manual solving
         logger.warning("Falling back to manual solving.")
         return self._solve_manually(image_data)
     
@@ -92,7 +84,6 @@ class CaptchaSolver:
         """Solve captcha using 2Captcha service."""
         logger.info("Solving captcha with 2Captcha...")
         
-        # Ensure image_data is base64 encoded
         if isinstance(image_data, bytes):
             image_data = base64.b64encode(image_data).decode('utf-8')
         
@@ -121,8 +112,7 @@ class CaptchaSolver:
             'json': 1
         }
         
-        # Poll for the result
-        for _ in range(30):  # Try for up to 30 * 5 = 150 seconds
+        for _ in range(30):
             time.sleep(5)
             response = requests.get(url, params=params)
             result = response.json()
@@ -140,7 +130,6 @@ class CaptchaSolver:
         """Solve captcha using Anti-Captcha service."""
         logger.info("Solving captcha with Anti-Captcha...")
         
-        # Ensure image_data is base64 encoded
         if isinstance(image_data, bytes):
             image_data = base64.b64encode(image_data).decode('utf-8')
         
@@ -175,8 +164,7 @@ class CaptchaSolver:
             "taskId": task_id
         }
         
-        # Poll for the result
-        for _ in range(30):  # Try for up to 30 * 5 = 150 seconds
+        for _ in range(30):
             time.sleep(5)
             response = requests.post(url, json=data)
             result = response.json()
@@ -201,46 +189,40 @@ class CaptchaSolver:
         
         image = Image.open(BytesIO(image_data))
         
-        # Create a simple GUI for captcha input
-        result = {'text': None}
+        captcha_text = None
         
         def submit_captcha():
-            result['text'] = captcha_var.get()
+            nonlocal captcha_text
+            captcha_text = captcha_var.get()
             root.quit()
         
-        # Create the GUI
         root = tk.Tk()
         root.title("Captcha Solver")
         root.geometry("300x200")
         
         Label(root, text="Enter the captcha text:").pack(pady=10)
         
-        # Display the captcha image
-        image = image.resize((200, 80), Image.LANCZOS)
+        image = image.resize((200, 80), Image.Resampling.LANCZOS)
         photo = tk.PhotoImage(data=self._image_to_data(image))
         Label(root, image=photo).pack(pady=10)
         
-        # Input field
         captcha_var = StringVar()
         Entry(root, textvariable=captcha_var, width=20).pack(pady=5)
         
-        # Submit button
         Button(root, text="Submit", command=submit_captcha).pack(pady=10)
         
-        # Run the GUI
         root.mainloop()
         
-        # Clean up
         root.destroy()
         
-        logger.info(f"Manual captcha solution: {result['text']}")
-        return result['text']
+        logger.info(f"Manual captcha solution: {captcha_text}")
+        return captcha_text
     
     def _image_to_data(self, image):
         """Convert PIL Image to PhotoImage compatible data."""
         buffer = BytesIO()
         image.save(buffer, format='PNG')
-        return base64.b64encode(buffer.getvalue())
+        return buffer.getvalue()
 
     def _solve_with_ocr(self, image_data):
         """Solve captcha using OCR with pytesseract."""
@@ -251,14 +233,11 @@ class CaptchaSolver:
         try:
             logger.info("Attempting to solve captcha with OCR...")
             
-            # Convert image_data to an image
             if isinstance(image_data, str):
-                # Assume it's base64 encoded
                 image_data = base64.b64decode(image_data)
             
             image = Image.open(BytesIO(image_data))
             
-            # Save original image for debugging if needed
             debug_dir = os.path.join(os.getcwd(), 'captcha_debug')
             if not os.path.exists(debug_dir):
                 os.makedirs(debug_dir)
@@ -267,30 +246,22 @@ class CaptchaSolver:
             original_path = os.path.join(debug_dir, f'original_{timestamp}.png')
             image.save(original_path)
             
-            # Preprocess the image to improve OCR accuracy
-            # Convert to grayscale
             image = image.convert('L')
             
-            # Increase contrast
             enhancer = ImageEnhance.Contrast(image)
             image = enhancer.enhance(2)
             
-            # Remove noise
             image = image.filter(ImageFilter.MedianFilter())
             
-            # Threshold the image
             threshold = 140
             image = ImageOps.invert(image)
             
-            # Save processed image for debugging
             processed_path = os.path.join(debug_dir, f'processed_{timestamp}.png')
             image.save(processed_path)
             
-            # Use pytesseract to extract text
             custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
             text = pytesseract.image_to_string(image, config=custom_config)
             
-            # Clean up the text
             text = text.strip()
             text = ''.join(c for c in text if c.isalnum())
             
@@ -301,16 +272,13 @@ class CaptchaSolver:
             return None
 
 if __name__ == "__main__":
-    # Example usage
     logging.basicConfig(level=logging.INFO)
     
-    # Test with a local captcha image if provided
     if len(sys.argv) > 1:
         image_path = sys.argv[1]
         with open(image_path, 'rb') as f:
             image_data = f.read()
         
-        # Try different solving methods
         solver = CaptchaSolver()
         
         if PYTESSERACT_AVAILABLE:

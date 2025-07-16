@@ -1,17 +1,18 @@
-# Property Scraper with Distributed Task Management
+# Property Scraper
 
-This property scraper is designed to work across multiple virtual machines (VMs), with each VM picking up where the previous one left off. This allows for efficient distributed scraping without duplicating work.
+This property scraper is designed to scrape property details from a government website. It can be run locally or in GitHub Codespaces.
 
 ## Features
 
 - Automatic proxy fetching from free proxy websites
 - Captcha solving using OCR or manual input
-- Distributed task management across multiple VMs
-- Cloud storage integration (AWS S3) for progress tracking
-- VM activity timeout detection
-- Race condition prevention
+- Progress tracking to resume from where you left off
+- Optional cloud storage integration (GitHub or AWS S3) for progress tracking
+- PDF downloading and processing
 
 ## Setup
+
+### Local Setup
 
 1. Install the required dependencies:
    ```
@@ -24,71 +25,82 @@ This property scraper is designed to work across multiple virtual machines (VMs)
    ```
    This script installs dependencies one by one with error handling and provides helpful troubleshooting messages.
 
-2. Configure AWS S3 for distributed scraping:
+2. Configure the scraper:
    - Open `config.json`
-   - Set `use_cloud_storage` to `true`
-   - Configure the S3 bucket and credentials:
+   - Set `use_cloud_storage` to `false` for local-only operation
+   - Or configure GitHub storage for cloud synchronization:
      ```json
+     "use_cloud_storage": true,
+     "cloud_storage_type": "github",
      "cloud_storage_config": {
-         "bucket_name": "your-bucket-name",
-         "progress_key": "progress.json",
-         "aws_access_key_id": "YOUR_ACCESS_KEY",
-         "aws_secret_access_key": "YOUR_SECRET_KEY",
-         "region_name": "us-east-1"
+         "repository": "your-username/your-repo",
+         "token": "your-github-token",
+         "progress_key": "progress.json"
      }
      ```
 
-3. Create an S3 bucket in your AWS account with the name specified in the config.
+### GitHub Codespaces Setup
+
+1. Create a new GitHub Codespace from your repository
+2. The Codespace will automatically install dependencies when it starts
+3. If needed, run the installation script to ensure all dependencies are properly installed:
+   ```
+   python install_dependencies.py
+   ```
+4. Configure the scraper as described in the local setup section
 
 ## How It Works
 
-### VM Identification
+### Instance Identification
 
-Each VM generates a unique ID using its hostname and a random UUID. This ID is used to track which VM is working on which task.
+Each instance of the scraper generates a unique ID. This ID is used for logging and tracking purposes.
 
 ```python
-self.vm_id = f"{socket.gethostname()}_{uuid.uuid4().hex[:8]}"
+self.instance_id = f"local_{uuid.uuid4().hex[:8]}"
 ```
 
 ### Task Management
 
-1. When a VM starts, it first checks if there are any available tasks that aren't completed or being worked on by other VMs.
-2. If a task is available, the VM marks it as being worked on by updating the `vm_tasks` field in the progress file.
-3. After completing a task, the VM marks it as completed in the `completed` field.
-4. The progress file is synchronized with S3 to ensure all VMs have the latest information.
-
-### Timeout Detection
-
-If a VM becomes inactive (no updates for 30 minutes), other VMs can take over its tasks. This prevents tasks from being stuck if a VM crashes or loses connection.
+1. The scraper checks if there are any available tasks that aren't completed.
+2. If a task is available, the scraper processes it and marks it as completed.
+3. The progress is saved to a local file and optionally synchronized with cloud storage.
 
 ## Running the Scraper
 
-To run the scraper on multiple VMs:
+### Standard Mode
 
-1. Set up each VM with the same configuration (same S3 bucket and credentials).
-2. Run the scraper on each VM:
-   ```
-   python property_scraper.py
-   ```
+Run the scraper with real browser automation:
 
-Each VM will automatically coordinate with others through the shared progress file in S3.
+```
+python property_scraper.py
+```
+
+### Demo Mode
+
+Run the scraper in demo mode (simulates the scraping process without making real requests):
+
+```
+# Add this to your code to run in demo mode
+if __name__ == "__main__":
+    scraper = PropertyScraper()
+    scraper.run_demo_mode()
+```
 
 ## Monitoring
 
 You can monitor the progress by:
 
-1. Checking the logs in the `logs` directory on each VM.
-2. Examining the progress.json file in your S3 bucket, which contains:
+1. Checking the logs in the `logs` directory.
+2. Examining the progress.json file, which contains:
    - Completed tasks
-   - Current tasks for each VM
-   - Last activity timestamp for each VM
+   - Current task being processed
 
 ## Troubleshooting
 
 ### Task Processing Issues
-- If a VM consistently fails to process a task, it will skip that task and move on to the next available one.
-- If all VMs are inactive for more than 30 minutes, their tasks will be considered available for processing when a VM becomes active again.
-- If you need to reset the progress, delete the progress.json file from your S3 bucket.
+- If the scraper consistently fails to process a task, it will skip that task and move on to the next available one.
+- If you need to reset the progress, delete the progress.json file.
+- If you're using cloud storage, make sure your credentials are correct and the repository/bucket exists.
 
 ### Installation Issues
 - If you encounter build errors during installation, try installing the packages one by one to identify which one is causing the issue.
@@ -101,9 +113,9 @@ You can monitor the progress by:
     - Ubuntu/Debian: `sudo apt-get install build-essential python3-dev`
     - Windows: Install Visual C++ Build Tools
 
-- For AWS S3 integration, make sure your AWS credentials are properly configured:
-  - Update the credentials in `config.json`
-  - Or set up AWS CLI configuration: `aws configure`
+- For GitHub integration, make sure your token has the necessary permissions:
+  - It needs `repo` scope to read and write to repositories
+  - Generate a token at GitHub Settings > Developer settings > Personal access tokens
 
 ### Numpy Installation Issues
 
@@ -131,3 +143,9 @@ If you encounter issues installing numpy (which is common due to its C extension
 5. Make sure you have the necessary build tools installed:
    - Windows: Install Visual C++ Build Tools
    - Linux: `sudo apt-get install build-essential python3-dev`
+
+### GitHub Codespaces Specific Issues
+
+- If you encounter browser automation issues in Codespaces, make sure to use the headless mode for Chrome.
+- For file permission issues, you may need to run `chmod +x install_dependencies.py` before executing the script.
+- If you're having trouble with the browser in Codespaces, try using the demo mode which doesn't require a real browser.
