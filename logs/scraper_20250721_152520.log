@@ -1,0 +1,4 @@
+2025-07-21 15:25:20,428 - property_scraper - INFO - Instance ID: local_2051b9a1
+2025-07-21 15:25:20,428 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 15:25:20,438 - test_captcha_screenshot - INFO - Using real captcha image: captcha_debug\cropped_captcha_1753090662.png
+2025-07-21 15:25:20,467 - test_captcha_screenshot - INFO - Using real dropdown image: dropdown_debug\after_district_1753090501.png

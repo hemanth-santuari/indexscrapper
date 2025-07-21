@@ -1,0 +1,245 @@
+2025-07-21 16:31:35,228 - property_scraper - INFO - Instance ID: local_a57aa567
+2025-07-21 16:31:35,229 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 16:31:35,229 - property_scraper - INFO - Running in demo mode
+2025-07-21 16:31:35,229 - property_scraper - INFO - Starting property scraper in DEMO MODE...
+2025-07-21 16:31:35,229 - property_scraper - INFO - Instance ID: local_a57aa567
+2025-07-21 16:31:35,230 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:31:35,230 - property_scraper - INFO - Processing combination: 2022_मुंबई_मुंबई_बांद्रा_3
+2025-07-21 16:31:35,231 - property_scraper - INFO - Processing in DEMO MODE: Year=2022, District=मुंबई, Taluka=मुंबई, Village=बांद्रा, Doc#=3
+2025-07-21 16:31:35,231 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating selecting Year: 2022
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating selecting Village: बांद्रा
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating entering Document Number: 3
+2025-07-21 16:31:35,732 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:31:36,733 - property_scraper - INFO - Captcha solved: ZDDI7G
+2025-07-21 16:31:36,733 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:31:37,234 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:31:37,734 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:31:38,535 - property_scraper - INFO - Found 2035 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:31:38,535 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2035 entries
+2025-07-21 16:31:38,535 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:31:38,535 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:31:39,336 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN5-6559-2022
+2025-07-21 16:31:39,336 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:40,337 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:40,599 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:40,600 - property_scraper - INFO - Downloaded PDF: 6559-2022-IndexII_copy.pdf
+2025-07-21 16:31:40,600 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:31:41,401 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-7246-2022
+2025-07-21 16:31:41,401 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:42,401 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:42,478 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:42,479 - property_scraper - INFO - Downloaded PDF: 7246-2022-IndexII_copy.pdf
+2025-07-21 16:31:42,479 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:31:43,281 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN7-4331-2022
+2025-07-21 16:31:43,281 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:44,282 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:44,377 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:44,378 - property_scraper - INFO - Downloaded PDF: 4331-2022-IndexII_copy.pdf
+2025-07-21 16:31:44,378 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:31:45,179 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN3-3487-2022
+2025-07-21 16:31:45,179 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:46,179 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:46,277 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:46,278 - property_scraper - INFO - Downloaded PDF: 3487-2022-IndexII_copy.pdf
+2025-07-21 16:31:46,278 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:31:47,079 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND4-5249-2022
+2025-07-21 16:31:47,079 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:48,079 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:48,163 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:48,164 - property_scraper - INFO - Downloaded PDF: 5249-2022-IndexII_copy.pdf
+2025-07-21 16:31:48,164 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-21 16:31:48,165 - property_scraper - INFO - Successfully processed combination: 2022_मुंबई_मुंबई_बांद्रा_3
+2025-07-21 16:31:48,165 - property_scraper - INFO - Daily requests: 1/5
+2025-07-21 16:31:48,165 - property_scraper - INFO - Waiting 4.33 seconds before next request...
+2025-07-21 16:31:52,498 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:31:52,498 - property_scraper - INFO - Processing combination: 2021_मुंबई_मुंबई_बांद्रा_1
+2025-07-21 16:31:52,499 - property_scraper - INFO - Processing in DEMO MODE: Year=2021, District=मुंबई, Taluka=मुंबई, Village=बांद्रा, Doc#=1
+2025-07-21 16:31:52,499 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating selecting Year: 2021
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating selecting Village: बांद्रा
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating entering Document Number: 1
+2025-07-21 16:31:53,001 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:31:54,002 - property_scraper - INFO - Captcha solved: SQXJFU
+2025-07-21 16:31:54,002 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:31:54,503 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:31:55,004 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:31:55,805 - property_scraper - INFO - Found 1799 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:31:55,805 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1799 entries
+2025-07-21 16:31:55,805 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:31:55,805 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:31:56,628 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND2-3979-2021
+2025-07-21 16:31:56,628 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:31:57,629 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:31:57,834 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:31:57,835 - property_scraper - INFO - Downloaded PDF: 3979-2021-IndexII_copy.pdf
+2025-07-21 16:31:57,835 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:31:58,637 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-21 16:31:58,637 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:31:59,437 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND6-4248-2021
+2025-07-21 16:31:59,437 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:00,438 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:00,523 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:00,524 - property_scraper - INFO - Downloaded PDF: 4248-2021-IndexII_copy.pdf
+2025-07-21 16:32:00,524 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:32:01,324 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP7-7317-2021
+2025-07-21 16:32:01,324 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:02,325 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:02,416 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:02,417 - property_scraper - INFO - Downloaded PDF: 7317-2021-IndexII_copy.pdf
+2025-07-21 16:32:02,417 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:32:03,218 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN9-8268-2021
+2025-07-21 16:32:03,218 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:04,218 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:04,305 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:04,307 - property_scraper - INFO - Downloaded PDF: 8268-2021-IndexII_copy.pdf
+2025-07-21 16:32:04,307 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-21 16:32:04,308 - property_scraper - INFO - Successfully processed combination: 2021_मुंबई_मुंबई_बांद्रा_1
+2025-07-21 16:32:04,308 - property_scraper - INFO - Daily requests: 2/5
+2025-07-21 16:32:04,308 - property_scraper - INFO - Waiting 3.83 seconds before next request...
+2025-07-21 16:32:08,143 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:32:08,143 - property_scraper - INFO - Processing combination: 2025_मुंबई_मुंबई_बांद्रा_3
+2025-07-21 16:32:08,144 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=मुंबई, Taluka=मुंबई, Village=बांद्रा, Doc#=3
+2025-07-21 16:32:08,144 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating selecting Village: बांद्रा
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating entering Document Number: 3
+2025-07-21 16:32:08,645 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:32:09,646 - property_scraper - INFO - Captcha solved: P5CFPG
+2025-07-21 16:32:09,646 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:32:10,147 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:32:10,647 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:32:11,448 - property_scraper - INFO - Found 1850 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:32:11,448 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1850 entries
+2025-07-21 16:32:11,448 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:32:11,448 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:32:12,249 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND3-4687-2025
+2025-07-21 16:32:12,249 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:13,250 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:13,336 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:13,337 - property_scraper - INFO - Downloaded PDF: 4687-2025-IndexII_copy.pdf
+2025-07-21 16:32:13,337 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:32:14,137 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-21 16:32:14,137 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:32:14,937 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN5-1315-2025
+2025-07-21 16:32:14,937 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:15,938 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:16,016 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:16,017 - property_scraper - INFO - Downloaded PDF: 1315-2025-IndexII_copy.pdf
+2025-07-21 16:32:16,017 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:32:16,930 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN4-7227-2025
+2025-07-21 16:32:16,930 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:17,932 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:18,074 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:18,075 - property_scraper - INFO - Downloaded PDF: 7227-2025-IndexII_copy.pdf
+2025-07-21 16:32:18,075 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:32:18,876 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN9-5007-2025
+2025-07-21 16:32:18,876 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:19,876 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:19,966 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:19,967 - property_scraper - INFO - Downloaded PDF: 5007-2025-IndexII_copy.pdf
+2025-07-21 16:32:19,967 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-21 16:32:19,967 - property_scraper - INFO - Successfully processed combination: 2025_मुंबई_मुंबई_बांद्रा_3
+2025-07-21 16:32:19,967 - property_scraper - INFO - Daily requests: 3/5
+2025-07-21 16:32:19,968 - property_scraper - INFO - Waiting 4.16 seconds before next request...
+2025-07-21 16:32:24,124 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:32:24,124 - property_scraper - INFO - Processing combination: 2022_मुंबई_मुंबई_माटुंगा_5
+2025-07-21 16:32:24,125 - property_scraper - INFO - Processing in DEMO MODE: Year=2022, District=मुंबई, Taluka=मुंबई, Village=माटुंगा, Doc#=5
+2025-07-21 16:32:24,125 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating selecting Year: 2022
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating selecting Village: माटुंगा
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating entering Document Number: 5
+2025-07-21 16:32:24,626 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:32:25,627 - property_scraper - INFO - Captcha solved: JKQ9RV
+2025-07-21 16:32:25,627 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:32:26,128 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:32:26,629 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:32:27,430 - property_scraper - INFO - Found 1987 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:32:27,430 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1987 entries
+2025-07-21 16:32:27,430 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:32:27,430 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:32:28,231 - property_scraper - WARNING - Failed to open PDF for entry #1 in new tab. The link may be broken.
+2025-07-21 16:32:28,231 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:32:29,031 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-21 16:32:29,031 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:32:29,832 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN6-4486-2022
+2025-07-21 16:32:29,832 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:30,832 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:30,931 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:30,932 - property_scraper - INFO - Downloaded PDF: 4486-2022-IndexII_copy.pdf
+2025-07-21 16:32:30,932 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:32:31,733 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN4-2068-2022
+2025-07-21 16:32:31,733 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:32,734 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:32,838 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:32,839 - property_scraper - INFO - Downloaded PDF: 2068-2022-IndexII_copy.pdf
+2025-07-21 16:32:32,839 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:32:33,640 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND5-5575-2022
+2025-07-21 16:32:33,640 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:34,641 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:34,731 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:34,731 - property_scraper - INFO - Downloaded PDF: 5575-2022-IndexII_copy.pdf
+2025-07-21 16:32:34,731 - property_scraper - INFO - Successfully downloaded 3 PDFs from 'List No. 2' buttons
+2025-07-21 16:32:34,732 - property_scraper - INFO - Successfully processed combination: 2022_मुंबई_मुंबई_माटुंगा_5
+2025-07-21 16:32:34,732 - property_scraper - INFO - Daily requests: 4/5
+2025-07-21 16:32:34,732 - property_scraper - INFO - Waiting 5.80 seconds before next request...
+2025-07-21 16:32:40,532 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:32:40,532 - property_scraper - INFO - Processing combination: 2020_मुंबई_मुंबई_कुलाबा_0
+2025-07-21 16:32:40,533 - property_scraper - INFO - Processing in DEMO MODE: Year=2020, District=मुंबई, Taluka=मुंबई, Village=कुलाबा, Doc#=0
+2025-07-21 16:32:40,533 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:32:41,047 - property_scraper - INFO - Simulating selecting Year: 2020
+2025-07-21 16:32:41,047 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:32:41,048 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:32:41,048 - property_scraper - INFO - Simulating selecting Village: कुलाबा
+2025-07-21 16:32:41,048 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-21 16:32:41,048 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:32:42,049 - property_scraper - INFO - Captcha solved: 2C04V0
+2025-07-21 16:32:42,049 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:32:42,550 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:32:43,072 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:32:43,873 - property_scraper - INFO - Found 2234 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:32:43,873 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2234 entries
+2025-07-21 16:32:43,873 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:32:43,873 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:32:44,674 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN6-5696-2020
+2025-07-21 16:32:44,674 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:45,675 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:45,780 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:45,782 - property_scraper - INFO - Downloaded PDF: 5696-2020-IndexII_copy.pdf
+2025-07-21 16:32:45,782 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:32:46,584 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN8-1221-2020
+2025-07-21 16:32:46,584 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:47,584 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:47,706 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:47,707 - property_scraper - INFO - Downloaded PDF: 1221-2020-IndexII_copy.pdf
+2025-07-21 16:32:47,707 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:32:48,508 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP1-3384-2020
+2025-07-21 16:32:48,508 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:49,508 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:49,606 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:49,607 - property_scraper - INFO - Downloaded PDF: 3384-2020-IndexII_copy.pdf
+2025-07-21 16:32:49,607 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:32:50,408 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN4-4518-2020
+2025-07-21 16:32:50,408 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:51,409 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:51,528 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:51,529 - property_scraper - INFO - Downloaded PDF: 4518-2020-IndexII_copy.pdf
+2025-07-21 16:32:51,529 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:32:52,330 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL4-8981-2020
+2025-07-21 16:32:52,330 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:32:53,330 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:32:53,423 - property_scraper - ERROR - Error creating screenshot-like PDF: expected str, bytes or os.PathLike object, not BytesIO
+2025-07-21 16:32:53,424 - property_scraper - INFO - Downloaded PDF: 8981-2020-IndexII_copy.pdf
+2025-07-21 16:32:53,424 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-21 16:32:53,425 - property_scraper - INFO - Successfully processed combination: 2020_मुंबई_मुंबई_कुलाबा_0
+2025-07-21 16:32:53,425 - property_scraper - INFO - Daily requests: 5/5
+2025-07-21 16:32:53,425 - property_scraper - INFO - Waiting 6.21 seconds before next request...
+2025-07-21 16:32:59,638 - property_scraper - INFO - Demo scraper completed.

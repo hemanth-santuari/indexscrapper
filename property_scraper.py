@@ -20,7 +20,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from captcha_solver import CaptchaSolver
+from solvecaptcha import Solvecaptcha
 import warnings
 
 try:
@@ -34,12 +34,26 @@ except ImportError:
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+# Configure logging with UTF-8 encoding
+import io
+import sys
+
+# Create logs directory if it doesn't exist
+os.makedirs('logs', exist_ok=True)
+
+# Create a UTF-8 encoded stream for console output
+utf8_stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(os.path.join('logs', f'scraper_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')),
-        logging.StreamHandler()
+        logging.FileHandler(
+            os.path.join('logs', f'scraper_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'),
+            encoding='utf-8'
+        ),
+        logging.StreamHandler(utf8_stdout)
     ]
 )
 logger = logging.getLogger('property_scraper')
@@ -62,8 +76,14 @@ class PropertyScraper:
                 self.proxies = config.get('proxies', [])
                 self.user_agents = config.get('user_agents', [])
                 self.captcha_api_key = config.get('captcha_api_key', '')
+                self.tesseract_path = config.get('tesseract_path', '')
                 self.use_free_proxies = config.get('use_free_proxies', True)
                 self.free_proxy_min_count = config.get('free_proxy_min_count', 5)
+                
+                # Set tesseract path if provided
+                if self.tesseract_path and PYTESSERACT_AVAILABLE:
+                    pytesseract.pytesseract.tesseract_cmd = self.tesseract_path
+                    logger.info(f"Tesseract path set to: {self.tesseract_path}")
                 
                 self.use_cloud_storage = config.get('use_cloud_storage', False)
                 self.cloud_storage_type = config.get('cloud_storage_type', 's3')
@@ -98,6 +118,7 @@ class PropertyScraper:
                 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15'
             ]
             self.captcha_api_key = ''
+            self.tesseract_path = ''
             self.use_free_proxies = True
             self.free_proxy_min_count = 5
             self.use_cloud_storage = False
@@ -446,6 +467,7 @@ class PropertyScraper:
             from selenium.webdriver.chrome.service import Service
             
             uc_options = uc.ChromeOptions()
+            uc_options.add_argument("--headless=new")  # Run in new headless mode
             uc_options.add_argument("--disable-notifications")
             uc_options.add_argument("--disable-popup-blocking")
             uc_options.add_argument("--disable-extensions")
@@ -454,6 +476,11 @@ class PropertyScraper:
             uc_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
             uc_options.add_argument("--no-sandbox")  # Bypass OS security model
             uc_options.add_argument("--window-size=1920,1080")  # Set window size
+            
+            # Additional settings for better headless performance
+            uc_options.add_argument("--start-maximized")
+            uc_options.add_argument("--force-device-scale-factor=1")
+            uc_options.add_argument("--high-dpi-support=1")
             
             if self.user_agents:
                 user_agent = random.choice(self.user_agents)
@@ -478,200 +505,171 @@ class PropertyScraper:
             logger.error(f"Error setting up Chrome WebDriver: {str(e)}")
             raise Exception(f"Failed to set up Chrome WebDriver: {str(e)}. Browser automation is required.")
     
-    def _solve_captcha_without_manual(self, image_data):
+    def _extract_captcha_from_screenshot(self, screenshot_path):
         """
-        Solve captcha without ever falling back to manual input.
-        Returns the solved captcha text or a random string if OCR fails.
+        Extract captcha text from a screenshot using the improved method.
+        
+        Args:
+            screenshot_path: Path to the screenshot image
+            
+        Returns:
+            str: Extracted captcha text or None if extraction failed
         """
-        captcha_text = None
+        logger.info(f"Extracting captcha from screenshot: {screenshot_path}")
         
-        # Try OCR if pytesseract is available
-        if PYTESSERACT_AVAILABLE:
-            try:
-                # Process the image for better OCR results
-                if isinstance(image_data, str):
-                    # Assume it's base64 encoded
-                    image_data = base64.b64decode(image_data)
+        try:
+            # Check if the image exists
+            if not os.path.exists(screenshot_path):
+                logger.error(f"Screenshot not found: {screenshot_path}")
+                return None
+            
+            # Create save directory if it doesn't exist
+            save_dir = "captcha_extracts"
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
+                logger.info(f"Created directory: {save_dir}")
+            
+            # Open the image
+            image = Image.open(screenshot_path)
+            logger.info(f"Image opened successfully: {image.format}, {image.size}, {image.mode}")
+            
+            # Crop the captcha area using the improved coordinates
+            captcha_area = (710, 590, 940, 650)
+            captcha_image = image.crop(captcha_area)
+            captcha_filename = os.path.join(save_dir, f"captcha_{os.path.basename(screenshot_path)}")
+            captcha_image.save(captcha_filename)
+            logger.info(f"Saved captcha image to: {captcha_filename}")
+            
+            # Apply preprocessing - Grayscale (best method based on testing)
+            gray = captcha_image.convert('L')
+            gray_filename = os.path.join(save_dir, f"gray_{os.path.basename(screenshot_path)}")
+            gray.save(gray_filename)
+            
+            # Perform OCR with the best configuration
+            custom_config = r'--psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+            text = pytesseract.image_to_string(gray, config=custom_config).strip()
+            
+            if text:
+                logger.info(f"Successfully extracted captcha text: '{text}'")
+                return text
+            else:
+                logger.warning("OCR returned empty text")
+                return None
                 
-                image = Image.open(BytesIO(image_data))
-                
-                # Preprocess the image
-                image = image.convert('L')  # Convert to grayscale
-                enhancer = ImageEnhance.Contrast(image)
-                image = enhancer.enhance(2)  # Increase contrast
-                image = image.filter(ImageFilter.MedianFilter())  # Remove noise
-                image = ImageOps.invert(image)  # Invert colors
-                
-                # Use pytesseract to extract text
-                custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                text = pytesseract.image_to_string(image, config=custom_config)
-                
-                # Clean up the text
-                text = text.strip()
-                text = ''.join(c for c in text if c.isalnum())
-                
-                if text and len(text) >= 4:
-                    captcha_text = text
-                    logger.info(f"Successfully solved captcha with OCR: {captcha_text}")
-            except Exception as e:
-                logger.warning(f"OCR failed: {str(e)}")
-        
-        # If OCR failed or pytesseract is not available, use a random string
-        if not captcha_text:
-            captcha_text = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=6))
-            logger.info(f"Using random captcha text: {captcha_text}")
-        
-        return captcha_text
+        except Exception as e:
+            logger.error(f"Error extracting captcha: {str(e)}")
+            return None
     
     def _handle_captcha(self, driver):
-        """Handle captcha solving. Returns True if successful, False otherwise."""
+        """Handle captcha solving using the improved screenshot method. Returns True if successful, False otherwise."""
         try:
             logger.info("Looking for captcha...")
             
-            # Don't refresh the page as it might reset form values
-            # Instead, just look for the captcha image directly
-            
-            # Try to find the captcha refresh button and click it
-            try:
-                refresh_button = driver.find_element(By.XPATH, "//img[contains(@src, 'captcha')]/following-sibling::button[contains(@class, 'refresh')] | //img[contains(@src, 'captcha')]/following-sibling::a[contains(@class, 'refresh')] | //button[contains(@class, 'refresh')] | //a[contains(@onclick, 'captcha') or contains(@onclick, 'refresh') or contains(@class, 'refresh')]")
-                refresh_button.click()
-                logger.info("Clicked captcha refresh button")
-                time.sleep(2)  # Wait for new captcha to load
-            except Exception as refresh_btn_error:
-                logger.info("No captcha refresh button found or couldn't click it")
-                try:
-                    refresh_icon = driver.find_element(By.CSS_SELECTOR, "img[alt='refresh'] + button, button img[alt='refresh'], a img[alt='refresh'], .refresh-icon")
-                    refresh_icon.click()
-                    logger.info("Clicked captcha refresh icon")
-                    time.sleep(2)
-                except Exception:
-                    logger.info("No captcha refresh icon found either")
-            
+            # Find the captcha image
             captcha_img = WebDriverWait(driver, 20).until(
                 EC.presence_of_element_located((By.XPATH, "//img[contains(@src, 'captcha') or contains(@id, 'captcha') or contains(@class, 'captcha-image')]"))
             )
             
             driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", captcha_img)
-            time.sleep(2)  # Wait longer for scroll to complete
+            time.sleep(2)  # Wait for scroll to complete
             
-            # Remove screenshot to avoid page reload
+            # Check if we have a district dropdown screenshot from this session
+            timestamp = int(time.time())
+            district_screenshot_path = None
             
-            captcha_src = None
-            for attempt in range(3):
-                try:
-                    captcha_src = captcha_img.get_attribute("src")
-                    if captcha_src:
-                        break
-                    time.sleep(1)
-                except:
-                    time.sleep(1)
-            
-            if not captcha_src:
-                logger.error("Could not find captcha image source after multiple attempts")
-                return False
-                
-            try:
-                if "?" not in captcha_src:
-                    new_src = f"{captcha_src}?t={int(time.time())}"
-                    driver.execute_script(f"arguments[0].src = '{new_src}';", captcha_img)
-                    logger.info(f"Forced reload of captcha image with: {new_src}")
-                    time.sleep(2)  # Wait for the new image to load
-                    captcha_src = new_src
-            except Exception as reload_error:
-                logger.warning(f"Could not force reload of captcha: {str(reload_error)}")
-            
-            captcha_data = None
-            
-            if captcha_src.startswith("data:image"):
-                logger.info("Captcha is base64 encoded, extracting data...")
-                base64_data = captcha_src.split(",")[1]
-                captcha_data = base64_data
-            else:
-                try:
-                    logger.info("Downloading captcha image with SSL verification...")
-                    response = requests.get(captcha_src)
-                    if response.status_code == 200:
-                        captcha_data = response.content
-                        logger.info("Successfully downloaded captcha image with SSL verification")
-                    else:
-                        logger.warning(f"Failed to download captcha image with SSL verification: {response.status_code}")
-                except Exception as ssl_error:
-                    logger.warning(f"Error downloading captcha with SSL verification: {str(ssl_error)}")
-                
-                if captcha_data is None:
-                    try:
-                        logger.warning("Trying to download captcha image with SSL verification disabled...")
-                        logger.warning("WARNING: SSL certificate verification is disabled. This is insecure!")
-                        import urllib3
-                        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-                        
-                        response = requests.get(captcha_src, verify=False)
-                        if response.status_code == 200:
-                            captcha_data = response.content
-                            logger.info("Successfully downloaded captcha image with SSL verification disabled")
-                        else:
-                            logger.warning(f"Failed to download captcha image with SSL verification disabled: {response.status_code}")
-                    except Exception as no_ssl_error:
-                        logger.warning(f"Error downloading captcha with SSL verification disabled: {str(no_ssl_error)}")
-                
-                if captcha_data is None:
-                    try:
-                        logger.warning("Trying to capture captcha using screenshot method...")
-                        # Take a screenshot of the captcha element only, not the whole page
-                        captcha_data = captcha_img.screenshot_as_png
-                        logger.info("Successfully captured captcha using screenshot method")
-                    except Exception as screenshot_error:
-                        logger.error(f"Error capturing captcha screenshot: {str(screenshot_error)}")
+            # Look for the most recent after_district_*.png file
+            dropdown_debug_dir = "dropdown_debug"
+            if os.path.exists(dropdown_debug_dir):
+                district_screenshots = [f for f in os.listdir(dropdown_debug_dir) if f.startswith("after_district_") and f.endswith(".png")]
+                if district_screenshots:
+                    # Sort by timestamp (newest first)
+                    district_screenshots.sort(reverse=True)
+                    district_screenshot_path = os.path.join(dropdown_debug_dir, district_screenshots[0])
+                    logger.info(f"Found district screenshot: {district_screenshot_path}")
             
             captcha_text = None
-            if captcha_data and PYTESSERACT_AVAILABLE:
-                # Try to solve the captcha using OCR
+            
+            # If we have a district screenshot, extract the captcha from it using extract_captcha.py
+            if district_screenshot_path and os.path.exists(district_screenshot_path):
+                logger.info(f"Using existing district screenshot for captcha extraction: {district_screenshot_path}")
+                
+                # Import extract_captcha function from extract_captcha.py
                 try:
-                    # Process the image for better OCR results
-                    if isinstance(captcha_data, str):
-                        # Assume it's base64 encoded
-                        image_data = base64.b64decode(captcha_data)
+                    from extract_captcha import extract_captcha
+                    captcha_text = extract_captcha(district_screenshot_path)
+                    
+                    if captcha_text:
+                        logger.info(f"Successfully extracted captcha text using extract_captcha.py: {captcha_text}")
                     else:
-                        image_data = captcha_data
+                        logger.warning("Failed to extract captcha text using extract_captcha.py")
+                except Exception as extract_error:
+                    logger.error(f"Error importing or using extract_captcha.py: {str(extract_error)}")
                     
-                    image = Image.open(BytesIO(image_data))
-                    
-                    # Preprocess the image
-                    image = image.convert('L')  # Convert to grayscale
-                    enhancer = ImageEnhance.Contrast(image)
-                    image = enhancer.enhance(2)  # Increase contrast
-                    image = image.filter(ImageFilter.MedianFilter())  # Remove noise
-                    image = ImageOps.invert(image)  # Invert colors
-                    
-                    # Use pytesseract to extract text
-                    custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                    text = pytesseract.image_to_string(image, config=custom_config)
-                    
-                    # Clean up the text
-                    text = text.strip()
-                    text = ''.join(c for c in text if c.isalnum())
-                    
-                    if text and len(text) >= 4:
-                        captcha_text = text
-                        logger.info(f"Successfully solved captcha with OCR: {captcha_text}")
-                except Exception as e:
-                    logger.warning(f"OCR failed: {str(e)}")
+                    # Fallback to internal extraction method if extract_captcha.py fails
+                    captcha_text = self._extract_captcha_from_screenshot(district_screenshot_path)
+                    if captcha_text:
+                        logger.info(f"Successfully extracted captcha text using internal method: {captcha_text}")
+                    else:
+                        logger.warning("Failed to extract captcha text using internal method")
             
-            # Only use random text as a last resort
+            # If we couldn't extract from district screenshot or don't have one, use SolveCaptcha API
+            if not captcha_text and self.captcha_api_key:
+                try:
+                    # Take a screenshot of the entire page
+                    full_screenshot = driver.get_screenshot_as_png()
+                    
+                    # Open the screenshot
+                    image = Image.open(BytesIO(full_screenshot))
+                    
+                    # Save the full screenshot for debugging
+                    os.makedirs("captcha_debug", exist_ok=True)
+                    full_path = f"captcha_debug/full_page_{timestamp}.png"
+                    image.save(full_path)
+                    logger.info(f"Saved full page screenshot to {full_path}")
+                    
+                    # Try to extract captcha from the full screenshot using extract_captcha.py
+                    try:
+                        from extract_captcha import extract_captcha
+                        captcha_text = extract_captcha(full_path)
+                        if captcha_text:
+                            logger.info(f"Successfully extracted captcha text from full screenshot: {captcha_text}")
+                    except Exception as extract_error:
+                        logger.error(f"Error extracting captcha from full screenshot: {str(extract_error)}")
+                    
+                    # If extract_captcha.py failed, try SolveCaptcha API
+                    if not captcha_text:
+                        # Initialize SolveCaptcha with API key from config
+                        solver = Solvecaptcha(self.captcha_api_key)
+                        
+                        # Convert image to base64
+                        img_byte_arr = BytesIO()
+                        image.save(img_byte_arr, format='PNG')
+                        img_byte_arr.seek(0)
+                        captcha_base64 = base64.b64encode(img_byte_arr.getvalue()).decode('utf-8')
+                        
+                        # Solve the captcha
+                        logger.info("Solving captcha with SolveCaptcha API...")
+                        captcha_text = solver.normal(captcha_base64)
+                        logger.info(f"Captcha solved with SolveCaptcha API: {captcha_text}")
+                except Exception as solver_error:
+                    logger.error(f"Error using SolveCaptcha API: {str(solver_error)}")
+            
+            # If we still don't have a captcha text, we can't proceed
             if not captcha_text:
-                captcha_text = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=6))
-                logger.info(f"Using random captcha text as fallback: {captcha_text}")
+                logger.error("Failed to extract captcha text using all available methods")
+                return False
             
+            # Find and fill the captcha input field
             captcha_input = WebDriverWait(driver, 15).until(
                 EC.presence_of_element_located((By.XPATH, "//input[contains(@id, 'captcha') or contains(@name, 'captcha') or contains(@placeholder, 'captcha') or contains(@placeholder, 'Captcha')]"))
             )
             
             driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", captcha_input)
-            time.sleep(1)  # Reduced wait time
+            time.sleep(1)
             
+            # Clear the input field
             try:
                 captcha_input.clear()
-                
                 driver.execute_script("arguments[0].value = '';", captcha_input)
                 
                 from selenium.webdriver.common.keys import Keys
@@ -682,6 +680,7 @@ class PropertyScraper:
             except Exception as clear_error:
                 logger.warning(f"Error clearing captcha input: {str(clear_error)}")
             
+            # Enter the captcha text
             try:
                 captcha_input.click()
                 time.sleep(1)
@@ -700,38 +699,20 @@ class PropertyScraper:
                 logger.warning(f"Error entering captcha text: {str(input_error)}")
                 return False
             
-            time.sleep(2)  # Reduced wait time
-            
-            # Don't click search button here - let the process_combination method do it
-            # This ensures the correct flow: fill form → handle captcha → click search
+            time.sleep(2)
             
             return True
             
         except Exception as e:
             logger.error(f"Error handling captcha: {str(e)}")
-            try:
-                logger.warning("Error in captcha handling. Attempting to find captcha input field and enter simulated text...")
-                captcha_text = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=6))
-                
-                captcha_input = driver.find_element(By.XPATH, "//input[contains(@id, 'captcha') or contains(@name, 'captcha')]")
-                captcha_input.clear()
-                captcha_input.send_keys(captcha_text)
-                
-                logger.info(f"Entered simulated captcha text as fallback: {captcha_text}")
-                return True
-            except:
-                logger.error("Failed to enter simulated captcha text as fallback")
-                return False
+            return False
     
     def _select_dropdown_option(self, driver, dropdown_id, option_text):
         """Select an option from a dropdown by visible text."""
         try:
             logger.info(f"Selecting '{option_text}' from dropdown '{dropdown_id}'")
             
-            dropdown = WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.ID, dropdown_id))
-            )
-            
+            # Take a screenshot before dropdown interaction
             try:
                 os.makedirs("dropdown_debug", exist_ok=True)
                 timestamp = int(time.time())
@@ -741,9 +722,16 @@ class PropertyScraper:
             except Exception as ss_error:
                 logger.warning(f"Could not save screenshot: {str(ss_error)}")
             
-            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", dropdown)
-            time.sleep(2)  # Wait longer for scroll to complete
+            # Find the dropdown element
+            dropdown = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.ID, dropdown_id))
+            )
             
+            # Scroll to the dropdown to make it visible
+            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", dropdown)
+            time.sleep(3)  # Wait longer for scroll to complete
+            
+            # Remove any overlays that might interfere with clicking
             try:
                 driver.execute_script("""
                     var overlays = document.querySelectorAll('.modal, .overlay, .popup, [style*="z-index"]');
@@ -755,57 +743,102 @@ class PropertyScraper:
             except Exception as overlay_error:
                 logger.warning(f"Error removing overlays: {str(overlay_error)}")
             
-            click_success = False
+            # PRIORITIZE JAVASCRIPT APPROACH - Most reliable for dropdown selection
+            select_success = False
             
+            # JavaScript approach first
             try:
-                dropdown.click()
-                click_success = True
-                logger.info("Standard click on dropdown successful")
-            except Exception as click_error:
-                logger.warning(f"Standard click failed: {str(click_error)}")
+                logger.info("Trying JavaScript selection approach first")
+                # Get all options to find the matching one
+                options_data = driver.execute_script(f"""
+                    var select = document.getElementById('{dropdown_id}');
+                    var options = select.options;
+                    var result = [];
+                    for (var i = 0; i < options.length; i++) {{
+                        result.push({{
+                            text: options[i].text,
+                            value: options[i].value,
+                            index: i
+                        }});
+                    }}
+                    return result;
+                """)
+                
+                option_index = None
+                option_value = None
+                
+                for opt in options_data:
+                    if opt['text'].strip() == option_text or option_text in opt['text'].strip():
+                        option_index = opt['index']
+                        option_value = opt['value']
+                        break
+                
+                if option_index is not None:
+                    # Set the value and trigger change event
+                    driver.execute_script(f"""
+                        var select = document.getElementById('{dropdown_id}');
+                        select.selectedIndex = {option_index};
+                        select.value = '{option_value}';
+                        var event = new Event('change', {{ bubbles: true }});
+                        select.dispatchEvent(event);
+                    """)
+                    select_success = True
+                    logger.info(f"JavaScript selection successful with index: {option_index}, value: {option_value}")
+                else:
+                    logger.warning(f"Could not find option '{option_text}' in dropdown options via JavaScript")
+            except Exception as js_error:
+                logger.warning(f"JavaScript selection failed: {str(js_error)}")
             
-            if not click_success:
-                try:
-                    driver.execute_script("arguments[0].click();", dropdown)
-                    click_success = True
-                    logger.info("JavaScript click on dropdown successful")
-                except Exception as js_click_error:
-                    logger.warning(f"JavaScript click failed: {str(js_click_error)}")
-            
-            if not click_success:
-                try:
-                    from selenium.webdriver.common.action_chains import ActionChains
-                    actions = ActionChains(driver)
-                    actions.move_to_element(dropdown)
-                    actions.click()
-                    actions.perform()
-                    click_success = True
-                    logger.info("ActionChains click on dropdown successful")
-                except Exception as action_error:
-                    logger.warning(f"ActionChains click failed: {str(action_error)}")
-            
-            time.sleep(3)
-            
+            # Take a screenshot after JavaScript attempt
             try:
-                screenshot_path = f"dropdown_debug/after_click_{dropdown_id}_{timestamp}.png"
+                screenshot_path = f"dropdown_debug/after_js_{dropdown_id}_{timestamp}.png"
                 driver.save_screenshot(screenshot_path)
-                logger.info(f"Saved screenshot after dropdown click: {screenshot_path}")
+                logger.info(f"Saved screenshot after JavaScript attempt: {screenshot_path}")
             except Exception as ss_error:
                 logger.warning(f"Could not save screenshot: {str(ss_error)}")
             
-            select_success = False
-            
-            try:
-                select = Select(dropdown)
-                select.select_by_visible_text(option_text)
-                select_success = True
-                logger.info("Select by visible text successful")
-            except Exception as select_error:
-                logger.warning(f"Select by visible text failed: {str(select_error)}")
-            
+            # If JavaScript approach failed, try Select class approach
             if not select_success:
                 try:
+                    logger.info("Trying Select class approach")
+                    select = Select(dropdown)
+                    select.select_by_visible_text(option_text)
+                    select_success = True
+                    logger.info("Select by visible text successful")
+                except Exception as select_error:
+                    logger.warning(f"Select by visible text failed: {str(select_error)}")
+                    
+                    # Try selecting by partial text
+                    try:
+                        options = select.options
+                        for option in options:
+                            if option_text in option.text:
+                                select.select_by_visible_text(option.text)
+                                select_success = True
+                                logger.info(f"Select by partial text successful with '{option.text}'")
+                                break
+                    except Exception as partial_error:
+                        logger.warning(f"Select by partial text failed: {str(partial_error)}")
+            
+            # Take a screenshot after Select class attempt
+            try:
+                screenshot_path = f"dropdown_debug/after_select_class_{dropdown_id}_{timestamp}.png"
+                driver.save_screenshot(screenshot_path)
+                logger.info(f"Saved screenshot after Select class attempt: {screenshot_path}")
+            except Exception as ss_error:
+                logger.warning(f"Could not save screenshot: {str(ss_error)}")
+            
+            # If Select class approach failed, try direct click approach
+            if not select_success:
+                try:
+                    logger.info("Trying direct click approach")
+                    # Click on the dropdown to open it
+                    driver.execute_script("arguments[0].click();", dropdown)
+                    time.sleep(1)
+                    
+                    # Try multiple XPath patterns to find the option
                     option_xpaths = [
+                        f"//option[text()='{option_text}']",
                         f"//select[@id='{dropdown_id}']/option[text()='{option_text}']",
                         f"//select[@id='{dropdown_id}']/option[contains(text(), '{option_text}')]",
                         f"//select[@id='{dropdown_id}']/option[normalize-space(text())='{option_text}']"
@@ -813,73 +846,68 @@ class PropertyScraper:
                     
                     for xpath in option_xpaths:
                         try:
-                            try:
-                                option = driver.find_element(By.XPATH, xpath)
-                                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", option)
-                                time.sleep(1)
-                            except:
-                                pass
-                                
-                            option = WebDriverWait(driver, 10).until(
+                            option = WebDriverWait(driver, 5).until(
                                 EC.element_to_be_clickable((By.XPATH, xpath))
                             )
                             
+                            # Try multiple click methods
                             try:
-                                option.click()  # Standard click
-                            except:
+                                # JavaScript click is most reliable
+                                driver.execute_script("arguments[0].click();", option)
+                                select_success = True
+                                logger.info(f"JavaScript click successful using xpath: {xpath}")
+                                break
+                            except Exception as js_click_error:
+                                logger.warning(f"JavaScript click failed: {str(js_click_error)}")
+                                
                                 try:
-                                    driver.execute_script("arguments[0].click();", option)  # JS click
-                                except:
+                                    # Standard click
+                                    option.click()
+                                    select_success = True
+                                    logger.info(f"Standard click successful using xpath: {xpath}")
+                                    break
+                                except Exception as std_click_error:
+                                    logger.warning(f"Standard click failed: {str(std_click_error)}")
+                                    
                                     try:
+                                        # Action chains click
                                         from selenium.webdriver.common.action_chains import ActionChains
                                         actions = ActionChains(driver)
                                         actions.move_to_element(option).click().perform()
-                                    except:
-                                        continue
-                                        
-                            select_success = True
-                            logger.info(f"Direct option click successful using xpath: {xpath}")
-                            break
-                        except:
-                            continue
-                except Exception as option_error:
-                    logger.warning(f"Direct option click failed: {str(option_error)}")
+                                        select_success = True
+                                        logger.info(f"Action chains click successful using xpath: {xpath}")
+                                        break
+                                    except Exception as action_error:
+                                        logger.warning(f"Action chains click failed: {str(action_error)}")
+                        except Exception as option_find_error:
+                            logger.warning(f"Could not find option with xpath {xpath}: {str(option_find_error)}")
+                except Exception as direct_error:
+                    logger.warning(f"Direct click approach failed: {str(direct_error)}")
             
-            if not select_success:
-                try:
-                    options = dropdown.find_elements(By.TAG_NAME, "option")
-                    option_value = None
-                    
-                    for opt in options:
-                        if opt.text.strip() == option_text or option_text in opt.text.strip():
-                            option_value = opt.get_attribute("value")
-                            break
-                    
-                    if option_value:
-                        driver.execute_script(f"document.getElementById('{dropdown_id}').value = '{option_value}';")
-                        driver.execute_script(f"var event = new Event('change'); document.getElementById('{dropdown_id}').dispatchEvent(event);")
-                        select_success = True
-                        logger.info(f"JavaScript selection successful with value: {option_value}")
-                    else:
-                        driver.execute_script(f"""
-                            var select = document.getElementById('{dropdown_id}');
-                            if(select.options.length > 1) {{
-                                select.selectedIndex = 1;  // Select the first non-default option
-                                var event = new Event('change');
-                                select.dispatchEvent(event);
-                            }}
-                        """)
-                        select_success = True
-                        logger.info("JavaScript selection by index successful")
-                except Exception as js_error:
-                    logger.warning(f"JavaScript selection failed: {str(js_error)}")
-            
+            # Take a screenshot after all selection attempts
             try:
-                screenshot_path = f"dropdown_debug/after_select_{dropdown_id}_{timestamp}.png"
+                screenshot_path = f"dropdown_debug/after_all_attempts_{dropdown_id}_{timestamp}.png"
                 driver.save_screenshot(screenshot_path)
-                logger.info(f"Saved screenshot after option selection: {screenshot_path}")
+                logger.info(f"Saved screenshot after all selection attempts: {screenshot_path}")
             except Exception as ss_error:
                 logger.warning(f"Could not save screenshot: {str(ss_error)}")
+            
+            # Final fallback: try to select any non-default option if all else fails
+            if not select_success:
+                try:
+                    logger.info("Trying fallback: select any non-default option")
+                    driver.execute_script(f"""
+                        var select = document.getElementById('{dropdown_id}');
+                        if(select.options.length > 1) {{
+                            select.selectedIndex = 1;  // Select the first non-default option
+                            var event = new Event('change', {{ bubbles: true }});
+                            select.dispatchEvent(event);
+                        }}
+                    """)
+                    select_success = True
+                    logger.info("Fallback selection successful: selected first non-default option")
+                except Exception as fallback_error:
+                    logger.warning(f"Fallback selection failed: {str(fallback_error)}")
             
             time.sleep(3)
             
@@ -1402,276 +1430,7 @@ class PropertyScraper:
             logger.error(f"Error processing combination: {str(e)}")
             return False
     
-    def _simulate_download_pdfs(self, year, district, taluka, village, doc_number):
-        """
-        Simulate downloading PDFs by clicking on "List No. 2" buttons, opening PDFs in new tabs,
-        and then downloading them directly without trying to recreate them.
-        This is a fallback method when browser automation fails.
-        """
-        logger.info("Selecting 'All' entries per page from dropdown...")
-        time.sleep(0.5)  # Simulate dropdown click time
-        
-        logger.info("Page refreshed with All entries per page")
-        time.sleep(0.8)  # Simulate page refresh time
-        
-        num_entries = random.randint(1500, 2500)
-        logger.info(f"Found {num_entries} entries with 'List No. 2' buttons in the search results table")
-        
-        pdfs_downloaded = 0
-        max_downloads = 5  # Always limit to 5 regardless of num_entries
-        logger.info(f"For demo purposes, downloading only {max_downloads} PDFs out of {num_entries} entries")
-        logger.info("In real usage, you could download all PDFs by processing them in batches")
-        
-        for i in range(max_downloads):
-            entry_num = i + 1
-            logger.info(f"Clicking on 'List No. 2' button for entry #{entry_num}...")
-            time.sleep(0.8)  # Simulate click time
-            
-            # 80% chance of successful opening in new tab
-            if random.random() < 0.8:
-                # Generate a random document registration number
-                doc_reg_number = random.randint(1000, 9999)
-                office_code = random.choice(["BRL", "AND", "THN", "PUN", "NGP"])
-                office_number = random.randint(1, 9)
-                
-                # Format the filename like the example: "6177-2024-IndexII_copy.pdf"
-                pdf_name = f"{doc_reg_number}-{year}-IndexII_copy.pdf"
-                
-                logger.info(f"PDF opened in new tab: Doc Reg. No. {office_code}{office_number}-{doc_reg_number}-{year}")
-                logger.info(f"Downloading PDF from new tab...")
-                time.sleep(1.0)  # Simulate download time
-                
-                pdf_path = os.path.join(self.download_dir, pdf_name)
-                
-                sample_pdfs = [f for f in os.listdir('.') if f.endswith('-IndexII_copy.pdf')]
-                
-                if sample_pdfs:
-                    # Use the first sample PDF as a template
-                    template_path = sample_pdfs[0]
-                    logger.info(f"Using real PDF template: {template_path}")
-                    
-                    # Copy the template PDF
-                    import shutil
-                    try:
-                        shutil.copy(template_path, pdf_path)
-                        logger.info(f"Successfully copied template PDF to {pdf_path}")
-                    except Exception as e:
-                        logger.error(f"Error copying template PDF: {str(e)}")
-                        # Fall back to creating a PDF with reportlab
-                        self._create_pdf_with_reportlab(pdf_path, office_code, office_number, doc_reg_number, year)
-                else:
-                    try:
-                        logger.info("Creating a PDF that simulates a screenshot of the document page")
-                        self._create_screenshot_like_pdf(pdf_path, office_code, office_number, doc_reg_number, year)
-                    except Exception as e:
-                        logger.error(f"Error creating screenshot-like PDF: {str(e)}")
-                        logger.warning("Falling back to simple PDF creation with reportlab.")
-                        self._create_pdf_with_reportlab(pdf_path, office_code, office_number, doc_reg_number, year)
-                
-                logger.info(f"Downloaded PDF: {pdf_name}")
-                pdfs_downloaded += 1
-            else:
-                logger.warning(f"Failed to open PDF for entry #{entry_num} in new tab. The link may be broken.")
-        
-        logger.info(f"Successfully downloaded {pdfs_downloaded} PDFs from 'List No. 2' buttons")
-        return pdfs_downloaded
-    
-    def _create_screenshot_like_pdf(self, pdf_path, office_code, office_number, doc_reg_number, year):
-        """
-        Create a PDF that looks like a screenshot of a document page.
-        This creates a more realistic looking document than the simple reportlab version.
-        """
-        try:
-            from PIL import Image, ImageDraw, ImageFont
-            from reportlab.lib.pagesizes import letter
-            from reportlab.pdfgen import canvas
-            import io
-            
-            width, height = 800, 1100  # Standard page size
-            import numpy as np
-            white_array = np.ones((height, width, 3), dtype=np.uint8) * 255
-            img = Image.fromarray(white_array)
-            draw = ImageDraw.Draw(img)
-            
-            try:
-                # Try to load Arial or a similar font
-                font_large = ImageFont.truetype("arial.ttf", 20)
-                font_medium = ImageFont.truetype("arial.ttf", 16)
-                font_small = ImageFont.truetype("arial.ttf", 12)
-            except Exception:
-                font_large = ImageFont.load_default()
-                font_medium = font_large
-                font_small = font_large
-            
-            draw.rectangle([(0, 0), (width, 60)], fill='lightgray')
-            draw.text((20, 20), "PROPERTY DOCUMENT", fill='black', font=font_large)
-            
-            draw.text((20, 80), f"Document Registration Number: {office_code}{office_number}-{doc_reg_number}-{year}", fill='black', font=font_medium)
-            draw.text((20, 110), f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", fill='black', font=font_medium)
-            
-            draw.line([(20, 140), (width-20, 140)], fill='black', width=2)
-            
-            draw.text((20, 170), "INDEX II", fill='black', font=font_large)
-            
-            draw.text((20, 210), "Property Details:", fill='black', font=font_medium)
-            draw.text((40, 240), "Type: Residential", fill='black', font=font_small)
-            draw.text((40, 270), "Area: 1200 sq. ft.", fill='black', font=font_small)
-            draw.text((40, 300), "Location: Maharashtra", fill='black', font=font_small)
-            
-            draw.text((20, 350), "Owner Information:", fill='black', font=font_medium)
-            draw.text((40, 380), "Name: [Owner Name]", fill='black', font=font_small)
-            draw.text((40, 410), "Address: [Owner Address]", fill='black', font=font_small)
-            
-            draw.text((20, 460), "Transaction Details:", fill='black', font=font_medium)
-            draw.text((40, 490), f"Registration Date: {datetime.now().strftime('%d-%m-%Y')}", fill='black', font=font_small)
-            draw.text((40, 520), "Registration Fee: Rs. 15,000", fill='black', font=font_small)
-            draw.text((40, 550), "Stamp Duty: Rs. 45,000", fill='black', font=font_small)
-            
-            draw.rectangle([(0, height-40), (width, height)], fill='lightgray')
-            draw.text((width//2-100, height-30), "E-DISPlay Portal", fill='black', font=font_small)
-            
-            img_byte_arr = io.BytesIO()
-            img.save(img_byte_arr, format='PNG')
-            img_byte_arr.seek(0)
-            
-            c = canvas.Canvas(pdf_path, pagesize=(width, height))
-            c.drawImage(img_byte_arr, 0, 0, width=width, height=height)
-            c.save()
-            
-            logger.info(f"Created screenshot-like PDF: {pdf_path}")
-            return True
-            
-        except ImportError as e:
-            logger.error(f"Required libraries for screenshot-like PDF not available: {str(e)}")
-            return False
-        except Exception as e:
-            logger.error(f"Error creating screenshot-like PDF: {str(e)}")
-            return False
-    
-    def _create_pdf_with_reportlab(self, pdf_path, office_code, office_number, doc_reg_number, year):
-        """Create a PDF file using reportlab."""
-        try:
-            import io
-            from reportlab.pdfgen import canvas
-            from reportlab.lib.pagesizes import letter
-            
-            buffer = io.BytesIO()
-            c = canvas.Canvas(buffer, pagesize=letter)
-            c.setFont("Helvetica", 12)
-            
-            c.drawString(100, 750, "PROPERTY DOCUMENT")
-            c.drawString(100, 730, f"Document Registration Number: {office_code}{office_number}-{doc_reg_number}-{year}")
-            c.drawString(100, 710, f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            
-            # Add some fake content to make it look like a real document
-            c.setFont("Helvetica-Bold", 14)
-            c.drawString(100, 670, "INDEX II")
-            c.setFont("Helvetica", 12)
-            c.drawString(100, 650, "Property Details:")
-            c.drawString(120, 630, "Type: Residential")
-            c.drawString(120, 610, "Area: 1200 sq. ft.")
-            c.drawString(120, 590, "Location: Maharashtra")
-            
-            c.drawString(100, 550, "Owner Information:")
-            c.drawString(120, 530, "Name: [Owner Name]")
-            c.drawString(120, 510, "Address: [Owner Address]")
-            
-            c.drawString(100, 470, "Transaction Details:")
-            c.drawString(120, 450, f"Registration Date: {datetime.now().strftime('%d-%m-%Y')}")
-            c.drawString(120, 430, "Registration Fee: Rs. 15,000")
-            c.drawString(120, 410, "Stamp Duty: Rs. 45,000")
-            
-            c.save()
-            
-            # Write the PDF to a file
-            with open(pdf_path, 'wb') as f:
-                f.write(buffer.getvalue())
-            
-            logger.info(f"Created PDF with reportlab: {pdf_path}")
-            
-        except ImportError:
-            # If reportlab is not installed, create a simple text file with .pdf extension
-            logger.warning("ReportLab not installed. Creating a text file with .pdf extension instead.")
-            with open(pdf_path, 'wb') as f:
-                f.write(b'This is a property document file.\n')
-                f.write(f'Document Registration Number: {office_code}{office_number}-{doc_reg_number}-{year}'.encode('utf-8'))
-    
-    def _simulate_handle_captcha(self):
-        """Simulate captcha solving for demo mode."""
-        logger.info("Simulating captcha solving...")
-        time.sleep(1)  # Simulate solving time
-        
-        # Simulate success with 90% probability
-        success = random.random() < 0.9
-        
-        if success:
-            captcha_text = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=6))
-            logger.info(f"Captcha solved: {captcha_text}")
-        else:
-            logger.error("Failed to solve captcha")
-            
-        return success
-    
-    def process_combination_demo(self, year, district, taluka, village, doc_number):
-        """Process a single combination of parameters in demo mode."""
-        if self._check_daily_limit():
-            logger.info("Daily limit reached. Stopping processing.")
-            return False
-        
-        # Update current progress
-        self.progress['current'] = {
-            'year': year,
-            'district': district,
-            'taluka': taluka,
-            'village': village,
-            'doc_number': doc_number
-        }
-        self._save_progress()
-        
-        logger.info(f"Processing in DEMO MODE: Year={year}, District={district}, Taluka={taluka}, Village={village}, Doc#={doc_number}")
-        
-        # Simulate navigating to the website
-        logger.info(f"Simulating navigation to {self.base_url}")
-        time.sleep(0.5)
-        
-        # Simulate selecting options from dropdowns
-        logger.info(f"Simulating selecting Year: {year}")
-        logger.info(f"Simulating selecting District: {district}")
-        logger.info(f"Simulating selecting Taluka: {taluka}")
-        logger.info(f"Simulating selecting Village: {village}")
-        logger.info(f"Simulating entering Document Number: {doc_number}")
-        
-        # Simulate handling captcha
-        if not self._simulate_handle_captcha():
-            logger.error("Failed to handle captcha. Retrying...")
-            if not self._simulate_handle_captcha():  # Second attempt
-                logger.error("Failed to handle captcha again. Skipping this combination.")
-                return False
-        
-        # Simulate clicking search button
-        logger.info("Simulating clicking Search button...")
-        time.sleep(0.5)
-        
-        # Simulate downloading PDFs
-        downloaded = self._simulate_download_pdfs(year, district, taluka, village, doc_number)
-        
-        self.daily_requests += 1
-        
-        combination_key = f"{year}_{district}_{taluka}_{village}_{doc_number}"
-        self.progress['completed'].append(combination_key)
-        self._save_progress()
-        
-        logger.info(f"Successfully processed combination: {combination_key}")
-        logger.info(f"Daily requests: {self.daily_requests}/{self.daily_limit}")
-        
-        delay = random.uniform(self.delay_between_requests[0], self.delay_between_requests[1])
-        logger.info(f"Waiting {delay:.2f} seconds before next request...")
-        time.sleep(delay)
-        
-        return True
-    
-    # _auto_select_from_dropdowns method removed as we now get dropdown options directly from the website
-    
+
     def _find_available_task(self):
         """
         Find a task that is not completed.
@@ -1708,129 +1467,6 @@ class PropertyScraper:
         logger.info("No current task to continue. Need to get dropdown options from website.")
         return None
     
-    def run_demo_mode(self):
-        """
-        Run the scraper in demo mode.
-        
-        This method simulates the scraping process without actually accessing the website.
-        It's useful for testing the scraper's logic and workflow without making real requests.
-        """
-        logger.info("Starting property scraper in DEMO MODE...")
-        logger.info(f"Instance ID: {self.instance_id}")
-        
-        num_combinations = 5
-        attempts = 0
-        max_attempts = 10
-        
-        # First, try to load the latest progress from cloud storage
-        if self.use_cloud_storage:
-            try:
-                if self.cloud_storage_type == 's3':
-                    latest_progress = self._load_progress_from_s3()
-                elif self.cloud_storage_type == 'github':
-                    latest_progress = self._load_progress_from_github()
-                else:
-                    latest_progress = None
-                    
-                if latest_progress:
-                    # Merge completed tasks
-                    for task in latest_progress['completed']:
-                        if task not in self.progress['completed']:
-                            self.progress['completed'].append(task)
-                    logger.info("Successfully loaded and merged latest progress from cloud storage")
-            except Exception as e:
-                logger.warning(f"Could not load latest progress from cloud storage: {str(e)}")
-        
-        processed_count = 0
-        while processed_count < num_combinations and attempts < max_attempts:
-            if self._check_daily_limit():
-                logger.info("Daily limit reached. Exiting.")
-                return
-            
-            # In demo mode, we can't get dropdown options from the website
-            # So we'll just generate random values for testing
-            logger.info("Demo mode: Generating random values for testing...")
-            
-            # Generate random values for year, district, taluka, village, and doc_number
-            year = str(random.randint(2020, 2025))
-            district = random.choice(["Mumbai", "Pune", "Nagpur", "Thane"])
-            
-            if district == "Mumbai":
-                taluka = random.choice(["Mumbai City", "Mumbai Suburban"])
-            elif district == "Pune":
-                taluka = random.choice(["Pune City", "Haveli"])
-            elif district == "Nagpur":
-                taluka = random.choice(["Nagpur Urban", "Nagpur Rural"])
-            else:  # Thane
-                taluka = random.choice(["Thane", "Kalyan"])
-            
-            if taluka == "Mumbai City":
-                village = random.choice(["Colaba", "Fort"])
-            elif taluka == "Mumbai Suburban":
-                village = random.choice(["Andheri", "Bandra"])
-            elif taluka == "Pune City":
-                village = random.choice(["Shivajinagar", "Kothrud"])
-            elif taluka == "Haveli":
-                village = random.choice(["Hadapsar", "Wagholi"])
-            elif taluka == "Nagpur Urban":
-                village = random.choice(["Dharampeth", "Sadar"])
-            elif taluka == "Nagpur Rural":
-                village = random.choice(["Hingna", "Wadi"])
-            elif taluka == "Thane":
-                village = random.choice(["Naupada", "Majiwada"])
-            else:  # Kalyan
-                village = random.choice(["Kalyan East", "Kalyan West"])
-            
-            doc_number = random.randint(0, 9)
-            combination_key = f"{year}_{district}_{taluka}_{village}_{doc_number}"
-            
-            # Check if this combination has already been processed
-            if combination_key in self.progress['completed']:
-                logger.info(f"Skipping combination {combination_key} as it's already completed.")
-                attempts += 1
-                continue
-            else:
-                # This block is now unreachable since we're not using _find_available_task in demo mode
-                # But keeping it for completeness
-                logger.info("Using previously found available task")
-            
-            # Update current progress
-            self.progress['current'] = {
-                'year': year,
-                'district': district,
-                'taluka': taluka,
-                'village': village,
-                'doc_number': doc_number
-            }
-            
-            self._save_progress()
-            
-            logger.info(f"Processing combination: {combination_key}")
-            success = self.process_combination_demo(year, district, taluka, village, doc_number)
-            
-            if not success:
-                # If we hit the daily limit, exit
-                if self._check_daily_limit():
-                    logger.info("Daily limit reached. Exiting.")
-                    return
-                
-                # Otherwise, retry with a new session
-                logger.info("Retrying with a new session...")
-                self._reset_session()
-                success = self.process_combination_demo(year, district, taluka, village, doc_number)
-                
-                if not success:
-                    logger.error(f"Failed to process combination {combination_key} after retry. Skipping.")
-            
-            if success:
-                processed_count += 1
-            
-            attempts += 1
-        
-        if processed_count < num_combinations:
-            logger.warning(f"Could only process {processed_count} combinations after {attempts} attempts")
-        
-        logger.info("Demo scraper completed.")
     
     def run(self):
         """
@@ -2019,8 +1655,12 @@ class PropertyScraper:
                             attempts += 1
                             continue
                         
-                        # Select a district
-                        district = random.choice(districts)
+                        # Always select 'मुंबई' (Mumbai) as the district
+                        district = 'मुंबई'
+                        # If 'मुंबई' is not in the list, fall back to a random choice
+                        if district not in districts:
+                            logger.warning(f"District '{district}' not found in options. Available districts: {districts}")
+                            district = random.choice(districts)
                         logger.info(f"Selected District: {district}")
                         
                         # Click on the district dropdown and select the option
@@ -2278,17 +1918,31 @@ if __name__ == "__main__":
     os.makedirs('logs', exist_ok=True)
     os.makedirs('downloads', exist_ok=True)
     
+    # Configure logging with UTF-8 encoding
+    import io
+    import sys
+    import argparse
+    
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Property Scraper')
+    args = parser.parse_args()
+    
+    # Create a UTF-8 encoded stream for console output
+    utf8_stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    
     # Configure logging
     log_file = os.path.join('logs', f'scraper_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[
-            logging.FileHandler(log_file),
-            logging.StreamHandler()
+            logging.FileHandler(log_file, encoding='utf-8'),
+            logging.StreamHandler(utf8_stdout)
         ]
     )
     
     # Run the scraper
     scraper = PropertyScraper()
+    
+    logger.info("Running property scraper")
     scraper.run()

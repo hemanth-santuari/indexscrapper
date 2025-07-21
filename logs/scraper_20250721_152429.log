@@ -1,0 +1,7 @@
+2025-07-21 15:24:29,497 - property_scraper - INFO - Instance ID: local_fa1e549a
+2025-07-21 15:24:29,497 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 15:24:29,541 - test_captcha_screenshot - INFO - Using real captcha image: captcha_debug\cropped_captcha_1753090662.png
+2025-07-21 15:24:29,542 - test_captcha_screenshot - INFO - Using real dropdown image: dropdown_debug\after_district_1753090501.png
+2025-07-21 15:05:01,000 - property_scraper - INFO - Looking for captcha...
+2025-07-21 15:05:01,000 - property_scraper - INFO - Capturing captcha using screenshot method...
+2025-07-21 15:05:01,000 - property_scraper - ERROR - Error handling captcha: maximum recursion depth exceeded

@@ -1,0 +1,215 @@
+2025-07-21 15:03:03,868 - property_scraper - INFO - Instance ID: local_47c9b913
+2025-07-21 15:03:03,868 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 15:03:03,869 - property_scraper - INFO - Starting property scraper...
+2025-07-21 15:03:03,869 - property_scraper - INFO - Instance ID: local_47c9b913
+2025-07-21 15:03:03,869 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-21 15:03:04,062 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+2025-07-21 15:03:04,062 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-21 15:03:04,824 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-21 15:03:04,827 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 15:03:11,970 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753090391.png
+2025-07-21 15:03:13,545 - property_scraper - INFO - Looking for available tasks...
+2025-07-21 15:03:13,546 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-21 15:03:13,546 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-21 15:03:13,765 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753090393.png
+2025-07-21 15:03:24,951 - property_scraper - INFO - Selected Year: 1992
+2025-07-21 15:03:28,390 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753090408.png
+2025-07-21 15:03:39,658 - property_scraper - INFO - Selected District: ठाणे
+2025-07-21 15:03:51,237 - property_scraper - ERROR - Error selecting dropdown options: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:03:52,640 - property_scraper - INFO - Looking for available tasks...
+2025-07-21 15:03:52,641 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-21 15:03:52,641 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-21 15:03:52,883 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753090432.png
+2025-07-21 15:04:04,105 - property_scraper - INFO - Selected Year: 1996
+2025-07-21 15:04:07,482 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753090447.png
+2025-07-21 15:04:18,752 - property_scraper - INFO - Selected District: सिंधुदुर्ग
+2025-07-21 15:04:30,318 - property_scraper - ERROR - Error selecting dropdown options: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:04:31,927 - property_scraper - INFO - Looking for available tasks...
+2025-07-21 15:04:31,927 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-21 15:04:31,928 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-21 15:04:32,179 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753090471.png
+2025-07-21 15:04:43,406 - property_scraper - INFO - Selected Year: 2020
+2025-07-21 15:04:46,753 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753090486.png
+2025-07-21 15:04:58,053 - property_scraper - INFO - Selected District: ठाणे
+2025-07-21 15:05:01,490 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753090501.png
+2025-07-21 15:05:12,220 - property_scraper - INFO - Selected Taluka: उल्हासनगर
+2025-07-21 15:05:15,571 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753090515.png
+2025-07-21 15:05:28,515 - property_scraper - INFO - Selected Village: दहिवली
+2025-07-21 15:05:31,881 - property_scraper - INFO - Saved screenshot after village selection: dropdown_debug/after_village_1753090531.png
+2025-07-21 15:05:31,882 - property_scraper - INFO - Processing combination: 2020_ठाणे_उल्हासनगर_दहिवली_4
+2025-07-21 15:05:31,882 - property_scraper - INFO - Processing: Year=2020, District=ठाणे, Taluka=उल्हासनगर, Village=दहिवली, Doc#=4
+2025-07-21 15:05:31,883 - property_scraper - INFO - Selecting '2020' from dropdown 'year'
+2025-07-21 15:05:52,932 - property_scraper - ERROR - Error selecting option '2020' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:05:52,933 - property_scraper - INFO - Selecting 'ठाणे' from dropdown 'district'
+2025-07-21 15:06:13,994 - property_scraper - ERROR - Error selecting option 'ठाणे' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:06:13,995 - property_scraper - INFO - Selecting 'उल्हासनगर' from dropdown 'taluka'
+2025-07-21 15:06:35,030 - property_scraper - ERROR - Error selecting option 'उल्हासनगर' from dropdown 'taluka': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:06:35,031 - property_scraper - INFO - Selecting 'दहिवली' from dropdown 'village'
+2025-07-21 15:06:56,094 - property_scraper - ERROR - Error selecting option 'दहिवली' from dropdown 'village': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 15:07:17,284 - property_scraper - INFO - Entered document number: 4
+2025-07-21 15:07:17,284 - property_scraper - INFO - Looking for captcha...
+2025-07-21 15:07:27,313 - property_scraper - INFO - No captcha refresh button found or couldn't click it
+2025-07-21 15:07:37,326 - property_scraper - INFO - No captcha refresh icon found either
+2025-07-21 15:07:39,361 - property_scraper - INFO - Forced reload of captcha image with: https://pay2igr.igrmaharashtra.gov.in/eDisplay/captcha-image?t=1753090659
+2025-07-21 15:07:41,363 - property_scraper - INFO - Downloading captcha image...
+2025-07-21 15:07:42,150 - property_scraper - WARNING - Error downloading captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image?t=1753090659 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-21 15:07:42,151 - property_scraper - WARNING - Trying to capture captcha using screenshot method...
+2025-07-21 15:07:42,397 - property_scraper - INFO - Saved cropped captcha to captcha_debug/cropped_captcha_1753090662.png
+2025-07-21 15:07:42,398 - property_scraper - INFO - Successfully extracted captcha from screenshot
+2025-07-21 15:07:42,398 - property_scraper - INFO - Solving captcha with SolveCaptcha...
+2025-07-21 15:07:42,400 - property_scraper - INFO - Saved original captcha to captcha_debug/original_captcha_1753090662.png
+2025-07-21 15:07:42,402 - property_scraper - INFO - Saved preprocessed captcha to captcha_debug/preprocessed_captcha_1753090662.png
+2025-07-21 15:07:42,402 - property_scraper - INFO - Using Tesseract path: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 15:07:42,557 - property_scraper - INFO - Raw OCR result: 'nn
+'
+2025-07-21 15:07:42,558 - property_scraper - WARNING - OCR result too short or empty: 'nn'
+2025-07-21 15:07:42,558 - property_scraper - INFO - Using random captcha text as fallback: UKUJ1S
+2025-07-21 15:07:43,653 - property_scraper - INFO - Cleared captcha input field
+2025-07-21 15:07:45,015 - property_scraper - INFO - Entered captcha text: UKUJ1S
+2025-07-21 15:07:47,091 - property_scraper - INFO - Clicked search button
+2025-07-21 15:07:48,837 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 15:07:56,732 - uc - INFO - ensuring close

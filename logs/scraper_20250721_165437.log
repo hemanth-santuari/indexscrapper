@@ -1,0 +1,300 @@
+2025-07-21 16:54:37,509 - property_scraper - INFO - Instance ID: local_694b5142
+2025-07-21 16:54:37,509 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 16:54:37,510 - property_scraper - INFO - Running in normal mode
+2025-07-21 16:54:37,510 - property_scraper - INFO - Starting property scraper...
+2025-07-21 16:54:37,510 - property_scraper - INFO - Instance ID: local_694b5142
+2025-07-21 16:54:37,511 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-21 16:54:37,732 - property_scraper - INFO - Using user agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+2025-07-21 16:54:37,732 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-21 16:54:37,754 - uc - WARNING - could not detect version_main.therefore, we are assuming it is chrome 108 or higher
+2025-07-21 16:54:38,937 - uc - INFO - setting properties for headless
+2025-07-21 16:54:39,150 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-21 16:54:39,151 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:54:45,900 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753097085.png
+2025-07-21 16:54:46,996 - property_scraper - INFO - Looking for available tasks...
+2025-07-21 16:54:46,996 - property_scraper - INFO - Continuing with previous task: 1994_मुंबई_Mumbai_कान्हेरी_9
+2025-07-21 16:54:46,996 - property_scraper - INFO - Found available task: 1994_मुंबई_Mumbai_कान्हेरी_9
+2025-07-21 16:54:46,996 - property_scraper - INFO - Selecting '1994' from dropdown 'year'
+2025-07-21 16:54:47,085 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753097086.png
+2025-07-21 16:55:08,516 - property_scraper - ERROR - Error selecting option '1994' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:55:09,517 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-21 16:55:09,608 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753097109.png
+2025-07-21 16:55:30,648 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:55:31,648 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-21 16:55:31,748 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753097131.png
+2025-07-21 16:55:52,812 - property_scraper - ERROR - Error selecting option 'Mumbai' from dropdown 'taluka': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:55:53,813 - property_scraper - INFO - Selecting 'कान्हेरी' from dropdown 'village'
+2025-07-21 16:55:53,904 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_village_1753097153.png
+2025-07-21 16:56:14,923 - property_scraper - ERROR - Error selecting option 'कान्हेरी' from dropdown 'village': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:56:37,059 - property_scraper - INFO - Entered document number: 9
+2025-07-21 16:56:37,059 - property_scraper - INFO - Processing combination: 1994_मुंबई_Mumbai_कान्हेरी_9
+2025-07-21 16:56:37,060 - property_scraper - INFO - Processing: Year=1994, District=मुंबई, Taluka=Mumbai, Village=कान्हेरी, Doc#=9
+2025-07-21 16:56:37,060 - property_scraper - INFO - Selecting '1994' from dropdown 'year'
+2025-07-21 16:56:37,153 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753097197.png
+2025-07-21 16:56:58,226 - property_scraper - ERROR - Error selecting option '1994' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:56:58,226 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-21 16:56:58,590 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753097218.png
+2025-07-21 16:57:19,714 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:57:19,714 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-21 16:57:19,832 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753097239.png
+2025-07-21 16:57:40,920 - property_scraper - ERROR - Error selecting option 'Mumbai' from dropdown 'taluka': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:57:40,920 - property_scraper - INFO - Selecting 'कान्हेरी' from dropdown 'village'
+2025-07-21 16:57:41,042 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_village_1753097260.png
+2025-07-21 16:58:02,130 - property_scraper - ERROR - Error selecting option 'कान्हेरी' from dropdown 'village': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:58:23,301 - property_scraper - INFO - Entered document number: 9
+2025-07-21 16:58:23,301 - property_scraper - INFO - Looking for captcha...
+2025-07-21 16:58:25,319 - property_scraper - ERROR - Failed to extract captcha text using all available methods
+2025-07-21 16:58:25,319 - property_scraper - ERROR - Failed to handle captcha. Retrying...
+2025-07-21 16:58:25,319 - property_scraper - INFO - Looking for captcha...
+2025-07-21 16:58:27,331 - property_scraper - ERROR - Failed to extract captcha text using all available methods
+2025-07-21 16:58:27,331 - property_scraper - ERROR - Failed to handle captcha again. Skipping this combination.
+2025-07-21 16:58:27,331 - property_scraper - INFO - Retrying with a new session...
+2025-07-21 16:58:27,332 - property_scraper - INFO - Processing: Year=1994, District=मुंबई, Taluka=Mumbai, Village=कान्हेरी, Doc#=9
+2025-07-21 16:58:27,332 - property_scraper - INFO - Selecting '1994' from dropdown 'year'
+2025-07-21 16:58:27,457 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753097307.png
+2025-07-21 16:58:48,535 - property_scraper - ERROR - Error selecting option '1994' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:58:48,535 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-21 16:58:48,657 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753097328.png
+2025-07-21 16:59:09,710 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-21 16:59:09,710 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-21 16:59:09,837 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753097349.png

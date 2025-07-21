@@ -1,0 +1,253 @@
+2025-07-21 16:35:19,678 - property_scraper - INFO - Instance ID: local_e7c71acc
+2025-07-21 16:35:19,679 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 16:35:19,679 - property_scraper - INFO - Running in demo mode
+2025-07-21 16:35:19,679 - property_scraper - INFO - Starting property scraper in DEMO MODE...
+2025-07-21 16:35:19,679 - property_scraper - INFO - Instance ID: local_e7c71acc
+2025-07-21 16:35:19,680 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:35:19,680 - property_scraper - INFO - Processing combination: 2025_मुंबई_मुंबई_बांद्रा_4
+2025-07-21 16:35:19,681 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=मुंबई, Taluka=मुंबई, Village=बांद्रा, Doc#=4
+2025-07-21 16:35:19,681 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating selecting Village: बांद्रा
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating entering Document Number: 4
+2025-07-21 16:35:20,182 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:35:21,183 - property_scraper - INFO - Captcha solved: QDXAQP
+2025-07-21 16:35:21,183 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:35:21,683 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:35:22,184 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:35:23,017 - property_scraper - INFO - Found 2310 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:35:23,017 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2310 entries
+2025-07-21 16:35:23,017 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:35:23,020 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:35:23,821 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN1-2386-2025
+2025-07-21 16:35:23,821 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:24,821 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:25,211 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\2386-2025-IndexII_copy.pdf
+2025-07-21 16:35:25,212 - property_scraper - INFO - Downloaded PDF: 2386-2025-IndexII_copy.pdf
+2025-07-21 16:35:25,212 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:35:26,013 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND2-4299-2025
+2025-07-21 16:35:26,013 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:27,014 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:27,198 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\4299-2025-IndexII_copy.pdf
+2025-07-21 16:35:27,199 - property_scraper - INFO - Downloaded PDF: 4299-2025-IndexII_copy.pdf
+2025-07-21 16:35:27,199 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:35:28,000 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND2-4186-2025
+2025-07-21 16:35:28,000 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:29,001 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:29,131 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\4186-2025-IndexII_copy.pdf
+2025-07-21 16:35:29,131 - property_scraper - INFO - Downloaded PDF: 4186-2025-IndexII_copy.pdf
+2025-07-21 16:35:29,132 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:35:29,933 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP4-5454-2025
+2025-07-21 16:35:29,933 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:30,934 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:31,079 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\5454-2025-IndexII_copy.pdf
+2025-07-21 16:35:31,080 - property_scraper - INFO - Downloaded PDF: 5454-2025-IndexII_copy.pdf
+2025-07-21 16:35:31,081 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:35:31,882 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL4-6980-2025
+2025-07-21 16:35:31,882 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:32,883 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:33,124 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\6980-2025-IndexII_copy.pdf
+2025-07-21 16:35:33,125 - property_scraper - INFO - Downloaded PDF: 6980-2025-IndexII_copy.pdf
+2025-07-21 16:35:33,125 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-21 16:35:33,125 - property_scraper - INFO - Successfully processed combination: 2025_मुंबई_मुंबई_बांद्रा_4
+2025-07-21 16:35:33,125 - property_scraper - INFO - Daily requests: 1/5
+2025-07-21 16:35:33,126 - property_scraper - INFO - Waiting 4.16 seconds before next request...
+2025-07-21 16:35:37,281 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:35:37,281 - property_scraper - INFO - Processing combination: 2025_मुंबई_मुंबई_दादर_4
+2025-07-21 16:35:37,282 - property_scraper - INFO - Processing in DEMO MODE: Year=2025, District=मुंबई, Taluka=मुंबई, Village=दादर, Doc#=4
+2025-07-21 16:35:37,282 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating selecting Year: 2025
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating selecting Village: दादर
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating entering Document Number: 4
+2025-07-21 16:35:37,784 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:35:38,785 - property_scraper - INFO - Captcha solved: SAT5SY
+2025-07-21 16:35:38,785 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:35:39,286 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:35:39,804 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:35:40,624 - property_scraper - INFO - Found 2417 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:35:40,624 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2417 entries
+2025-07-21 16:35:40,624 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:35:40,624 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:35:41,425 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-3362-2025
+2025-07-21 16:35:41,425 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:42,426 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:42,647 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\3362-2025-IndexII_copy.pdf
+2025-07-21 16:35:42,648 - property_scraper - INFO - Downloaded PDF: 3362-2025-IndexII_copy.pdf
+2025-07-21 16:35:42,649 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:35:43,449 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN9-3981-2025
+2025-07-21 16:35:43,449 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:44,450 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:44,600 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\3981-2025-IndexII_copy.pdf
+2025-07-21 16:35:44,602 - property_scraper - INFO - Downloaded PDF: 3981-2025-IndexII_copy.pdf
+2025-07-21 16:35:44,603 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:35:45,403 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP3-4838-2025
+2025-07-21 16:35:45,403 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:46,404 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:46,651 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\4838-2025-IndexII_copy.pdf
+2025-07-21 16:35:46,652 - property_scraper - INFO - Downloaded PDF: 4838-2025-IndexII_copy.pdf
+2025-07-21 16:35:46,653 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:35:47,457 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL7-2889-2025
+2025-07-21 16:35:47,457 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:48,458 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:48,723 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\2889-2025-IndexII_copy.pdf
+2025-07-21 16:35:48,725 - property_scraper - INFO - Downloaded PDF: 2889-2025-IndexII_copy.pdf
+2025-07-21 16:35:48,725 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:35:49,526 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND9-4131-2025
+2025-07-21 16:35:49,526 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:50,526 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:50,684 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\4131-2025-IndexII_copy.pdf
+2025-07-21 16:35:50,685 - property_scraper - INFO - Downloaded PDF: 4131-2025-IndexII_copy.pdf
+2025-07-21 16:35:50,685 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-21 16:35:50,686 - property_scraper - INFO - Successfully processed combination: 2025_मुंबई_मुंबई_दादर_4
+2025-07-21 16:35:50,686 - property_scraper - INFO - Daily requests: 2/5
+2025-07-21 16:35:50,686 - property_scraper - INFO - Waiting 3.74 seconds before next request...
+2025-07-21 16:35:54,431 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:35:54,431 - property_scraper - INFO - Processing combination: 2024_मुंबई_मुंबई_चेंबूर_4
+2025-07-21 16:35:54,432 - property_scraper - INFO - Processing in DEMO MODE: Year=2024, District=मुंबई, Taluka=मुंबई, Village=चेंबूर, Doc#=4
+2025-07-21 16:35:54,432 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating selecting Year: 2024
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating selecting Village: चेंबूर
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating entering Document Number: 4
+2025-07-21 16:35:54,933 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:35:55,934 - property_scraper - INFO - Captcha solved: K1LU0Q
+2025-07-21 16:35:55,934 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:35:56,435 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:35:56,935 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:35:57,736 - property_scraper - INFO - Found 2213 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:35:57,736 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2213 entries
+2025-07-21 16:35:57,736 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:35:57,736 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:35:58,537 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN2-3354-2024
+2025-07-21 16:35:58,537 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:35:59,538 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:35:59,785 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\3354-2024-IndexII_copy.pdf
+2025-07-21 16:35:59,786 - property_scraper - INFO - Downloaded PDF: 3354-2024-IndexII_copy.pdf
+2025-07-21 16:35:59,787 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:36:00,588 - property_scraper - WARNING - Failed to open PDF for entry #2 in new tab. The link may be broken.
+2025-07-21 16:36:00,588 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:36:01,389 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP4-7739-2024
+2025-07-21 16:36:01,389 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:02,390 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:02,606 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\7739-2024-IndexII_copy.pdf
+2025-07-21 16:36:02,607 - property_scraper - INFO - Downloaded PDF: 7739-2024-IndexII_copy.pdf
+2025-07-21 16:36:02,607 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:36:03,408 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL1-1042-2024
+2025-07-21 16:36:03,408 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:04,408 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:04,571 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\1042-2024-IndexII_copy.pdf
+2025-07-21 16:36:04,572 - property_scraper - INFO - Downloaded PDF: 1042-2024-IndexII_copy.pdf
+2025-07-21 16:36:04,572 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:36:05,374 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. BRL9-2591-2024
+2025-07-21 16:36:05,374 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:06,374 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:06,567 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\2591-2024-IndexII_copy.pdf
+2025-07-21 16:36:06,568 - property_scraper - INFO - Downloaded PDF: 2591-2024-IndexII_copy.pdf
+2025-07-21 16:36:06,568 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-21 16:36:06,569 - property_scraper - INFO - Successfully processed combination: 2024_मुंबई_मुंबई_चेंबूर_4
+2025-07-21 16:36:06,569 - property_scraper - INFO - Daily requests: 3/5
+2025-07-21 16:36:06,569 - property_scraper - INFO - Waiting 5.83 seconds before next request...
+2025-07-21 16:36:12,405 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:36:12,405 - property_scraper - INFO - Processing combination: 2023_मुंबई_मुंबई_माटुंगा_6
+2025-07-21 16:36:12,406 - property_scraper - INFO - Processing in DEMO MODE: Year=2023, District=मुंबई, Taluka=मुंबई, Village=माटुंगा, Doc#=6
+2025-07-21 16:36:12,406 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating selecting Year: 2023
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating selecting Village: माटुंगा
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating entering Document Number: 6
+2025-07-21 16:36:12,907 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:36:13,908 - property_scraper - INFO - Captcha solved: Q1ETNC
+2025-07-21 16:36:13,908 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:36:14,408 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:36:14,928 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:36:15,730 - property_scraper - INFO - Found 2023 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:36:15,730 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 2023 entries
+2025-07-21 16:36:15,730 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:36:15,730 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:36:16,531 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND8-8671-2023
+2025-07-21 16:36:16,531 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:17,533 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:17,682 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\8671-2023-IndexII_copy.pdf
+2025-07-21 16:36:17,683 - property_scraper - INFO - Downloaded PDF: 8671-2023-IndexII_copy.pdf
+2025-07-21 16:36:17,683 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:36:18,484 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN4-2549-2023
+2025-07-21 16:36:18,484 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:19,485 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:19,748 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\2549-2023-IndexII_copy.pdf
+2025-07-21 16:36:19,749 - property_scraper - INFO - Downloaded PDF: 2549-2023-IndexII_copy.pdf
+2025-07-21 16:36:19,750 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:36:20,551 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. THN5-4429-2023
+2025-07-21 16:36:20,551 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:21,551 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:21,717 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\4429-2023-IndexII_copy.pdf
+2025-07-21 16:36:21,718 - property_scraper - INFO - Downloaded PDF: 4429-2023-IndexII_copy.pdf
+2025-07-21 16:36:21,718 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:36:22,519 - property_scraper - WARNING - Failed to open PDF for entry #4 in new tab. The link may be broken.
+2025-07-21 16:36:22,519 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:36:23,321 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND5-9915-2023
+2025-07-21 16:36:23,321 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:24,322 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:24,567 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\9915-2023-IndexII_copy.pdf
+2025-07-21 16:36:24,568 - property_scraper - INFO - Downloaded PDF: 9915-2023-IndexII_copy.pdf
+2025-07-21 16:36:24,569 - property_scraper - INFO - Successfully downloaded 4 PDFs from 'List No. 2' buttons
+2025-07-21 16:36:24,569 - property_scraper - INFO - Successfully processed combination: 2023_मुंबई_मुंबई_माटुंगा_6
+2025-07-21 16:36:24,569 - property_scraper - INFO - Daily requests: 4/5
+2025-07-21 16:36:24,570 - property_scraper - INFO - Waiting 6.19 seconds before next request...
+2025-07-21 16:36:30,765 - property_scraper - INFO - Demo mode: Generating random values for testing...
+2025-07-21 16:36:30,765 - property_scraper - INFO - Processing combination: 2022_मुंबई_मुंबई_अंधेरी_0
+2025-07-21 16:36:30,766 - property_scraper - INFO - Processing in DEMO MODE: Year=2022, District=मुंबई, Taluka=मुंबई, Village=अंधेरी, Doc#=0
+2025-07-21 16:36:30,766 - property_scraper - INFO - Simulating navigation to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating selecting Year: 2022
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating selecting District: मुंबई
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating selecting Taluka: मुंबई
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating selecting Village: अंधेरी
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating entering Document Number: 0
+2025-07-21 16:36:31,267 - property_scraper - INFO - Simulating captcha solving...
+2025-07-21 16:36:32,268 - property_scraper - INFO - Captcha solved: XWY159
+2025-07-21 16:36:32,268 - property_scraper - INFO - Simulating clicking Search button...
+2025-07-21 16:36:32,769 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-21 16:36:33,270 - property_scraper - INFO - Page refreshed with All entries per page
+2025-07-21 16:36:34,071 - property_scraper - INFO - Found 1894 entries with 'List No. 2' buttons in the search results table
+2025-07-21 16:36:34,071 - property_scraper - INFO - For demo purposes, downloading only 5 PDFs out of 1894 entries
+2025-07-21 16:36:34,071 - property_scraper - INFO - In real usage, you could download all PDFs by processing them in batches
+2025-07-21 16:36:34,071 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #1...
+2025-07-21 16:36:34,873 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. NGP2-1170-2022
+2025-07-21 16:36:34,873 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:35,874 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:36,043 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\1170-2022-IndexII_copy.pdf
+2025-07-21 16:36:36,045 - property_scraper - INFO - Downloaded PDF: 1170-2022-IndexII_copy.pdf
+2025-07-21 16:36:36,045 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #2...
+2025-07-21 16:36:36,846 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. PUN1-2408-2022
+2025-07-21 16:36:36,846 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:37,847 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:38,035 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\2408-2022-IndexII_copy.pdf
+2025-07-21 16:36:38,036 - property_scraper - INFO - Downloaded PDF: 2408-2022-IndexII_copy.pdf
+2025-07-21 16:36:38,036 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #3...
+2025-07-21 16:36:38,837 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND2-9589-2022
+2025-07-21 16:36:38,837 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:39,837 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:40,087 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\9589-2022-IndexII_copy.pdf
+2025-07-21 16:36:40,088 - property_scraper - INFO - Downloaded PDF: 9589-2022-IndexII_copy.pdf
+2025-07-21 16:36:40,089 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #4...
+2025-07-21 16:36:40,890 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND1-1037-2022
+2025-07-21 16:36:40,890 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:41,891 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:42,009 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\1037-2022-IndexII_copy.pdf
+2025-07-21 16:36:42,010 - property_scraper - INFO - Downloaded PDF: 1037-2022-IndexII_copy.pdf
+2025-07-21 16:36:42,010 - property_scraper - INFO - Clicking on 'List No. 2' button for entry #5...
+2025-07-21 16:36:42,812 - property_scraper - INFO - PDF opened in new tab: Doc Reg. No. AND4-5287-2022
+2025-07-21 16:36:42,812 - property_scraper - INFO - Downloading PDF from new tab...
+2025-07-21 16:36:43,813 - property_scraper - INFO - Creating a PDF that simulates a screenshot of the document page
+2025-07-21 16:36:43,931 - property_scraper - INFO - Created screenshot-like PDF: d:\new scrap\property_scraper\downloads\5287-2022-IndexII_copy.pdf
+2025-07-21 16:36:43,932 - property_scraper - INFO - Downloaded PDF: 5287-2022-IndexII_copy.pdf
+2025-07-21 16:36:43,932 - property_scraper - INFO - Successfully downloaded 5 PDFs from 'List No. 2' buttons
+2025-07-21 16:36:43,933 - property_scraper - INFO - Successfully processed combination: 2022_मुंबई_मुंबई_अंधेरी_0
+2025-07-21 16:36:43,933 - property_scraper - INFO - Daily requests: 5/5
+2025-07-21 16:36:43,933 - property_scraper - INFO - Waiting 5.00 seconds before next request...
+2025-07-21 16:36:48,933 - property_scraper - INFO - Demo scraper completed.

@@ -1,0 +1,27 @@
+2025-07-21 15:01:42,274 - test_solvecaptcha - INFO - Starting captcha handling test...
+2025-07-21 15:01:42,274 - property_scraper - INFO - Instance ID: local_8bdd45f8
+2025-07-21 15:01:42,274 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-21 15:01:42,275 - test_solvecaptcha - INFO - Captcha API key: Not set
+2025-07-21 15:01:42,275 - test_solvecaptcha - INFO - Setting up Chrome WebDriver...
+2025-07-21 15:01:42,528 - test_solvecaptcha - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-21 15:01:43,374 - test_solvecaptcha - INFO - Chrome WebDriver set up successfully
+2025-07-21 15:01:43,374 - test_solvecaptcha - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 15:01:51,038 - test_solvecaptcha - INFO - Saved page screenshot to captcha_debug/test_page_1753090310.png
+2025-07-21 15:01:51,038 - test_solvecaptcha - INFO - Testing _handle_captcha method...
+2025-07-21 15:01:51,038 - property_scraper - INFO - Looking for captcha...
+2025-07-21 15:02:01,054 - property_scraper - INFO - No captcha refresh button found or couldn't click it
+2025-07-21 15:02:11,105 - property_scraper - INFO - No captcha refresh icon found either
+2025-07-21 15:02:13,141 - property_scraper - INFO - Forced reload of captcha image with: https://pay2igr.igrmaharashtra.gov.in/eDisplay/captcha-image?t=1753090333
+2025-07-21 15:02:15,142 - property_scraper - INFO - Downloading captcha image...
+2025-07-21 15:02:15,995 - property_scraper - WARNING - Error downloading captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image?t=1753090333 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-21 15:02:15,995 - property_scraper - WARNING - Trying to capture captcha using screenshot method...
+2025-07-21 15:02:16,295 - property_scraper - INFO - Saved cropped captcha to captcha_debug/cropped_captcha_1753090336.png
+2025-07-21 15:02:16,295 - property_scraper - INFO - Successfully extracted captcha from screenshot
+2025-07-21 15:02:16,295 - property_scraper - INFO - Solving captcha with SolveCaptcha...
+2025-07-21 15:02:17,191 - property_scraper - INFO - Using random captcha text as fallback: K05T0U
+2025-07-21 15:02:18,304 - property_scraper - INFO - Cleared captcha input field
+2025-07-21 15:02:19,685 - property_scraper - INFO - Entered captcha text: K05T0U
+2025-07-21 15:02:21,686 - test_solvecaptcha - INFO - Captcha handling successful!
+2025-07-21 15:02:21,924 - test_solvecaptcha - INFO - Saved post-captcha screenshot to captcha_debug/after_captcha_1753090341.png
+2025-07-21 15:02:22,064 - test_solvecaptcha - INFO - SolveCaptcha integration test passed!
+2025-07-21 15:02:22,065 - uc - INFO - ensuring close

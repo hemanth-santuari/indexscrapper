@@ -1,0 +1,11 @@
+{
+    "last_run": null,
+    "completed": [],
+    "current": {
+        "year": null,
+        "district": null,
+        "taluka": null,
+        "village": null,
+        "doc_number": null
+    }
+}

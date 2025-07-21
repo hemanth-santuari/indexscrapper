@@ -1,0 +1,27 @@
+2025-07-21 14:58:36,242 - test_solvecaptcha - INFO - Starting captcha handling test...
+2025-07-21 14:58:36,242 - property_scraper - INFO - Instance ID: local_847a9e64
+2025-07-21 14:58:36,243 - test_solvecaptcha - INFO - Captcha API key: Not set
+2025-07-21 14:58:36,243 - test_solvecaptcha - INFO - Setting up Chrome WebDriver...
+2025-07-21 14:58:36,403 - test_solvecaptcha - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-21 14:58:37,325 - test_solvecaptcha - INFO - Chrome WebDriver set up successfully
+2025-07-21 14:58:37,326 - test_solvecaptcha - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-21 14:58:44,893 - test_solvecaptcha - INFO - Saved page screenshot to captcha_debug/test_page_1753090124.png
+2025-07-21 14:58:44,894 - test_solvecaptcha - INFO - Testing _handle_captcha method...
+2025-07-21 14:58:44,894 - property_scraper - INFO - Looking for captcha...
+2025-07-21 14:58:54,903 - property_scraper - INFO - No captcha refresh button found or couldn't click it
+2025-07-21 14:59:04,940 - property_scraper - INFO - No captcha refresh icon found either
+2025-07-21 14:59:06,974 - property_scraper - INFO - Forced reload of captcha image with: https://pay2igr.igrmaharashtra.gov.in/eDisplay/captcha-image?t=1753090146
+2025-07-21 14:59:08,976 - property_scraper - INFO - Downloading captcha image...
+2025-07-21 14:59:09,695 - property_scraper - WARNING - Error downloading captcha: HTTPSConnectionPool(host='pay2igr.igrmaharashtra.gov.in', port=443): Max retries exceeded with url: /eDisplay/captcha-image?t=1753090146 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+2025-07-21 14:59:09,696 - property_scraper - WARNING - Trying to capture captcha using screenshot method...
+2025-07-21 14:59:10,268 - property_scraper - INFO - Saved cropped captcha to captcha_debug/cropped_captcha_1753090150.png
+2025-07-21 14:59:10,268 - property_scraper - INFO - Successfully extracted captcha from screenshot
+2025-07-21 14:59:10,268 - property_scraper - INFO - Solving captcha with SolveCaptcha...
+2025-07-21 14:59:10,313 - property_scraper - WARNING - OCR failed: tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-21 14:59:10,313 - property_scraper - INFO - Using random captcha text as fallback: E2MDLK
+2025-07-21 14:59:11,428 - property_scraper - INFO - Cleared captcha input field
+2025-07-21 14:59:15,033 - property_scraper - INFO - Entered captcha text: E2MDLK
+2025-07-21 14:59:17,034 - test_solvecaptcha - INFO - Captcha handling successful!
+2025-07-21 14:59:17,271 - test_solvecaptcha - INFO - Saved post-captcha screenshot to captcha_debug/after_captcha_1753090157.png
+2025-07-21 14:59:17,413 - test_solvecaptcha - INFO - SolveCaptcha integration test passed!
+2025-07-21 14:59:17,414 - uc - INFO - ensuring close
