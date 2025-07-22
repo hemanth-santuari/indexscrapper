@@ -1,7 +1,0 @@
-2025-07-21 15:26:02,894 - property_scraper - INFO - Instance ID: local_5c0f56c2
-2025-07-21 15:26:02,894 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
-2025-07-21 15:26:02,902 - test_captcha_screenshot - INFO - Using real captcha image: captcha_debug\cropped_captcha_1753090662.png
-2025-07-21 15:26:02,930 - test_captcha_screenshot - INFO - Using real dropdown image: dropdown_debug\after_district_1753090501.png
-2025-07-21 15:26:02,964 - test_captcha_screenshot - INFO - Using custom _handle_captcha implementation for testing
-2025-07-21 15:26:02,965 - test_captcha_screenshot - INFO - Generated captcha text: DR0501
-2025-07-21 15:26:02,965 - test_captcha_screenshot - INFO - Expected captcha text: DR0501

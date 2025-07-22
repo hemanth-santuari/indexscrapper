@@ -1,0 +1,126 @@
+2025-07-22 12:46:43,852 - property_scraper - INFO - Instance ID: local_64295ee6
+2025-07-22 12:46:43,853 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 12:46:43,860 - property_scraper - INFO - Running property scraper
+2025-07-22 12:46:43,860 - property_scraper - INFO - Starting property scraper...
+2025-07-22 12:46:43,861 - property_scraper - INFO - Instance ID: local_64295ee6
+2025-07-22 12:46:43,861 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 12:46:43,982 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15
+2025-07-22 12:46:43,983 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-22 12:46:45,412 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-22 12:46:45,413 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-22 12:46:52,236 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753168612.png
+2025-07-22 12:46:53,619 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 12:46:53,620 - property_scraper - INFO - Continuing with previous task: 1996_मुंबई_Mumbai_नाहूर_4
+2025-07-22 12:46:53,620 - property_scraper - INFO - Found available task: 1996_मुंबई_Mumbai_नाहूर_4
+2025-07-22 12:46:53,620 - property_scraper - INFO - Selecting '1996' from dropdown 'year'
+2025-07-22 12:46:53,753 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753168613.png
+2025-07-22 12:47:14,325 - property_scraper - ERROR - Error selecting option '1996' from dropdown 'year': Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: chrome=138.0.7204.158)
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2520c0]
+	(No symbol) [0x0x252046]
+	(No symbol) [0x0x250963]
+	(No symbol) [0x0x25162d]
+	(No symbol) [0x0x266cc7]
+	(No symbol) [0x0x26745b]
+	(No symbol) [0x0x26ac7a]
+	(No symbol) [0x0x26acf7]
+	(No symbol) [0x0x2aa194]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 12:47:15,327 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-22 12:47:15,328 - property_scraper - WARNING - Could not save screenshot: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x261f90]
+	(No symbol) [0x0x29db48]
+	(No symbol) [0x0x2cf326]
+	(No symbol) [0x0x2caf15]
+	(No symbol) [0x0x2ca496]
+	(No symbol) [0x0x233a45]
+	(No symbol) [0x0x233f9e]
+	(No symbol) [0x0x23442d]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	(No symbol) [0x0x233710]
+	(No symbol) [0x0x232f1d]
+	GetHandleVerifier [0x0x7c8aec+3881500]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 12:47:15,332 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x261f90]
+	(No symbol) [0x0x29db48]
+	(No symbol) [0x0x2cf326]
+	(No symbol) [0x0x2caf15]
+	(No symbol) [0x0x2ca496]
+	(No symbol) [0x0x233a45]
+	(No symbol) [0x0x233f9e]
+	(No symbol) [0x0x23442d]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	(No symbol) [0x0x233710]
+	(No symbol) [0x0x232f1d]
+	GetHandleVerifier [0x0x7c8aec+3881500]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 12:47:15,334 - property_scraper - ERROR - Failed to select district: मुंबई
+2025-07-22 12:47:15,335 - property_scraper - ERROR - Error in main run loop: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x261f90]
+	(No symbol) [0x0x29db48]
+	(No symbol) [0x0x2cf326]
+	(No symbol) [0x0x2caf15]
+	(No symbol) [0x0x2ca496]
+	(No symbol) [0x0x233a45]
+	(No symbol) [0x0x233f9e]
+	(No symbol) [0x0x23442d]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	(No symbol) [0x0x233710]
+	(No symbol) [0x0x232f1d]
+	GetHandleVerifier [0x0x7c8aec+3881500]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 12:47:15,386 - uc - INFO - ensuring close

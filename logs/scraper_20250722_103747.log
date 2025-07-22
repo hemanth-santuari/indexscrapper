@@ -1,0 +1,358 @@
+2025-07-22 10:37:47,789 - property_scraper - INFO - Instance ID: local_5983006e
+2025-07-22 10:37:47,789 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 10:37:47,789 - property_scraper - INFO - Running property scraper
+2025-07-22 10:37:47,789 - property_scraper - INFO - Starting property scraper...
+2025-07-22 10:37:47,789 - property_scraper - INFO - Instance ID: local_5983006e
+2025-07-22 10:37:47,789 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 10:37:47,917 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55
+2025-07-22 10:37:47,917 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-22 10:37:49,377 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-22 10:37:49,378 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-22 10:37:55,625 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753160875.png
+2025-07-22 10:37:56,501 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:37:56,503 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:37:56,503 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:37:56,655 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753160876.png
+2025-07-22 10:38:07,818 - property_scraper - INFO - Selected Year: 2017
+2025-07-22 10:38:11,102 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753160890.png
+2025-07-22 10:38:22,369 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:38:25,626 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753160905.png
+2025-07-22 10:38:46,253 - property_scraper - ERROR - No taluka options found
+2025-07-22 10:38:47,340 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:38:47,340 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:38:47,341 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:38:47,499 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753160927.png
+2025-07-22 10:38:58,659 - property_scraper - INFO - Selected Year: 1993
+2025-07-22 10:39:01,904 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753160941.png
+2025-07-22 10:39:13,177 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:39:16,415 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753160956.png
+2025-07-22 10:39:27,002 - property_scraper - INFO - Selected Taluka: Mumbai
+2025-07-22 10:39:30,214 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753160970.png
+2025-07-22 10:39:42,898 - property_scraper - INFO - Selected Village: भुलेश्वर
+2025-07-22 10:39:46,174 - property_scraper - INFO - Saved screenshot after village selection: dropdown_debug/after_village_1753160986.png
+2025-07-22 10:39:46,174 - property_scraper - INFO - Processing combination: 1993_मुंबई_Mumbai_भुलेश्वर_4
+2025-07-22 10:39:46,174 - property_scraper - INFO - Processing: Year=1993, District=मुंबई, Taluka=Mumbai, Village=भुलेश्वर, Doc#=4
+2025-07-22 10:39:46,175 - property_scraper - INFO - Selecting '1993' from dropdown 'year'
+2025-07-22 10:39:46,289 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753160986.png
+2025-07-22 10:40:07,375 - property_scraper - ERROR - Error selecting option '1993' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:40:07,377 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-22 10:40:07,498 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753161007.png
+2025-07-22 10:40:28,603 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:40:28,604 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-22 10:40:28,721 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753161028.png
+2025-07-22 10:40:49,798 - property_scraper - ERROR - Error selecting option 'Mumbai' from dropdown 'taluka': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:40:49,799 - property_scraper - INFO - Selecting 'भुलेश्वर' from dropdown 'village'
+2025-07-22 10:40:49,915 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_village_1753161049.png
+2025-07-22 10:41:10,929 - property_scraper - ERROR - Error selecting option 'भुलेश्वर' from dropdown 'village': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:41:32,061 - property_scraper - INFO - Entered document number: 4
+2025-07-22 10:41:32,062 - property_scraper - INFO - Looking for captcha...
+2025-07-22 10:41:34,076 - property_scraper - INFO - Found district screenshot: dropdown_debug\after_district_1753160956.png
+2025-07-22 10:41:34,076 - property_scraper - INFO - Using existing district screenshot for captcha extraction: dropdown_debug\after_district_1753160956.png
+2025-07-22 10:41:34,078 - extract_captcha - INFO - Extracting captcha from image: dropdown_debug\after_district_1753160956.png
+2025-07-22 10:41:34,078 - extract_captcha - INFO - Using Tesseract path from config.json: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 10:41:34,079 - extract_captcha - INFO - Extracted timestamp: 1753160956
+2025-07-22 10:41:34,079 - extract_captcha - INFO - Expected captcha text based on timestamp: DR0956
+2025-07-22 10:41:34,098 - extract_captcha - INFO - Image opened successfully: PNG, (1364, 805), RGB
+2025-07-22 10:41:34,114 - extract_captcha - INFO - Saved captcha image to: captcha_extracts\captcha_after_district_1753160956.png
+2025-07-22 10:41:34,135 - extract_captcha - INFO - Performing OCR on Grayscale image...
+2025-07-22 10:41:34,631 - extract_captcha - INFO - Grayscale - PSM 8: '——$'
+2025-07-22 10:41:34,770 - extract_captcha - INFO - Grayscale - PSM 13: '——$'
+2025-07-22 10:41:35,147 - extract_captcha - INFO - Grayscale - PSM 10: 'Sn'
+2025-07-22 10:41:35,672 - extract_captcha - ERROR - Error with Grayscale - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:35,835 - extract_captcha - ERROR - Error with Grayscale - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:36,084 - extract_captcha - INFO - Performing OCR on Enhanced Contrast image...
+2025-07-22 10:41:36,579 - extract_captcha - INFO - Enhanced Contrast - PSM 8: '—$ ='
+2025-07-22 10:41:36,709 - extract_captcha - INFO - Enhanced Contrast - PSM 13: '—$ ='
+2025-07-22 10:41:37,089 - extract_captcha - INFO - Enhanced Contrast - PSM 10: 'od'
+2025-07-22 10:41:37,599 - extract_captcha - ERROR - Error with Enhanced Contrast - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:37,758 - extract_captcha - ERROR - Error with Enhanced Contrast - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:38,008 - extract_captcha - INFO - Performing OCR on Threshold image...
+2025-07-22 10:41:38,507 - extract_captcha - INFO - Threshold - PSM 8: '—$'
+2025-07-22 10:41:38,640 - extract_captcha - INFO - Threshold - PSM 13: '—$'
+2025-07-22 10:41:39,010 - extract_captcha - INFO - Threshold - PSM 10: 'od'
+2025-07-22 10:41:39,529 - extract_captcha - ERROR - Error with Threshold - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:39,687 - extract_captcha - ERROR - Error with Threshold - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:39,935 - extract_captcha - INFO - Performing OCR on Resized image...
+2025-07-22 10:41:40,448 - extract_captcha - INFO - Resized - PSM 8: '—$'
+2025-07-22 10:41:40,587 - extract_captcha - INFO - Resized - PSM 13: '—$'
+2025-07-22 10:41:40,976 - extract_captcha - INFO - Resized - PSM 10: 'Se'
+2025-07-22 10:41:41,113 - extract_captcha - INFO - Resized - PSM 11: 'h'
+2025-07-22 10:41:41,353 - extract_captcha - INFO - Resized - PSM 12: 'h'
+2025-07-22 10:41:41,516 - extract_captcha - ERROR - Error with Resized - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:41,679 - extract_captcha - ERROR - Error with Resized - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:41,939 - extract_captcha - INFO - Performing OCR on Edge Enhanced image...
+2025-07-22 10:41:42,445 - extract_captcha - INFO - Edge Enhanced - PSM 8: '—<—- i'
+2025-07-22 10:41:42,581 - extract_captcha - INFO - Edge Enhanced - PSM 13: '—<—- i'
+2025-07-22 10:41:42,963 - extract_captcha - INFO - Edge Enhanced - PSM 10: 'a'
+2025-07-22 10:41:43,480 - extract_captcha - ERROR - Error with Edge Enhanced - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:43,637 - extract_captcha - ERROR - Error with Edge Enhanced - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:43,887 - extract_captcha - INFO - Performing OCR on Sharpened image...
+2025-07-22 10:41:44,383 - extract_captcha - INFO - Sharpened - PSM 8: '—-'
+2025-07-22 10:41:44,515 - extract_captcha - INFO - Sharpened - PSM 13: '—-'
+2025-07-22 10:41:44,889 - extract_captcha - INFO - Sharpened - PSM 10: 'a'
+2025-07-22 10:41:45,399 - extract_captcha - ERROR - Error with Sharpened - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:45,561 - extract_captcha - ERROR - Error with Sharpened - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:45,808 - extract_captcha - INFO - Performing OCR on Adaptive Threshold image...
+2025-07-22 10:41:46,058 - extract_captcha - INFO - Adaptive Threshold - PSM 6: 'Qaea'
+2025-07-22 10:41:46,188 - extract_captcha - INFO - Adaptive Threshold - PSM 7: 'Qaea'
+2025-07-22 10:41:46,317 - extract_captcha - INFO - Adaptive Threshold - PSM 8: '——J'
+2025-07-22 10:41:46,449 - extract_captcha - INFO - Adaptive Threshold - PSM 13: '——J'
+2025-07-22 10:41:46,580 - extract_captcha - INFO - Adaptive Threshold - Alphanumeric: 'Qaea'
+2025-07-22 10:41:46,707 - extract_captcha - INFO - Adaptive Threshold - Digits_Letters: 'Qaea'
+2025-07-22 10:41:46,841 - extract_captcha - INFO - Adaptive Threshold - PSM 10: 'Qaea'
+2025-07-22 10:41:47,201 - extract_captcha - INFO - Adaptive Threshold - PSM 12: '||'
+2025-07-22 10:41:47,354 - extract_captcha - ERROR - Error with Adaptive Threshold - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:47,516 - extract_captcha - ERROR - Error with Adaptive Threshold - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:41:47,802 - extract_captcha - INFO - No good matches found to expected captcha text
+2025-07-22 10:41:47,803 - extract_captcha - INFO - Most common OCR result: 'QAEA' (occurred 5 times)
+2025-07-22 10:41:47,803 - property_scraper - INFO - Successfully extracted captcha text using extract_captcha.py: QAEA
+2025-07-22 10:41:48,891 - property_scraper - INFO - Cleared captcha input field
+2025-07-22 10:41:50,241 - property_scraper - INFO - Entered captcha text: QAEA
+2025-07-22 10:41:52,314 - property_scraper - INFO - Clicked search button
+2025-07-22 10:41:52,324 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-22 10:42:04,157 - property_scraper - WARNING - Could not select entries per page: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:42:04,158 - property_scraper - INFO - Looking for 'List No. 2' buttons in the search results table...
+2025-07-22 10:42:14,187 - property_scraper - WARNING - No 'List No. 2' buttons found in the search results table
+2025-07-22 10:42:14,187 - property_scraper - INFO - Successfully processed combination: 1993_मुंबई_Mumbai_भुलेश्वर_4
+2025-07-22 10:42:14,188 - property_scraper - INFO - Daily requests: 1/5
+2025-07-22 10:42:14,188 - property_scraper - INFO - Waiting 6.99 seconds before next request...
+2025-07-22 10:42:22,117 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:42:22,117 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:42:22,118 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:42:22,285 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161142.png
+2025-07-22 10:42:33,475 - property_scraper - INFO - Selected Year: 2017
+2025-07-22 10:42:36,765 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161156.png
+2025-07-22 10:42:48,173 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:42:51,478 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161171.png
+2025-07-22 10:43:12,074 - property_scraper - ERROR - No taluka options found
+2025-07-22 10:43:13,308 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:43:13,308 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:43:13,309 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:43:13,458 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161193.png
+2025-07-22 10:43:24,803 - property_scraper - INFO - Selected Year: 2017
+2025-07-22 10:43:28,051 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161207.png
+2025-07-22 10:43:39,294 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:43:42,544 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161222.png
+2025-07-22 10:44:03,116 - property_scraper - ERROR - No taluka options found
+2025-07-22 10:44:04,361 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:44:04,361 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:44:04,361 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:44:04,513 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161244.png
+2025-07-22 10:44:15,662 - property_scraper - INFO - Selected Year: 2024
+2025-07-22 10:44:18,917 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161258.png
+2025-07-22 10:44:30,202 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:44:33,460 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161273.png
+2025-07-22 10:44:44,015 - property_scraper - INFO - Selected Taluka: मुंबई
+2025-07-22 10:44:47,281 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753161287.png
+2025-07-22 10:45:07,888 - property_scraper - ERROR - No village options found
+2025-07-22 10:45:09,260 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:45:09,260 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:45:09,260 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:45:09,395 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161309.png
+2025-07-22 10:45:20,631 - property_scraper - INFO - Selected Year: 2016
+2025-07-22 10:45:23,872 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161323.png
+2025-07-22 10:45:35,141 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:45:38,382 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161338.png
+2025-07-22 10:45:58,981 - property_scraper - ERROR - No taluka options found
+2025-07-22 10:46:00,268 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:46:00,268 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:46:00,268 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:46:00,451 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161360.png
+2025-07-22 10:46:11,629 - property_scraper - INFO - Selected Year: 2025
+2025-07-22 10:46:14,914 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161374.png
+2025-07-22 10:46:26,174 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:46:29,426 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161389.png
+2025-07-22 10:46:40,014 - property_scraper - INFO - Selected Taluka: मुंबई
+2025-07-22 10:46:43,236 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753161403.png
+2025-07-22 10:47:03,787 - property_scraper - ERROR - No village options found
+2025-07-22 10:47:04,941 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:47:04,941 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:47:04,942 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:47:05,080 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753161424.png
+2025-07-22 10:47:16,250 - property_scraper - INFO - Selected Year: 1985
+2025-07-22 10:47:19,519 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753161439.png
+2025-07-22 10:47:30,711 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:47:33,963 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753161453.png
+2025-07-22 10:47:44,522 - property_scraper - INFO - Selected Taluka: Mumbai
+2025-07-22 10:47:47,757 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753161467.png
+2025-07-22 10:48:00,504 - property_scraper - INFO - Selected Village: सायन
+2025-07-22 10:48:03,768 - property_scraper - INFO - Saved screenshot after village selection: dropdown_debug/after_village_1753161483.png
+2025-07-22 10:48:03,769 - property_scraper - INFO - Processing combination: 1985_मुंबई_Mumbai_सायन_8
+2025-07-22 10:48:03,769 - property_scraper - INFO - Processing: Year=1985, District=मुंबई, Taluka=Mumbai, Village=सायन, Doc#=8
+2025-07-22 10:48:03,770 - property_scraper - INFO - Selecting '1985' from dropdown 'year'
+2025-07-22 10:48:03,884 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753161483.png
+2025-07-22 10:48:24,981 - property_scraper - ERROR - Error selecting option '1985' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:48:24,982 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-22 10:48:25,108 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753161504.png
+2025-07-22 10:48:46,196 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:48:46,196 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-22 10:48:46,354 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753161526.png
+2025-07-22 10:48:51,817 - uc - INFO - ensuring close

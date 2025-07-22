@@ -1,0 +1,11 @@
+2025-07-22 13:14:36,537 - property_scraper - INFO - Instance ID: local_8a47fae5
+2025-07-22 13:14:36,537 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 13:14:36,544 - property_scraper - INFO - Running property scraper
+2025-07-22 13:14:36,544 - property_scraper - INFO - Starting property scraper...
+2025-07-22 13:14:36,544 - property_scraper - INFO - Instance ID: local_8a47fae5
+2025-07-22 13:14:36,545 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 13:14:36,667 - property_scraper - INFO - Using user agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+2025-07-22 13:14:38,245 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-22 13:14:39,760 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-22 13:14:39,761 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-22 13:14:43,244 - uc - INFO - ensuring close

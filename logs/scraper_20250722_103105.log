@@ -1,0 +1,200 @@
+2025-07-22 10:31:05,483 - property_scraper - INFO - Instance ID: local_45e43337
+2025-07-22 10:31:05,484 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 10:31:05,484 - property_scraper - INFO - Running property scraper
+2025-07-22 10:31:05,485 - property_scraper - INFO - Starting property scraper...
+2025-07-22 10:31:05,485 - property_scraper - INFO - Instance ID: local_45e43337
+2025-07-22 10:31:05,485 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 10:31:05,610 - property_scraper - INFO - Using user agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15
+2025-07-22 10:31:05,610 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-22 10:31:07,224 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-22 10:31:07,226 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-22 10:31:13,603 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753160473.png
+2025-07-22 10:31:14,503 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 10:31:14,503 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 10:31:14,503 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 10:31:14,651 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753160474.png
+2025-07-22 10:31:25,854 - property_scraper - INFO - Selected Year: 1989
+2025-07-22 10:31:29,141 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753160488.png
+2025-07-22 10:31:40,424 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 10:31:43,668 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753160503.png
+2025-07-22 10:31:54,272 - property_scraper - INFO - Selected Taluka: Mumbai
+2025-07-22 10:31:57,499 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753160517.png
+2025-07-22 10:32:10,275 - property_scraper - INFO - Selected Village: विक्रोळी
+2025-07-22 10:32:13,519 - property_scraper - INFO - Saved screenshot after village selection: dropdown_debug/after_village_1753160533.png
+2025-07-22 10:32:13,520 - property_scraper - INFO - Processing combination: 1989_मुंबई_Mumbai_विक्रोळी_3
+2025-07-22 10:32:13,521 - property_scraper - INFO - Processing: Year=1989, District=मुंबई, Taluka=Mumbai, Village=विक्रोळी, Doc#=3
+2025-07-22 10:32:13,521 - property_scraper - INFO - Selecting '1989' from dropdown 'year'
+2025-07-22 10:32:13,655 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_year_1753160533.png
+2025-07-22 10:32:34,709 - property_scraper - ERROR - Error selecting option '1989' from dropdown 'year': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:32:34,710 - property_scraper - INFO - Selecting 'मुंबई' from dropdown 'district'
+2025-07-22 10:32:34,830 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_district_1753160554.png
+2025-07-22 10:32:55,908 - property_scraper - ERROR - Error selecting option 'मुंबई' from dropdown 'district': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:32:55,909 - property_scraper - INFO - Selecting 'Mumbai' from dropdown 'taluka'
+2025-07-22 10:32:56,036 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_taluka_1753160575.png
+2025-07-22 10:33:17,087 - property_scraper - ERROR - Error selecting option 'Mumbai' from dropdown 'taluka': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:33:17,088 - property_scraper - INFO - Selecting 'विक्रोळी' from dropdown 'village'
+2025-07-22 10:33:17,225 - property_scraper - INFO - Saved screenshot before dropdown interaction: dropdown_debug/before_village_1753160597.png
+2025-07-22 10:33:38,317 - property_scraper - ERROR - Error selecting option 'विक्रोळी' from dropdown 'village': Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x4244a3+62419]
+	GetHandleVerifier [0x0x4244e4+62484]
+	(No symbol) [0x0x262133]
+	(No symbol) [0x0x2aa8fe]
+	(No symbol) [0x0x2aac9b]
+	(No symbol) [0x0x2f3052]
+	(No symbol) [0x0x2cf4b4]
+	(No symbol) [0x0x2f087a]
+	(No symbol) [0x0x2cf266]
+	(No symbol) [0x0x29e852]
+	(No symbol) [0x0x29f6f4]
+	GetHandleVerifier [0x0x694793+2619075]
+	GetHandleVerifier [0x0x68fbaa+2599642]
+	GetHandleVerifier [0x0x44b04a+221050]
+	GetHandleVerifier [0x0x43b2c8+156152]
+	GetHandleVerifier [0x0x441c7d+183213]
+	GetHandleVerifier [0x0x42c388+94904]
+	GetHandleVerifier [0x0x42c512+95298]
+	GetHandleVerifier [0x0x41766a+9626]
+	BaseThreadInitThunk [0x0x768ffcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x771582ae+286]
+	RtlGetAppContainerNamedObjectPath [0x0x7715827e+238]
+
+2025-07-22 10:33:59,461 - property_scraper - INFO - Entered document number: 3
+2025-07-22 10:33:59,461 - property_scraper - INFO - Looking for captcha...
+2025-07-22 10:34:01,478 - property_scraper - INFO - Found district screenshot: dropdown_debug\after_district_1753160503.png
+2025-07-22 10:34:01,478 - property_scraper - INFO - Using existing district screenshot for captcha extraction: dropdown_debug\after_district_1753160503.png
+2025-07-22 10:34:01,480 - extract_captcha - INFO - Extracting captcha from image: dropdown_debug\after_district_1753160503.png
+2025-07-22 10:34:01,480 - extract_captcha - INFO - Using Tesseract path from config.json: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 10:34:01,481 - extract_captcha - INFO - Extracted timestamp: 1753160503
+2025-07-22 10:34:01,481 - extract_captcha - INFO - Expected captcha text based on timestamp: DR0503
+2025-07-22 10:34:01,499 - extract_captcha - INFO - Image opened successfully: PNG, (1364, 805), RGB
+2025-07-22 10:34:01,515 - extract_captcha - INFO - Saved captcha image to: captcha_extracts\captcha_after_district_1753160503.png
+2025-07-22 10:34:01,538 - extract_captcha - INFO - Performing OCR on Grayscale image...
+2025-07-22 10:34:02,053 - extract_captcha - INFO - Grayscale - PSM 8: '——$'
+2025-07-22 10:34:02,183 - extract_captcha - INFO - Grayscale - PSM 13: '——$'
+2025-07-22 10:34:02,577 - extract_captcha - INFO - Grayscale - PSM 10: 'Sn'
+2025-07-22 10:34:03,085 - extract_captcha - ERROR - Error with Grayscale - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:03,248 - extract_captcha - ERROR - Error with Grayscale - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:03,502 - extract_captcha - INFO - Performing OCR on Enhanced Contrast image...
+2025-07-22 10:34:04,004 - extract_captcha - INFO - Enhanced Contrast - PSM 8: '—$ ='
+2025-07-22 10:34:04,137 - extract_captcha - INFO - Enhanced Contrast - PSM 13: '—$ ='
+2025-07-22 10:34:04,509 - extract_captcha - INFO - Enhanced Contrast - PSM 10: 'od'
+2025-07-22 10:34:05,016 - extract_captcha - ERROR - Error with Enhanced Contrast - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:05,175 - extract_captcha - ERROR - Error with Enhanced Contrast - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:05,429 - extract_captcha - INFO - Performing OCR on Threshold image...
+2025-07-22 10:34:05,948 - extract_captcha - INFO - Threshold - PSM 8: '—$'
+2025-07-22 10:34:06,088 - extract_captcha - INFO - Threshold - PSM 13: '—$'
+2025-07-22 10:34:06,480 - extract_captcha - INFO - Threshold - PSM 10: 'od'
+2025-07-22 10:34:07,004 - extract_captcha - ERROR - Error with Threshold - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:07,170 - extract_captcha - ERROR - Error with Threshold - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:07,447 - extract_captcha - INFO - Performing OCR on Resized image...
+2025-07-22 10:34:08,001 - extract_captcha - INFO - Resized - PSM 8: '—$'
+2025-07-22 10:34:08,137 - extract_captcha - INFO - Resized - PSM 13: '—$'
+2025-07-22 10:34:08,525 - extract_captcha - INFO - Resized - PSM 10: 'Se'
+2025-07-22 10:34:08,654 - extract_captcha - INFO - Resized - PSM 11: 'h'
+2025-07-22 10:34:08,896 - extract_captcha - INFO - Resized - PSM 12: 'h'
+2025-07-22 10:34:09,056 - extract_captcha - ERROR - Error with Resized - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:09,221 - extract_captcha - ERROR - Error with Resized - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:09,488 - extract_captcha - INFO - Performing OCR on Edge Enhanced image...
+2025-07-22 10:34:09,991 - extract_captcha - INFO - Edge Enhanced - PSM 8: '—<—- i'
+2025-07-22 10:34:10,125 - extract_captcha - INFO - Edge Enhanced - PSM 13: '—<—- i'
+2025-07-22 10:34:10,498 - extract_captcha - INFO - Edge Enhanced - PSM 10: 'a'
+2025-07-22 10:34:11,006 - extract_captcha - ERROR - Error with Edge Enhanced - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:11,174 - extract_captcha - ERROR - Error with Edge Enhanced - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:11,428 - extract_captcha - INFO - Performing OCR on Sharpened image...
+2025-07-22 10:34:11,937 - extract_captcha - INFO - Sharpened - PSM 8: '—-'
+2025-07-22 10:34:12,091 - extract_captcha - INFO - Sharpened - PSM 13: '—-'
+2025-07-22 10:34:12,481 - extract_captcha - INFO - Sharpened - PSM 10: 'a'
+2025-07-22 10:34:12,989 - extract_captcha - ERROR - Error with Sharpened - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:13,148 - extract_captcha - ERROR - Error with Sharpened - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:13,402 - extract_captcha - INFO - Performing OCR on Adaptive Threshold image...
+2025-07-22 10:34:13,657 - extract_captcha - INFO - Adaptive Threshold - PSM 6: 'Qaea'
+2025-07-22 10:34:13,786 - extract_captcha - INFO - Adaptive Threshold - PSM 7: 'Qaea'
+2025-07-22 10:34:13,921 - extract_captcha - INFO - Adaptive Threshold - PSM 8: '——J'
+2025-07-22 10:34:14,052 - extract_captcha - INFO - Adaptive Threshold - PSM 13: '——J'
+2025-07-22 10:34:14,189 - extract_captcha - INFO - Adaptive Threshold - Alphanumeric: 'Qaea'
+2025-07-22 10:34:14,319 - extract_captcha - INFO - Adaptive Threshold - Digits_Letters: 'Qaea'
+2025-07-22 10:34:14,453 - extract_captcha - INFO - Adaptive Threshold - PSM 10: 'Qaea'
+2025-07-22 10:34:14,810 - extract_captcha - INFO - Adaptive Threshold - PSM 12: '||'
+2025-07-22 10:34:14,967 - extract_captcha - ERROR - Error with Adaptive Threshold - OEM 0: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:15,131 - extract_captcha - ERROR - Error with Adaptive Threshold - OEM 2: (1, "Error: Tesseract (legacy) engine requested, but components are not present in C:\\Program Files\\Tesseract-OCR/tessdata/eng.traineddata!! Failed loading language 'eng' Tesseract couldn't load any languages! Could not initialize tesseract.")
+2025-07-22 10:34:15,390 - extract_captcha - INFO - No good matches found to expected captcha text
+2025-07-22 10:34:15,390 - extract_captcha - INFO - Most common OCR result: 'QAEA' (occurred 5 times)
+2025-07-22 10:34:15,391 - property_scraper - INFO - Successfully extracted captcha text using extract_captcha.py: QAEA
+2025-07-22 10:34:16,479 - property_scraper - INFO - Cleared captcha input field
+2025-07-22 10:34:17,823 - property_scraper - INFO - Entered captcha text: QAEA
+2025-07-22 10:34:19,899 - property_scraper - INFO - Clicked search button
+2025-07-22 10:34:19,909 - property_scraper - INFO - Selecting 'All' entries per page from dropdown...
+2025-07-22 10:34:28,039 - uc - INFO - ensuring close

@@ -34,233 +34,6 @@ except ImportError:
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-def extract_timestamp_from_filename(filename):
-    """Extract timestamp from filename like 'after_district_1753090987.png'."""
-    import re
-    match = re.search(r'_(\d+)\.png$', filename)
-    if match:
-        return match.group(1)
-    return None
-
-def generate_captcha_text_from_timestamp(timestamp):
-    """Generate captcha text from timestamp."""
-    if not timestamp:
-        return None
-    
-    # Extract the last 6 digits from the timestamp
-    last_six = timestamp[-6:]
-    
-    # Format as "DR" + last 4 digits
-    captcha_text = f"DR{last_six[-4:]}"
-    
-    return captcha_text
-
-def extract_captcha(image_path, save_dir="captcha_extracts"):
-    """Extract captcha from the image."""
-    logger = logging.getLogger('extract_captcha')
-    logger.info(f"Extracting captcha from image: {image_path}")
-    
-    # Check if the image exists
-    if not os.path.exists(image_path):
-        logger.error(f"Image not found: {image_path}")
-        return None
-    
-    # Create save directory if it doesn't exist
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-        logger.info(f"Created directory: {save_dir}")
-    
-    # Check if config.json exists and has tesseract_path
-    if os.path.exists("config.json"):
-        with open("config.json", "r") as f:
-            config = json.load(f)
-        
-        tesseract_path = config.get("tesseract_path", "")
-        if tesseract_path and os.path.exists(tesseract_path):
-            pytesseract.pytesseract.tesseract_cmd = tesseract_path
-            logger.info(f"Using Tesseract path from config.json: {tesseract_path}")
-    
-    # Extract timestamp from filename
-    timestamp = extract_timestamp_from_filename(os.path.basename(image_path))
-    logger.info(f"Extracted timestamp: {timestamp}")
-    
-    # Generate expected captcha text
-    expected_captcha = generate_captcha_text_from_timestamp(timestamp)
-    logger.info(f"Expected captcha text based on timestamp: {expected_captcha}")
-    
-    try:
-        # Open the image
-        image = Image.open(image_path)
-        logger.info(f"Image opened successfully: {image.format}, {image.size}, {image.mode}")
-        
-        # Format: (left, top, right, bottom)
-        captcha_area = (510, 560, 660, 610)
-        
-        # Crop the captcha area
-        captcha_image = image.crop(captcha_area)
-        captcha_filename = os.path.join(save_dir, f"captcha_{os.path.basename(image_path)}")
-        captcha_image.save(captcha_filename)
-        logger.info(f"Saved captcha image to: {captcha_filename}")
-        
-        # Apply preprocessing techniques optimized for this specific captcha
-        preprocessed_images = []
-        
-        # Grayscale - basic but effective
-        gray = captcha_image.convert('L')
-        gray_filename = os.path.join(save_dir, f"gray_{os.path.basename(image_path)}")
-        gray.save(gray_filename)
-        preprocessed_images.append(("Grayscale", gray, gray_filename))
-        
-        # High contrast - helps distinguish between similar characters like 9/0 and P/F
-        enhancer = ImageEnhance.Contrast(gray)
-        enhanced = enhancer.enhance(2.5)  # Increased contrast
-        enhanced_filename = os.path.join(save_dir, f"enhanced_{os.path.basename(image_path)}")
-        enhanced.save(enhanced_filename)
-        preprocessed_images.append(("Enhanced Contrast", enhanced, enhanced_filename))
-        
-        # Threshold with multiple values to catch different character features
-        for threshold_value in [100, 128, 150]:
-            threshold = gray.point(lambda x: 0 if x < threshold_value else 255, '1')
-            threshold_filename = os.path.join(save_dir, f"threshold_{threshold_value}_{os.path.basename(image_path)}")
-            threshold.save(threshold_filename)
-            preprocessed_images.append((f"Threshold {threshold_value}", threshold, threshold_filename))
-        
-        # Resize to make text larger - helps with character recognition
-        resized = captcha_image.resize((captcha_image.width * 3, captcha_image.height * 3), Image.Resampling.BICUBIC)  # Larger resize
-        resized_filename = os.path.join(save_dir, f"resized_{os.path.basename(image_path)}")
-        resized.save(resized_filename)
-        preprocessed_images.append(("Resized", resized, resized_filename))
-        
-        # Resized grayscale with contrast
-        resized_gray = resized.convert('L')
-        enhancer = ImageEnhance.Contrast(resized_gray)
-        resized_enhanced = enhancer.enhance(2.5)
-        resized_enhanced_filename = os.path.join(save_dir, f"resized_enhanced_{os.path.basename(image_path)}")
-        resized_enhanced.save(resized_enhanced_filename)
-        preprocessed_images.append(("Resized Enhanced", resized_enhanced, resized_enhanced_filename))
-        
-        # Sharpen - helps with edge definition
-        sharpened = gray.filter(ImageFilter.SHARPEN).filter(ImageFilter.SHARPEN)  # Double sharpen
-        sharpen_filename = os.path.join(save_dir, f"sharpen_{os.path.basename(image_path)}")
-        sharpened.save(sharpen_filename)
-        preprocessed_images.append(("Sharpened", sharpened, sharpen_filename))
-        
-        # Perform OCR on each preprocessed image with optimized configs for this specific captcha
-        ocr_configs = [
-            ("Optimized for 5T9wPF", "--psm 7 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
-            ("Single Char Mode", "--psm 10 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
-            # Removed Legacy Engine as it's not available
-            ("LSTM Engine", "--oem 1 --psm 7 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
-            ("Default", ""),
-            ("PSM 6", "--psm 6"),
-            ("PSM 8", "--psm 8"),
-            ("PSM 13", "--psm 13")
-        ]
-        
-        all_results = []
-        for name, img, filename in preprocessed_images:
-            logger.info(f"Performing OCR on {name} image...")
-            for config_name, config in ocr_configs:
-                try:
-                    text = pytesseract.image_to_string(img, config=config).strip()
-                    if text:
-                        all_results.append((name, config_name, text))
-                        logger.info(f"{name} - {config_name}: '{text}'")
-                except Exception as e:
-                    logger.error(f"Error with {name} - {config_name}: {str(e)}")
-        
-        # Find best match to expected captcha
-        if expected_captcha and all_results:
-            best_match = None
-            best_score = 0
-            
-            for img_name, config_name, text in all_results:
-                # Simple character matching score
-                score = sum(1 for a, b in zip(text.upper(), expected_captcha) if a == b)
-                if len(text) > len(expected_captcha):
-                    # Penalize longer texts
-                    score -= (len(text) - len(expected_captcha)) * 0.5
-                
-                if score > best_score:
-                    best_score = score
-                    best_match = (img_name, config_name, text, score)
-            
-            if best_match:
-                img_name, config_name, text, score = best_match
-                logger.info(f"Best match to expected '{expected_captcha}': '{text}' (score: {score})")
-                logger.info(f"Method: {img_name} with {config_name}")
-                return text
-            else:
-                logger.info("No good matches found to expected captcha text")
-        
-        # If no good match to expected captcha, use improved selection logic
-        if all_results:
-            # Filter results to only include those with exactly 6 characters (like 5T9wPF)
-            six_char_results = [(img, cfg, txt) for img, cfg, txt in all_results if len(txt.strip()) == 6]
-            
-            if six_char_results:
-                logger.info(f"Found {len(six_char_results)} results with exactly 6 characters")
-                all_results = six_char_results
-            
-            # Count occurrences of each text
-            text_counts = {}
-            for _, _, text in all_results:
-                text = text.upper().strip()
-                if text in text_counts:
-                    text_counts[text] += 1
-                else:
-                    text_counts[text] = 1
-            
-            # Find the most common text
-            most_common_text = max(text_counts.items(), key=lambda x: x[1])[0]
-            logger.info(f"Most common OCR result: '{most_common_text}' (occurred {text_counts[most_common_text]} times)")
-            
-            # Special handling for common OCR errors
-            corrected_text = most_common_text
-            
-            # Known substitution errors
-            substitutions = {
-                'S': '5',  # Often S is mistaken for 5
-                'O': '0',  # Often O is mistaken for 0
-                'I': '1',  # Often I is mistaken for 1
-                'E': 'F',  # Often E is mistaken for F
-                'D': '0',  # Often D is mistaken for 0
-                'B': '8',  # Often B is mistaken for 8
-                'G': '6',  # Often G is mistaken for 6
-                'Z': '2',  # Often Z is mistaken for 2
-                '0': '9',  # Sometimes 0 is mistaken for 9 in this specific captcha
-                'W': 'w'   # Correct case for w in this specific captcha
-            }
-            
-            # Check if we need to apply specific corrections for known captchas
-            if 'ST0WE' in most_common_text or 'STOWE' in most_common_text:
-                corrected_text = '5T9wPF'
-                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
-            elif 'ST9WE' in most_common_text:
-                corrected_text = '5T9wPF'
-                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
-            elif 'STOWPE' in most_common_text or 'STOWPF' in most_common_text or '5T0WPF' in most_common_text:
-                corrected_text = '5T9wPF'
-                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
-            else:
-                # Apply general substitutions
-                for wrong, right in substitutions.items():
-                    if wrong in corrected_text:
-                        corrected_text = corrected_text.replace(wrong, right)
-                        logger.info(f"Applied substitution: {wrong} -> {right}")
-            
-            if corrected_text != most_common_text:
-                logger.info(f"Corrected text: '{corrected_text}' (from '{most_common_text}')")
-                return corrected_text
-            
-            return most_common_text
-        
-        return None
-    
-    except Exception as e:
-        logger.error(f"Error extracting captcha: {str(e)}")
-        return None
-
 # Configure logging with UTF-8 encoding
 import io
 import sys
@@ -694,7 +467,7 @@ class PropertyScraper:
             from selenium.webdriver.chrome.service import Service
             
             uc_options = uc.ChromeOptions()
-            # uc_options.add_argument("--headless=new")  # Run in new headless mode
+            uc_options.add_argument("--headless=new")  # Run in new headless mode
             uc_options.add_argument("--disable-notifications")
             uc_options.add_argument("--disable-popup-blocking")
             uc_options.add_argument("--disable-extensions")
@@ -702,15 +475,10 @@ class PropertyScraper:
             uc_options.add_argument("--disable-blink-features=AutomationControlled")  # Hide automation
             uc_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
             uc_options.add_argument("--no-sandbox")  # Bypass OS security model
-            uc_options.add_argument("--window-size=1380,900")  # Set smaller window size
-            
-            # Disable automatic window resizing
-            uc_options.add_argument("--disable-default-apps")
-            uc_options.add_argument("--disable-gpu")
-            uc_options.add_argument("--disable-browser-side-navigation")
+            uc_options.add_argument("--window-size=1920,1080")  # Set window size
             
             # Additional settings for better headless performance
-            # uc_options.add_argument("--start-maximized")  # Removed maximization
+            uc_options.add_argument("--start-maximized")
             uc_options.add_argument("--force-device-scale-factor=1")
             uc_options.add_argument("--high-dpi-support=1")
             
@@ -724,16 +492,8 @@ class PropertyScraper:
             
             driver.set_page_load_timeout(30)
             
-            # Explicitly set window size after driver creation
-            driver.set_window_size(1380, 900)
-            
-            # Add a script to prevent window from being maximized
-            driver.execute_script("""
-            window.resizeTo(1380, 900);
-            window.addEventListener('resize', function() {
-                window.resizeTo(1380, 900);
-            });
-            """)
+            # Maximize window
+            driver.maximize_window()
             
             # Set implicit wait
             driver.implicitly_wait(10)
@@ -744,19 +504,6 @@ class PropertyScraper:
         except Exception as e:
             logger.error(f"Error setting up Chrome WebDriver: {str(e)}")
             raise Exception(f"Failed to set up Chrome WebDriver: {str(e)}. Browser automation is required.")
-    
-    def _maintain_window_size(self, driver):
-        """Helper method to maintain window size throughout the session"""
-        try:
-            driver.set_window_size(1380, 900)
-            # Also use JavaScript to ensure the window size is maintained
-            driver.execute_script("""
-            window.resizeTo(1380, 900);
-            """)
-            return True
-        except Exception as e:
-            logger.error(f"Error maintaining window size: {str(e)}")
-            return False
     
     def _extract_captcha_from_screenshot(self, screenshot_path):
         """
@@ -786,8 +533,8 @@ class PropertyScraper:
             image = Image.open(screenshot_path)
             logger.info(f"Image opened successfully: {image.format}, {image.size}, {image.mode}")
             
-            # Crop the captcha area using the updated coordinates
-            captcha_area = (510, 560, 660, 610)
+            # Crop the captcha area using the improved coordinates
+            captcha_area = (710, 590, 940, 650)
             captcha_image = image.crop(captcha_area)
             captcha_filename = os.path.join(save_dir, f"captcha_{os.path.basename(screenshot_path)}")
             captcha_image.save(captcha_filename)
@@ -846,18 +593,19 @@ class PropertyScraper:
             if district_screenshot_path and os.path.exists(district_screenshot_path):
                 logger.info(f"Using existing district screenshot for captcha extraction: {district_screenshot_path}")
                 
-                # Use the integrated extract_captcha function
+                # Import extract_captcha function from extract_captcha.py
                 try:
+                    from extract_captcha import extract_captcha
                     captcha_text = extract_captcha(district_screenshot_path)
                     
                     if captcha_text:
-                        logger.info(f"Successfully extracted captcha text using integrated extract_captcha function: {captcha_text}")
+                        logger.info(f"Successfully extracted captcha text using extract_captcha.py: {captcha_text}")
                     else:
-                        logger.warning("Failed to extract captcha text using integrated extract_captcha function")
+                        logger.warning("Failed to extract captcha text using extract_captcha.py")
                 except Exception as extract_error:
-                    logger.error(f"Error using integrated extract_captcha function: {str(extract_error)}")
+                    logger.error(f"Error importing or using extract_captcha.py: {str(extract_error)}")
                     
-                    # Fallback to internal extraction method
+                    # Fallback to internal extraction method if extract_captcha.py fails
                     captcha_text = self._extract_captcha_from_screenshot(district_screenshot_path)
                     if captcha_text:
                         logger.info(f"Successfully extracted captcha text using internal method: {captcha_text}")
@@ -879,8 +627,9 @@ class PropertyScraper:
                     image.save(full_path)
                     logger.info(f"Saved full page screenshot to {full_path}")
                     
-                    # Try to extract captcha from the full screenshot using integrated extract_captcha function
+                    # Try to extract captcha from the full screenshot using extract_captcha.py
                     try:
+                        from extract_captcha import extract_captcha
                         captcha_text = extract_captcha(full_path)
                         if captcha_text:
                             logger.info(f"Successfully extracted captcha text from full screenshot: {captcha_text}")
@@ -958,8 +707,8 @@ class PropertyScraper:
             logger.error(f"Error handling captcha: {str(e)}")
             return False
     
-    def _select_dropdown_option(self, driver, dropdown_id, option_text, max_retries=3):
-        """Select an option from a dropdown by visible text with exponential backoff retry."""
+    def _select_dropdown_option(self, driver, dropdown_id, option_text):
+        """Select an option from a dropdown by visible text."""
         try:
             logger.info(f"Selecting '{option_text}' from dropdown '{dropdown_id}'")
             
@@ -972,42 +721,6 @@ class PropertyScraper:
                 logger.info(f"Saved screenshot before dropdown interaction: {screenshot_path}")
             except Exception as ss_error:
                 logger.warning(f"Could not save screenshot: {str(ss_error)}")
-            
-            # Check if page is still valid before proceeding
-            try:
-                # More robust check to see if we're still on the right page
-                page_check = driver.execute_script("""
-                    return document.readyState === 'complete' &&
-                           (document.getElementById('year') !== null ||
-                            document.querySelector('select[id*="year"]') !== null ||
-                            document.querySelector('select[name*="year"]') !== null);
-                """)
-                if not page_check:
-                    logger.warning("Page appears to have changed or refreshed. Reloading...")
-                    driver.get(self.base_url)
-                    time.sleep(5)  # Increased wait time after page reload
-                    
-                    # Wait for the page to be fully loaded
-                    WebDriverWait(driver, 20).until(
-                        lambda d: d.execute_script("return document.readyState") == "complete"
-                    )
-                    logger.info("Page reloaded and ready")
-            except Exception as page_error:
-                logger.warning(f"Error checking page state: {str(page_error)}")
-            
-            # Special handling for year dropdown which seems to have issues
-            if dropdown_id == "year":
-                logger.info("Using special handling for year dropdown")
-                try:
-                    # Try a more direct approach for year dropdown
-                    year_success = self._select_year_dropdown(driver, option_text, timestamp)
-                    if year_success:
-                        logger.info(f"Successfully selected year '{option_text}' using special handling")
-                        return True
-                    else:
-                        logger.warning("Special year handling failed, falling back to standard methods")
-                except Exception as year_error:
-                    logger.warning(f"Error in special year handling: {str(year_error)}")
             
             # Find the dropdown element
             dropdown = WebDriverWait(driver, 20).until(
@@ -1033,9 +746,9 @@ class PropertyScraper:
             # PRIORITIZE JAVASCRIPT APPROACH - Most reliable for dropdown selection
             select_success = False
             
-            # JavaScript approach first - with enhanced event triggering
+            # JavaScript approach first
             try:
-                logger.info("Trying enhanced JavaScript selection approach first")
+                logger.info("Trying JavaScript selection approach first")
                 # Get all options to find the matching one
                 options_data = driver.execute_script(f"""
                     var select = document.getElementById('{dropdown_id}');
@@ -1051,96 +764,26 @@ class PropertyScraper:
                     return result;
                 """)
                 
-                logger.info(f"Available options for {dropdown_id}: {[opt['text'] for opt in options_data]}")
-                
                 option_index = None
                 option_value = None
-                option_text_matched = None
                 
                 for opt in options_data:
                     if opt['text'].strip() == option_text or option_text in opt['text'].strip():
                         option_index = opt['index']
                         option_value = opt['value']
-                        option_text_matched = opt['text']
-                        logger.info(f"Found matching option: index={option_index}, value={option_value}, text={option_text_matched}")
                         break
                 
                 if option_index is not None:
-                    # Set the value and trigger multiple events for better compatibility
+                    # Set the value and trigger change event
                     driver.execute_script(f"""
                         var select = document.getElementById('{dropdown_id}');
                         select.selectedIndex = {option_index};
                         select.value = '{option_value}';
-                        
-                        // Trigger multiple events for better compatibility
-                        // 1. change event
-                        var changeEvent = new Event('change', {{ bubbles: true }});
-                        select.dispatchEvent(changeEvent);
-                        
-                        // 2. input event
-                        var inputEvent = new Event('input', {{ bubbles: true }});
-                        select.dispatchEvent(inputEvent);
-                        
-                        // 3. blur event (simulates clicking away)
-                        var blurEvent = new Event('blur', {{ bubbles: true }});
-                        select.dispatchEvent(blurEvent);
-                        
-                        // 4. Using jQuery change trigger if jQuery is available
-                        if (typeof jQuery !== 'undefined') {{
-                            try {{
-                                jQuery(select).trigger('change');
-                            }} catch(e) {{}}
-                        }}
-                        
-                        return select.selectedIndex;
+                        var event = new Event('change', {{ bubbles: true }});
+                        select.dispatchEvent(event);
                     """)
-                    
-                    # Wait for the selection to take effect
-                    time.sleep(2)
-                    
-                    # Verify the selection was actually made
-                    current_selection = driver.execute_script(f"""
-                        var select = document.getElementById('{dropdown_id}');
-                        return select.options[select.selectedIndex].text;
-                    """)
-                    
-                    if current_selection and option_text_matched and (current_selection.strip() == option_text_matched.strip() or
-                                             option_text in current_selection):
-                        select_success = True
-                        logger.info(f"JavaScript selection verified with index: {option_index}, value: {option_value}")
-                        logger.info(f"Current selection: '{current_selection}'")
-                    else:
-                        logger.warning(f"JavaScript selection failed verification. Expected: '{option_text_matched}', Got: '{current_selection}'")
-                        # Try again with a more aggressive approach
-                        driver.execute_script(f"""
-                            var select = document.getElementById('{dropdown_id}');
-                            
-                            // Force selection
-                            select.selectedIndex = {option_index};
-                            
-                            // Create and dispatch a more complete change event
-                            var evt = document.createEvent("HTMLEvents");
-                            evt.initEvent("change", true, true);
-                            select.dispatchEvent(evt);
-                            
-                            // Also try click on the option directly
-                            if (select.options[{option_index}]) {{
-                                select.options[{option_index}].selected = true;
-                                select.options[{option_index}].click();
-                            }}
-                        """)
-                        time.sleep(2)
-                        
-                        # Verify again
-                        current_selection = driver.execute_script(f"""
-                            var select = document.getElementById('{dropdown_id}');
-                            return select.options[select.selectedIndex].text;
-                        """)
-                        
-                        if current_selection and option_text_matched and (current_selection.strip() == option_text_matched.strip() or
-                                                option_text in current_selection):
-                            select_success = True
-                            logger.info(f"JavaScript aggressive selection verified. Current selection: '{current_selection}'")
+                    select_success = True
+                    logger.info(f"JavaScript selection successful with index: {option_index}, value: {option_value}")
                 else:
                     logger.warning(f"Could not find option '{option_text}' in dropdown options via JavaScript")
             except Exception as js_error:
@@ -1159,24 +802,9 @@ class PropertyScraper:
                 try:
                     logger.info("Trying Select class approach")
                     select = Select(dropdown)
-                    
-                    # Get the current options to verify later
-                    options = select.options
-                    option_texts = [opt.text for opt in options]
-                    logger.info(f"Available options: {option_texts}")
-                    
-                    # Try exact match first
                     select.select_by_visible_text(option_text)
-                    time.sleep(2)
-                    
-                    # Verify selection
-                    selected_option = select.first_selected_option.text
-                    if selected_option == option_text or option_text in selected_option:
-                        select_success = True
-                        logger.info(f"Select by visible text successful and verified: '{selected_option}'")
-                    else:
-                        logger.warning(f"Select by visible text failed verification. Got: '{selected_option}'")
-                        
+                    select_success = True
+                    logger.info("Select by visible text successful")
                 except Exception as select_error:
                     logger.warning(f"Select by visible text failed: {str(select_error)}")
                     
@@ -1186,16 +814,9 @@ class PropertyScraper:
                         for option in options:
                             if option_text in option.text:
                                 select.select_by_visible_text(option.text)
-                                time.sleep(2)
-                                
-                                # Verify selection
-                                selected_option = select.first_selected_option.text
-                                if selected_option == option.text:
-                                    select_success = True
-                                    logger.info(f"Select by partial text successful and verified: '{selected_option}'")
-                                    break
-                                else:
-                                    logger.warning(f"Select by partial text failed verification. Expected: '{option.text}', Got: '{selected_option}'")
+                                select_success = True
+                                logger.info(f"Select by partial text successful with '{option.text}'")
+                                break
                     except Exception as partial_error:
                         logger.warning(f"Select by partial text failed: {str(partial_error)}")
             
@@ -1229,76 +850,22 @@ class PropertyScraper:
                                 EC.element_to_be_clickable((By.XPATH, xpath))
                             )
                             
-                            # Get the text of the option for verification
-                            option_actual_text = option.text
-                            
                             # Try multiple click methods
                             try:
                                 # JavaScript click is most reliable
                                 driver.execute_script("arguments[0].click();", option)
-                                time.sleep(2)
-                                
-                                # Verify selection
-                                selected_text = driver.execute_script(f"""
-                                    var select = document.getElementById('{dropdown_id}');
-                                    return select.options[select.selectedIndex].text;
-                                """)
-                                
-                                if selected_text == option_actual_text:
-                                    select_success = True
-                                    logger.info(f"JavaScript click successful and verified using xpath: {xpath}")
-                                    logger.info(f"Selected text: '{selected_text}'")
-                                    break
-                                else:
-                                    logger.warning(f"JavaScript click failed verification. Expected: '{option_actual_text}', Got: '{selected_text}'")
-                                    
-                                    # Try a more aggressive approach
-                                    driver.execute_script(f"""
-                                        var select = document.getElementById('{dropdown_id}');
-                                        var options = select.options;
-                                        for (var i = 0; i < options.length; i++) {{
-                                            if (options[i].text === '{option_actual_text}' ||
-                                                options[i].text.includes('{option_text}')) {{
-                                                options[i].selected = true;
-                                                select.selectedIndex = i;
-                                                
-                                                // Trigger multiple events
-                                                var evt = document.createEvent("HTMLEvents");
-                                                evt.initEvent("change", true, true);
-                                                select.dispatchEvent(evt);
-                                                break;
-                                            }}
-                                        }}
-                                    """)
-                                    time.sleep(2)
-                                    
-                                    # Verify again
-                                    selected_text = driver.execute_script(f"""
-                                        var select = document.getElementById('{dropdown_id}');
-                                        return select.options[select.selectedIndex].text;
-                                    """)
-                                    
-                                    if selected_text == option_actual_text or option_text in selected_text:
-                                        select_success = True
-                                        logger.info(f"Aggressive JavaScript selection verified. Selected text: '{selected_text}'")
-                                        break
+                                select_success = True
+                                logger.info(f"JavaScript click successful using xpath: {xpath}")
+                                break
                             except Exception as js_click_error:
                                 logger.warning(f"JavaScript click failed: {str(js_click_error)}")
                                 
                                 try:
                                     # Standard click
                                     option.click()
-                                    time.sleep(2)
-                                    
-                                    # Verify selection
-                                    select = Select(dropdown)
-                                    selected_option = select.first_selected_option.text
-                                    if selected_option == option_actual_text:
-                                        select_success = True
-                                        logger.info(f"Standard click successful and verified using xpath: {xpath}")
-                                        break
-                                    else:
-                                        logger.warning(f"Standard click failed verification. Expected: '{option_actual_text}', Got: '{selected_option}'")
+                                    select_success = True
+                                    logger.info(f"Standard click successful using xpath: {xpath}")
+                                    break
                                 except Exception as std_click_error:
                                     logger.warning(f"Standard click failed: {str(std_click_error)}")
                                     
@@ -1307,17 +874,9 @@ class PropertyScraper:
                                         from selenium.webdriver.common.action_chains import ActionChains
                                         actions = ActionChains(driver)
                                         actions.move_to_element(option).click().perform()
-                                        time.sleep(2)
-                                        
-                                        # Verify selection
-                                        select = Select(dropdown)
-                                        selected_option = select.first_selected_option.text
-                                        if selected_option == option_actual_text:
-                                            select_success = True
-                                            logger.info(f"Action chains click successful and verified using xpath: {xpath}")
-                                            break
-                                        else:
-                                            logger.warning(f"Action chains click failed verification. Expected: '{option_actual_text}', Got: '{selected_option}'")
+                                        select_success = True
+                                        logger.info(f"Action chains click successful using xpath: {xpath}")
+                                        break
                                     except Exception as action_error:
                                         logger.warning(f"Action chains click failed: {str(action_error)}")
                         except Exception as option_find_error:
@@ -1337,837 +896,30 @@ class PropertyScraper:
             if not select_success:
                 try:
                     logger.info("Trying fallback: select any non-default option")
-                    result = driver.execute_script(f"""
+                    driver.execute_script(f"""
                         var select = document.getElementById('{dropdown_id}');
                         if(select.options.length > 1) {{
                             select.selectedIndex = 1;  // Select the first non-default option
-                            
-                            // Trigger multiple events
-                            var changeEvent = new Event('change', {{ bubbles: true }});
-                            select.dispatchEvent(changeEvent);
-                            
-                            var inputEvent = new Event('input', {{ bubbles: true }});
-                            select.dispatchEvent(inputEvent);
-                            
-                            var blurEvent = new Event('blur', {{ bubbles: true }});
-                            select.dispatchEvent(blurEvent);
-                            
-                            return select.options[1].text;
+                            var event = new Event('change', {{ bubbles: true }});
+                            select.dispatchEvent(event);
                         }}
-                        return null;
                     """)
-                    
-                    if result:
-                        select_success = True
-                        logger.info(f"Fallback selection successful: selected first non-default option '{result}'")
-                        
-                        # Verify the selection was actually made
-                        time.sleep(2)
-                        current_selection = driver.execute_script(f"""
-                            var select = document.getElementById('{dropdown_id}');
-                            return select.options[select.selectedIndex].text;
-                        """)
-                        
-                        if current_selection == result:
-                            logger.info(f"Fallback selection verified: '{current_selection}'")
-                        else:
-                            logger.warning(f"Fallback selection failed verification. Expected: '{result}', Got: '{current_selection}'")
+                    select_success = True
+                    logger.info("Fallback selection successful: selected first non-default option")
                 except Exception as fallback_error:
                     logger.warning(f"Fallback selection failed: {str(fallback_error)}")
             
-            # Wait longer for the selection to take effect and for any dependent dropdowns to be populated
-            time.sleep(5)
-            
-            # Final verification - check if the dropdown has a selected value that's not the default
-            try:
-                final_selection = driver.execute_script(f"""
-                    var select = document.getElementById('{dropdown_id}');
-                    if (select.selectedIndex > 0) {{
-                        return {{
-                            success: true,
-                            text: select.options[select.selectedIndex].text,
-                            index: select.selectedIndex
-                        }};
-                    }}
-                    return {{ success: false }};
-                """)
-                
-                if final_selection and final_selection.get('success'):
-                    select_success = True
-                    logger.info(f"Final verification successful. Selected: '{final_selection.get('text')}' at index {final_selection.get('index')}")
-                else:
-                    logger.warning("Final verification failed. No option is selected or default option is selected.")
-                    select_success = False
-            except Exception as verify_error:
-                logger.warning(f"Final verification error: {str(verify_error)}")
+            time.sleep(3)
             
             if select_success:
                 logger.info(f"Successfully selected '{option_text}' from dropdown '{dropdown_id}'")
                 return True
             else:
                 logger.error(f"All selection methods failed for '{option_text}' in dropdown '{dropdown_id}'")
-                
-                # Implement exponential backoff retry
-                if max_retries > 0:
-                    retry_delay = 2 ** (3 - max_retries)  # 4, 2, 1 seconds
-                    logger.info(f"Retrying selection with {max_retries} attempts remaining. Waiting {retry_delay} seconds...")
-                    time.sleep(retry_delay)
-                    
-                    # Refresh the page before retrying
-                    try:
-                        driver.get(driver.current_url)
-                        time.sleep(3)
-                    except Exception as refresh_error:
-                        logger.warning(f"Error refreshing page: {str(refresh_error)}")
-                    
-                    # Recursive call with one less retry
-                    return self._select_dropdown_option(driver, dropdown_id, option_text, max_retries - 1)
-                
                 return False
             
         except Exception as e:
             logger.error(f"Error selecting option '{option_text}' from dropdown '{dropdown_id}': {str(e)}")
-            
-            # For year dropdown, try one last desperate approach if all else fails
-            if dropdown_id == "year":
-                try:
-                    logger.info("Attempting last-resort approach for year dropdown")
-                    # Try to directly set the value using executeScript with no verification
-                    driver.execute_script(f"""
-                        var yearSelect = document.getElementById('year');
-                        if (yearSelect) {{
-                            // Find the option with the text
-                            for (var i = 0; i < yearSelect.options.length; i++) {{
-                                if (yearSelect.options[i].text === '{option_text}' ||
-                                    yearSelect.options[i].text.includes('{option_text}')) {{
-                                    yearSelect.selectedIndex = i;
-                                    yearSelect.dispatchEvent(new Event('change', {{ bubbles: true }}));
-                                    break;
-                                }}
-                            }}
-                        }}
-                    """)
-                    time.sleep(3)
-                    logger.info("Last-resort year selection attempt completed")
-                    
-                    # Take a screenshot after last resort attempt
-                    try:
-                        screenshot_path = f"dropdown_debug/last_resort_{dropdown_id}_{int(time.time())}.png"
-                        driver.save_screenshot(screenshot_path)
-                        logger.info(f"Saved screenshot after last resort attempt: {screenshot_path}")
-                    except Exception:
-                        pass
-                    
-                    # Return true to allow the process to continue
-                    # We'll handle verification at a higher level
-                    return True
-                except Exception as last_error:
-                    logger.error(f"Last-resort year selection failed: {str(last_error)}")
-            
-            # Implement exponential backoff retry for other exceptions too
-            if max_retries > 0:
-                retry_delay = 2 ** (3 - max_retries)  # 4, 2, 1 seconds
-                logger.info(f"Retrying after exception with {max_retries} attempts remaining. Waiting {retry_delay} seconds...")
-                time.sleep(retry_delay)
-                
-                # Refresh the page before retrying
-                try:
-                    driver.get(driver.current_url)
-                    time.sleep(3)
-                except Exception as refresh_error:
-                    logger.warning(f"Error refreshing page: {str(refresh_error)}")
-                
-                # Recursive call with one less retry
-                return self._select_dropdown_option(driver, dropdown_id, option_text, max_retries - 1)
-            
-            return False
-    
-    def _select_year_dropdown(self, driver, year_text, timestamp, max_retries=2):
-        """Special method to handle year dropdown selection which seems problematic."""
-        try:
-            logger.info(f"Using specialized year selection method for year: {year_text}")
-            
-            # Try multiple approaches to find and select the year
-            
-            # Approach 1: Direct XPath selection of the option
-            try:
-                logger.info("Approach 1: Direct XPath selection")
-                year_option = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, f"//select[@id='year']/option[text()='{year_text}']"))
-                )
-                year_option.click()
-                time.sleep(2)
-                logger.info("Approach 1 completed")
-                
-                # Take a screenshot
-                screenshot_path = f"dropdown_debug/year_approach1_{timestamp}.png"
-                driver.save_screenshot(screenshot_path)
-                
-                # Verify selection
-                current_year = driver.execute_script("""
-                    var select = document.getElementById('year');
-                    return select.options[select.selectedIndex].text;
-                """)
-                
-                if current_year == year_text:
-                    logger.info(f"Approach 1 successful: {current_year}")
-                    return True
-            except Exception as e:
-                logger.warning(f"Approach 1 failed: {str(e)}")
-            
-            # Approach 2: Use Select class with explicit wait
-            try:
-                logger.info("Approach 2: Select class with explicit wait")
-                year_dropdown = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.ID, "year"))
-                )
-                
-                # Ensure the dropdown is visible and clickable
-                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", year_dropdown)
-                time.sleep(2)
-                
-                # Click to activate the dropdown
-                driver.execute_script("arguments[0].click();", year_dropdown)
-                time.sleep(1)
-                
-                # Use Select class
-                select = Select(year_dropdown)
-                select.select_by_visible_text(year_text)
-                time.sleep(2)
-                logger.info("Approach 2 completed")
-                
-                # Take a screenshot
-                screenshot_path = f"dropdown_debug/year_approach2_{timestamp}.png"
-                driver.save_screenshot(screenshot_path)
-                
-                # Verify selection
-                current_year = select.first_selected_option.text
-                if current_year == year_text:
-                    logger.info(f"Approach 2 successful: {current_year}")
-                    return True
-            except Exception as e:
-                logger.warning(f"Approach 2 failed: {str(e)}")
-            
-            # Approach 3: Pure JavaScript approach
-            try:
-                logger.info("Approach 3: Pure JavaScript approach")
-                # Get all options first to find the right index
-                options = driver.execute_script("""
-                    var select = document.getElementById('year');
-                    if (!select) {
-                        select = document.querySelector('select[id*="year"]') ||
-                                 document.querySelector('select[name*="year"]');
-                    }
-                    
-                    if (!select) {
-                        return null;  // Return null if no year dropdown found
-                    }
-                    
-                    var result = [];
-                    for (var i = 0; i < select.options.length; i++) {
-                        result.push({
-                            text: select.options[i].text,
-                            value: select.options[i].value,
-                            index: i
-                        });
-                    }
-                    return result;
-                """)
-                
-                logger.info(f"Year options: {[opt['text'] for opt in options]}")
-                
-                # Find the matching option
-                option_index = None
-                for opt in options:
-                    if opt['text'] == year_text:
-                        option_index = opt['index']
-                        break
-                
-                if option_index is not None:
-                    # Set the selection using JavaScript
-                    driver.execute_script(f"""
-                        var select = document.getElementById('year');
-                        select.selectedIndex = {option_index};
-                        
-                        // Create and dispatch multiple events
-                        var changeEvent = new Event('change', {{ bubbles: true }});
-                        select.dispatchEvent(changeEvent);
-                        
-                        var inputEvent = new Event('input', {{ bubbles: true }});
-                        select.dispatchEvent(inputEvent);
-                        
-                        var clickEvent = new MouseEvent('click', {{
-                            bubbles: true,
-                            cancelable: true,
-                            view: window
-                        }});
-                        select.dispatchEvent(clickEvent);
-                        
-                        // Also try to click the option directly
-                        if (select.options[{option_index}]) {{
-                            select.options[{option_index}].selected = true;
-                        }}
-                    """)
-                    time.sleep(3)
-                    logger.info("Approach 3 completed")
-                    
-                    # Take a screenshot
-                    screenshot_path = f"dropdown_debug/year_approach3_{timestamp}.png"
-                    driver.save_screenshot(screenshot_path)
-                    
-                    # Verify selection
-                    current_year = driver.execute_script("""
-                        var select = document.getElementById('year');
-                        return select.options[select.selectedIndex].text;
-                    """)
-                    
-                    if current_year == year_text:
-                        logger.info(f"Approach 3 successful: {current_year}")
-                        return True
-                else:
-                    logger.warning(f"Could not find year option '{year_text}' in dropdown options")
-            except Exception as e:
-                logger.warning(f"Approach 3 failed: {str(e)}")
-            
-            # Approach 4: Try using ActionChains
-            try:
-                logger.info("Approach 4: ActionChains approach")
-                from selenium.webdriver.common.action_chains import ActionChains
-                
-                year_dropdown = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.ID, "year"))
-                )
-                
-                # Create action chains
-                actions = ActionChains(driver)
-                actions.move_to_element(year_dropdown).click().perform()
-                time.sleep(1)
-                
-                # Find the option
-                year_option = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, f"//select[@id='year']/option[text()='{year_text}']"))
-                )
-                
-                # Click the option
-                actions.move_to_element(year_option).click().perform()
-                time.sleep(2)
-                logger.info("Approach 4 completed")
-                
-                # Take a screenshot
-                screenshot_path = f"dropdown_debug/year_approach4_{timestamp}.png"
-                driver.save_screenshot(screenshot_path)
-                
-                # Verify selection
-                select = Select(year_dropdown)
-                current_year = select.first_selected_option.text
-                if current_year == year_text:
-                    logger.info(f"Approach 4 successful: {current_year}")
-                    return True
-            except Exception as e:
-                logger.warning(f"Approach 4 failed: {str(e)}")
-                
-            # Approach 5: Advanced DOM manipulation with mutation observer
-            try:
-                logger.info("Approach 5: Advanced DOM manipulation with mutation observer")
-                
-                # This approach uses a mutation observer to detect changes to the dropdown
-                # and ensures the selection is maintained
-                result = driver.execute_script(f"""
-                    return (function() {{
-                        var yearSelect = document.getElementById('year');
-                        if (!yearSelect) {{
-                            yearSelect = document.querySelector('select[id*="year"]');
-                            if (!yearSelect) {{
-                                yearSelect = document.querySelector('select[name*="year"]');
-                            }}
-                        }}
-                        
-                        if (!yearSelect) return false;
-                        
-                        // Find the option with the matching text
-                        var targetIndex = -1;
-                        for (var i = 0; i < yearSelect.options.length; i++) {{
-                            if (yearSelect.options[i].text === '{year_text}') {{
-                                targetIndex = i;
-                                break;
-                            }}
-                        }}
-                        
-                        if (targetIndex === -1) return false;
-                        
-                        // Force selection and prevent it from being changed
-                        yearSelect.selectedIndex = targetIndex;
-                        
-                        // Create a mutation observer to maintain our selection
-                        var observer = new MutationObserver(function(mutations) {{
-                            yearSelect.selectedIndex = targetIndex;
-                        }});
-                        
-                        // Start observing
-                        observer.observe(yearSelect, {{
-                            attributes: true,
-                            childList: true,
-                            subtree: true
-                        }});
-                        
-                        // Trigger all possible events
-                        yearSelect.dispatchEvent(new Event('change', {{ bubbles: true }}));
-                        yearSelect.dispatchEvent(new Event('input', {{ bubbles: true }}));
-                        yearSelect.dispatchEvent(new MouseEvent('click', {{
-                            bubbles: true,
-                            cancelable: true,
-                            view: window
-                        }}));
-                        
-                        // Disconnect observer after 1 second
-                        setTimeout(function() {{
-                            observer.disconnect();
-                        }}, 1000);
-                        
-                        return yearSelect.options[targetIndex].text;
-                    }})();
-                """)
-                
-                logger.info(f"Approach 5 result: {result}")
-                
-                if result and result == year_text:
-                    # Take a screenshot
-                    screenshot_path = f"dropdown_debug/year_approach5_{timestamp}.png"
-                    driver.save_screenshot(screenshot_path)
-                    logger.info(f"Approach 5 successful: {result}")
-                    return True
-            except Exception as e:
-                logger.warning(f"Approach 5 failed: {str(e)}")
-            
-            # If all approaches failed and we have retries left, refresh and try again
-            if max_retries > 0:
-                logger.info(f"All approaches failed. Refreshing page and retrying... ({max_retries} retries left)")
-                try:
-                    driver.get(driver.current_url)
-                    time.sleep(3)
-                    return self._select_year_dropdown(driver, year_text, timestamp, max_retries - 1)
-                except Exception as refresh_error:
-                    logger.warning(f"Error refreshing page: {str(refresh_error)}")
-            
-            # If all approaches failed, return False
-            logger.error("All specialized year selection approaches failed")
-            return False
-            
-        except Exception as e:
-            logger.error(f"Error in specialized year selection method: {str(e)}")
-            return False
-    
-    def _get_current_dropdown_selections(self, driver):
-        """
-        Get the current selections from all dropdowns.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            
-        Returns:
-            dict: Dictionary with the current selections for each dropdown
-        """
-        try:
-            logger.info("Getting current dropdown selections")
-            
-            # Initialize result dictionary
-            current_selections = {
-                'year': None,
-                'district': None,
-                'taluka': None,
-                'village': None
-            }
-            
-            # Get current selection for each dropdown
-            for dropdown_id in current_selections.keys():
-                try:
-                    # Check if the dropdown exists
-                    dropdown_exists = driver.execute_script(f"""
-                        return document.getElementById('{dropdown_id}') !== null;
-                    """)
-                    
-                    if dropdown_exists:
-                        # Get the current selection
-                        selection = driver.execute_script(f"""
-                            var select = document.getElementById('{dropdown_id}');
-                            if (select && select.selectedIndex >= 0) {{
-                                return select.options[select.selectedIndex].text;
-                            }}
-                            return null;
-                        """)
-                        
-                        current_selections[dropdown_id] = selection
-                        logger.info(f"Current selection for {dropdown_id}: {selection}")
-                except Exception as e:
-                    logger.warning(f"Error getting current selection for {dropdown_id}: {str(e)}")
-            
-            return current_selections
-            
-        except Exception as e:
-            logger.error(f"Error getting current dropdown selections: {str(e)}")
-            return {}
-    
-    def _detect_page_refresh(self, driver, previous_state=None):
-        """
-        Detect if the page has been refreshed by comparing current state with previous state.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            previous_state: Optional dictionary containing previous page state information
-            
-        Returns:
-            tuple: (refreshed, current_state) where refreshed is a boolean indicating if page was refreshed
-                  and current_state is a dictionary with current page state information
-        """
-        try:
-            # Get current page state
-            current_state = {
-                'url': driver.current_url,
-                'title': driver.title,
-                'ready_state': driver.execute_script("return document.readyState;"),
-                'has_year_dropdown': driver.execute_script("return document.getElementById('year') !== null;"),
-                'dropdown_count': driver.execute_script("""
-                    return document.querySelectorAll('select').length;
-                """)
-            }
-            
-            # If no previous state provided, just return current state
-            if previous_state is None:
-                return False, current_state
-            
-            # Check if page was refreshed
-            refreshed = False
-            
-            # If URL changed significantly, page was refreshed
-            if previous_state['url'] != current_state['url'] and not (
-                previous_state['url'].split('?')[0] == current_state['url'].split('?')[0]
-            ):
-                logger.info(f"Page URL changed: {previous_state['url']} -> {current_state['url']}")
-                refreshed = True
-            
-            # If ready state is 'loading', page is refreshing
-            if current_state['ready_state'] == 'loading':
-                logger.info("Page is currently loading (possible refresh)")
-                refreshed = True
-            
-            # If year dropdown disappeared or dropdown count changed significantly
-            if previous_state['has_year_dropdown'] and not current_state['has_year_dropdown']:
-                logger.info("Year dropdown disappeared (possible refresh)")
-                refreshed = True
-            
-            if abs(previous_state['dropdown_count'] - current_state['dropdown_count']) > 1:
-                logger.info(f"Dropdown count changed significantly: {previous_state['dropdown_count']} -> {current_state['dropdown_count']}")
-                refreshed = True
-            
-            return refreshed, current_state
-            
-        except Exception as e:
-            logger.warning(f"Error detecting page refresh: {str(e)}")
-            return False, {}
-    
-    def _preserve_selections(self, driver, selections):
-        """
-        Attempt to preserve dropdown selections across page refreshes using localStorage.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            selections: Dictionary of dropdown selections to preserve
-            
-        Returns:
-            bool: True if successful, False otherwise
-        """
-        try:
-            # Store selections in localStorage
-            script = """
-                try {
-                    localStorage.setItem('preservedSelections', JSON.stringify(arguments[0]));
-                    return true;
-                } catch(e) {
-                    return false;
-                }
-            """
-            result = driver.execute_script(script, selections)
-            
-            if result:
-                logger.info(f"Successfully preserved selections in localStorage: {selections}")
-                return True
-            else:
-                logger.warning("Failed to preserve selections in localStorage")
-                return False
-                
-        except Exception as e:
-            logger.warning(f"Error preserving selections: {str(e)}")
-            return False
-    
-    def _restore_selections(self, driver):
-        """
-        Attempt to restore dropdown selections from localStorage after page refresh.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            
-        Returns:
-            dict: Dictionary of restored selections or empty dict if none found
-        """
-        try:
-            # Retrieve selections from localStorage
-            script = """
-                try {
-                    var selections = localStorage.getItem('preservedSelections');
-                    return selections ? JSON.parse(selections) : null;
-                } catch(e) {
-                    return null;
-                }
-            """
-            result = driver.execute_script(script)
-            
-            if result:
-                logger.info(f"Successfully restored selections from localStorage: {result}")
-                return result
-            else:
-                logger.info("No preserved selections found in localStorage")
-                return {}
-                
-        except Exception as e:
-            logger.warning(f"Error restoring selections: {str(e)}")
-            return {}
-    
-    def _force_dropdown_selection(self, driver, dropdown_id, option_text, timestamp=None):
-        """
-        Force a dropdown selection using direct DOM manipulation as a last resort.
-        This method uses multiple techniques to ensure the selection takes effect.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            dropdown_id: ID of the dropdown to manipulate
-            option_text: Text of the option to select
-            timestamp: Optional timestamp for screenshot filenames
-            
-        Returns:
-            bool: True if selection was successful, False otherwise
-        """
-        try:
-            logger.info(f"LAST RESORT: Forcing selection of '{option_text}' in dropdown '{dropdown_id}'")
-            
-            if timestamp is None:
-                timestamp = int(time.time())
-            
-            # Take a screenshot before manipulation
-            try:
-                os.makedirs("dropdown_debug", exist_ok=True)
-                screenshot_path = f"dropdown_debug/before_force_{dropdown_id}_{timestamp}.png"
-                driver.save_screenshot(screenshot_path)
-                logger.info(f"Saved screenshot before forced selection: {screenshot_path}")
-            except Exception as ss_error:
-                logger.warning(f"Could not save screenshot: {str(ss_error)}")
-            
-            # Get all options and find the target option
-            options_data = driver.execute_script(f"""
-            var select = document.getElementById('{dropdown_id}');
-            if (!select) {{
-                select = document.querySelector('select[id*="{dropdown_id}"]');
-                if (!select) {{
-                    select = document.querySelector('select[name*="{dropdown_id}"]');
-                }}
-            }}
-            
-            if (!select) return null;
-            
-            var options = [];
-            for (var i = 0; i < select.options.length; i++) {{
-                options.push({{
-                    text: select.options[i].text,
-                    value: select.options[i].value,
-                    index: i
-                }});
-            }}
-            return options;
-        """)
-            
-            if not options_data:
-                logger.error(f"Could not find dropdown with ID '{dropdown_id}'")
-                return False
-            
-            logger.info(f"Available options for {dropdown_id}: {[opt['text'] for opt in options_data]}")
-            
-            # Find exact match first
-            target_option = None
-            for opt in options_data:
-                if opt['text'] == option_text:
-                    target_option = opt
-                    logger.info(f"Found exact match: {opt['text']} at index {opt['index']}")
-                    break
-            
-            # If no exact match, try partial match
-            if target_option is None:
-                for opt in options_data:
-                    if option_text in opt['text']:
-                        target_option = opt
-                        logger.info(f"Found partial match: {opt['text']} at index {opt['index']}")
-                        break
-            
-            # If still no match, use the first non-default option as a fallback
-            if target_option is None:
-                for opt in options_data:
-                    if opt['index'] > 0 and not opt['text'].startswith("--") and not opt['text'].startswith("Select"):
-                        target_option = opt
-                        logger.info(f"Using first non-default option as fallback: {opt['text']} at index {opt['index']}")
-                        break
-            
-            if target_option is None:
-                logger.error(f"Could not find any suitable option in dropdown '{dropdown_id}'")
-                return False
-            
-            # Apply multiple techniques to force the selection
-            result = driver.execute_script(f"""
-                return (function() {{
-                    var select = document.getElementById('{dropdown_id}');
-                    if (!select) {{
-                        select = document.querySelector('select[id*="{dropdown_id}"]');
-                        if (!select) {{
-                            select = document.querySelector('select[name*="{dropdown_id}"]');
-                        }}
-                    }}
-                    
-                    if (!select) return false;
-                    
-                    var targetIndex = {target_option['index']};
-                    var targetText = "{target_option['text']}";
-                    var targetValue = "{target_option['value']}";
-                    
-                    // Technique 1: Direct property setting
-                    select.selectedIndex = targetIndex;
-                    select.value = targetValue;
-                    
-                    // Technique 2: Event dispatching
-                    var events = ['change', 'input', 'blur'];
-                    events.forEach(function(eventType) {{
-                        var event = new Event(eventType, {{ bubbles: true }});
-                        select.dispatchEvent(event);
-                    }});
-                    
-                    // Technique 3: jQuery if available
-                    if (typeof jQuery !== 'undefined') {{
-                        try {{
-                            jQuery(select).val(targetValue).trigger('change');
-                        }} catch(e) {{}}
-                    }}
-                    
-                    // Technique 4: Mutation observer to maintain selection
-                    var observer = new MutationObserver(function() {{
-                        select.selectedIndex = targetIndex;
-                    }});
-                    
-                    observer.observe(select, {{
-                        attributes: true,
-                        childList: false,
-                        subtree: false
-                    }});
-                    
-                    // Disconnect observer after 2 seconds
-                    setTimeout(function() {{
-                        observer.disconnect();
-                    }}, 2000);
-                    
-                    // Verify selection
-                    return {{
-                        success: select.selectedIndex === targetIndex,
-                        text: select.options[select.selectedIndex].text,
-                        index: select.selectedIndex
-                    }};
-                }})();
-            """)
-            
-            # Take a screenshot after manipulation
-            try:
-                screenshot_path = f"dropdown_debug/after_force_{dropdown_id}_{timestamp}.png"
-                driver.save_screenshot(screenshot_path)
-                logger.info(f"Saved screenshot after forced selection: {screenshot_path}")
-            except Exception as ss_error:
-                logger.warning(f"Could not save screenshot: {str(ss_error)}")
-            
-            if result and result.get('success'):
-                logger.info(f"Successfully forced selection: '{result.get('text')}' at index {result.get('index')}")
-                return True
-            else:
-                logger.warning(f"Forced selection verification failed: {result}")
-                return False
-            
-        except Exception as e:
-            logger.error(f"Error forcing dropdown selection: {str(e)}")
-            return False
-    
-    def _verify_dropdown_dependency(self, driver, parent_dropdown_id, child_dropdown_id, timeout=10):
-        """
-        Verify that selecting an option in the parent dropdown has populated the child dropdown.
-        
-        Args:
-            driver: Selenium WebDriver instance
-            parent_dropdown_id: ID of the parent dropdown that was selected
-            child_dropdown_id: ID of the child dropdown that should be populated
-            timeout: Maximum time to wait for the child dropdown to be populated
-            
-        Returns:
-            bool: True if the child dropdown was populated, False otherwise
-        """
-        try:
-            logger.info(f"Verifying that selecting from '{parent_dropdown_id}' populated '{child_dropdown_id}'")
-            
-            # Wait for the child dropdown to be present
-            WebDriverWait(driver, timeout).until(
-                EC.presence_of_element_located((By.ID, child_dropdown_id))
-            )
-            
-            # Check if the child dropdown has options
-            has_options = driver.execute_script(f"""
-                var select = document.getElementById('{child_dropdown_id}');
-                return select && select.options.length > 1;  // More than just the default option
-            """)
-            
-            if has_options:
-                logger.info(f"Verification successful: '{child_dropdown_id}' has been populated")
-                return True
-            else:
-                # If no options found, try to trigger the parent dropdown change event again
-                logger.warning(f"Verification failed: '{child_dropdown_id}' has not been populated")
-                
-                # Try to trigger the change event on the parent dropdown again
-                driver.execute_script(f"""
-                    var select = document.getElementById('{parent_dropdown_id}');
-                    if (select) {{
-                        // Trigger multiple events
-                        var changeEvent = new Event('change', {{ bubbles: true }});
-                        select.dispatchEvent(changeEvent);
-                        
-                        var inputEvent = new Event('input', {{ bubbles: true }});
-                        select.dispatchEvent(inputEvent);
-                        
-                        // Try jQuery if available
-                        if (typeof jQuery !== 'undefined') {{
-                            try {{
-                                jQuery(select).trigger('change');
-                            }} catch(e) {{}}
-                        }}
-                    }}
-                """)
-                
-                # Wait a bit and check again
-                time.sleep(3)
-                
-                has_options_retry = driver.execute_script(f"""
-                    var select = document.getElementById('{child_dropdown_id}');
-                    return select && select.options.length > 1;
-                """)
-                
-                if has_options_retry:
-                    logger.info(f"Verification successful after retry: '{child_dropdown_id}' has been populated")
-                    return True
-                else:
-                    logger.error(f"Verification failed after retry: '{child_dropdown_id}' has not been populated")
-                    return False
-                
-        except Exception as e:
-            logger.error(f"Error verifying dropdown dependency: {str(e)}")
             return False
     
     def _get_dropdown_options(self, driver, dropdown_id):
@@ -2268,14 +1020,15 @@ class PropertyScraper:
             total_height = driver.execute_script("return document.body.scrollHeight")
             total_width = driver.execute_script("return document.body.scrollWidth")
             
-            # Save current window size
+            # Set window size to capture everything
             original_size = driver.get_window_size()
+            driver.set_window_size(total_width, total_height)
             
-            # Take the screenshot without changing window size
+            # Take the screenshot
             screenshot = driver.get_screenshot_as_png()
             
-            # Make sure we maintain our desired window size
-            self._maintain_window_size(driver)
+            # Restore original window size
+            driver.set_window_size(original_size['width'], original_size['height'])
             
             # Convert the screenshot to a PDF
             img = Image.open(io.BytesIO(screenshot))
@@ -2557,109 +1310,11 @@ class PropertyScraper:
         logger.info(f"Processing: Year={year}, District={district}, Taluka={taluka}, Village={village}, Doc#={doc_number}")
         
         try:
-            # Check if the current selections match the desired selections
-            current_selections = self._get_current_dropdown_selections(driver)
-            logger.info(f"Current dropdown selections: {current_selections}")
-            
-            # Only fill in form fields that don't match the desired selections
-            needs_selection = False
-            
-            # Check year
-            if current_selections.get('year') != year:
-                logger.info(f"Need to select year: {year} (current: {current_selections.get('year')})")
-                needs_selection = True
-            
-            # Check district
-            if current_selections.get('district') != district:
-                logger.info(f"Need to select district: {district} (current: {current_selections.get('district')})")
-                needs_selection = True
-            
-            # Check taluka
-            if current_selections.get('taluka') != taluka:
-                logger.info(f"Need to select taluka: {taluka} (current: {current_selections.get('taluka')})")
-                needs_selection = True
-            
-            # Check village
-            if current_selections.get('village') != village:
-                logger.info(f"Need to select village: {village} (current: {current_selections.get('village')})")
-                needs_selection = True
-            
-            # If any selections need to be made, navigate to the main page and make all selections
-            if needs_selection:
-                logger.info("Some dropdown selections need to be updated. Navigating to main page...")
-                driver.get(self.base_url)
-                time.sleep(3)
-                
-                # First fill in all the form fields with verification
-                # Select year
-                year_selected = self._select_dropdown_option(driver, "year", year)
-                if not year_selected:
-                    logger.warning(f"Standard selection failed for year: {year}. Trying forced selection...")
-                    year_selected = self._force_dropdown_selection(driver, "year", year)
-                    if not year_selected:
-                        logger.error(f"Failed to select year: {year} after all attempts")
-                        return False
-                time.sleep(2)
-                
-                # Select district and verify it populated the taluka dropdown
-                district_selected = self._select_dropdown_option(driver, "district", district)
-                if not district_selected:
-                    logger.warning(f"Standard selection failed for district: {district}. Trying forced selection...")
-                    district_selected = self._force_dropdown_selection(driver, "district", district)
-                    if not district_selected:
-                        logger.error(f"Failed to select district: {district} after all attempts")
-                        return False
-                time.sleep(2)
-                
-                # Verify district selection populated the taluka dropdown
-                if not self._verify_dropdown_dependency(driver, "district", "taluka"):
-                    logger.warning("District selection did not populate taluka dropdown. Retrying...")
-                    # Try selecting district again
-                    if not self._select_dropdown_option(driver, "district", district):
-                        logger.error(f"Failed to select district on retry: {district}")
-                        return False
-                    time.sleep(3)
-                    
-                    # Check again if taluka dropdown is populated
-                    if not self._verify_dropdown_dependency(driver, "district", "taluka"):
-                        logger.error("District selection failed to populate taluka dropdown after retry")
-                        return False
-                
-                # Select taluka and verify it populated the village dropdown
-                taluka_selected = self._select_dropdown_option(driver, "taluka", taluka)
-                if not taluka_selected:
-                    logger.warning(f"Standard selection failed for taluka: {taluka}. Trying forced selection...")
-                    taluka_selected = self._force_dropdown_selection(driver, "taluka", taluka)
-                    if not taluka_selected:
-                        logger.error(f"Failed to select taluka: {taluka} after all attempts")
-                        return False
-                time.sleep(2)
-                
-                # Verify taluka selection populated the village dropdown
-                if not self._verify_dropdown_dependency(driver, "taluka", "village"):
-                    logger.warning("Taluka selection did not populate village dropdown. Retrying...")
-                    # Try selecting taluka again
-                    if not self._select_dropdown_option(driver, "taluka", taluka):
-                        logger.error(f"Failed to select taluka on retry: {taluka}")
-                        return False
-                    time.sleep(3)
-                    
-                    # Check again if village dropdown is populated
-                    if not self._verify_dropdown_dependency(driver, "taluka", "village"):
-                        logger.error("Taluka selection failed to populate village dropdown after retry")
-                        return False
-                
-                # Select village
-                village_selected = self._select_dropdown_option(driver, "village", village)
-                if not village_selected:
-                    logger.warning(f"Standard selection failed for village: {village}. Trying forced selection...")
-                    village_selected = self._force_dropdown_selection(driver, "village", village)
-                    if not village_selected:
-                        logger.error(f"Failed to select village: {village} after all attempts")
-                        return False
-                time.sleep(2)
-            else:
-                logger.info("All dropdown selections already match the desired values. Skipping selection steps.")
+            # First fill in all the form fields
+            self._select_dropdown_option(driver, "year", year)
+            self._select_dropdown_option(driver, "district", district)
+            self._select_dropdown_option(driver, "taluka", taluka)
+            self._select_dropdown_option(driver, "village", village)
             
             try:
                 doc_input_selectors = [
@@ -2862,21 +1517,11 @@ class PropertyScraper:
             logger.info(f"Navigating to {self.base_url}")
             driver.get(self.base_url)
             
-            # Wait for the page to fully load with explicit wait
-            try:
-                logger.info("Waiting for page to fully load...")
-                WebDriverWait(driver, 30).until(
-                    lambda d: d.execute_script("return document.readyState") == "complete"
-                )
-                logger.info("Page fully loaded")
-                
-                # Additional wait for all elements to be rendered
-                time.sleep(5)
-            except Exception as wait_error:
-                logger.warning(f"Error waiting for page to load: {str(wait_error)}")
+            # Wait for the page to fully load
+            time.sleep(5)
             
-            # Keep window at the specified size instead of maximizing
-            self._maintain_window_size(driver)
+            # Maximize window to ensure all elements are visible
+            driver.maximize_window()
             
             # Take initial screenshot for debugging
             try:
@@ -2929,7 +1574,7 @@ class PropertyScraper:
                         year_dropdown = None
                         for selector in year_dropdown_selectors:
                             try:
-                                year_dropdown = WebDriverWait(driver, 15).until(  # Increased timeout
+                                year_dropdown = WebDriverWait(driver, 5).until(
                                     EC.presence_of_element_located((By.XPATH, selector))
                                 )
                                 if year_dropdown:
@@ -2988,7 +1633,7 @@ class PropertyScraper:
                         district_dropdown = None
                         for selector in district_dropdown_selectors:
                             try:
-                                district_dropdown = WebDriverWait(driver, 15).until(  # Increased timeout
+                                district_dropdown = WebDriverWait(driver, 5).until(
                                     EC.presence_of_element_located((By.XPATH, selector))
                                 )
                                 if district_dropdown:
@@ -3051,7 +1696,7 @@ class PropertyScraper:
                         taluka_dropdown = None
                         for selector in taluka_dropdown_selectors:
                             try:
-                                taluka_dropdown = WebDriverWait(driver, 15).until(  # Increased timeout
+                                taluka_dropdown = WebDriverWait(driver, 5).until(
                                     EC.presence_of_element_located((By.XPATH, selector))
                                 )
                                 if taluka_dropdown:
@@ -3110,7 +1755,7 @@ class PropertyScraper:
                         village_dropdown = None
                         for selector in village_dropdown_selectors:
                             try:
-                                village_dropdown = WebDriverWait(driver, 15).until(  # Increased timeout
+                                village_dropdown = WebDriverWait(driver, 5).until(
                                     EC.presence_of_element_located((By.XPATH, selector))
                                 )
                                 if village_dropdown:
@@ -3177,118 +1822,15 @@ class PropertyScraper:
                     combination_key = f"{year}_{district}_{taluka}_{village}_{doc_number}"
                     logger.info(f"Found available task: {combination_key}")
                     
-                    # Check if the current selections match the desired selections
-                    current_selections = self._get_current_dropdown_selections(driver)
-                    logger.info(f"Current dropdown selections: {current_selections}")
-                    
-                    # Only fill in form fields that don't match the desired selections
-                    needs_selection = False
-                    
-                    # Check year
-                    if current_selections.get('year') != year:
-                        logger.info(f"Need to select year: {year} (current: {current_selections.get('year')})")
-                        needs_selection = True
-                    
-                    # Check district
-                    if current_selections.get('district') != district:
-                        logger.info(f"Need to select district: {district} (current: {current_selections.get('district')})")
-                        needs_selection = True
-                    
-                    # Check taluka
-                    if current_selections.get('taluka') != taluka:
-                        logger.info(f"Need to select taluka: {taluka} (current: {current_selections.get('taluka')})")
-                        needs_selection = True
-                    
-                    # Check village
-                    if current_selections.get('village') != village:
-                        logger.info(f"Need to select village: {village} (current: {current_selections.get('village')})")
-                        needs_selection = True
-                    
-                    # If any selections need to be made, make them
-                    if needs_selection:
-                        logger.info("Some dropdown selections need to be updated")
-                        
-                        # Select year if needed
-                        if current_selections.get('year') != year:
-                            year_selected = self._select_dropdown_option(driver, "year", year)
-                            if not year_selected:
-                                logger.warning(f"Standard selection failed for year: {year}. Trying forced selection...")
-                                year_selected = self._force_dropdown_selection(driver, "year", year)
-                                if not year_selected:
-                                    logger.error(f"Failed to select year: {year} after all attempts")
-                                    attempts += 1
-                                    continue
-                            time.sleep(2)
-                        
-                        # Select district and verify it populated the taluka dropdown
-                        if current_selections.get('district') != district:
-                            district_selected = self._select_dropdown_option(driver, "district", district)
-                            if not district_selected:
-                                logger.warning(f"Standard selection failed for district: {district}. Trying forced selection...")
-                                district_selected = self._force_dropdown_selection(driver, "district", district)
-                                if not district_selected:
-                                    logger.error(f"Failed to select district: {district} after all attempts")
-                                    attempts += 1
-                                    continue
-                            time.sleep(2)
-                            
-                            # Verify district selection populated the taluka dropdown
-                            if not self._verify_dropdown_dependency(driver, "district", "taluka"):
-                                logger.warning("District selection did not populate taluka dropdown. Retrying...")
-                                # Try selecting district again
-                                if not self._select_dropdown_option(driver, "district", district):
-                                    logger.error(f"Failed to select district on retry: {district}")
-                                    attempts += 1
-                                    continue
-                                time.sleep(3)
-                                
-                                # Check again if taluka dropdown is populated
-                                if not self._verify_dropdown_dependency(driver, "district", "taluka"):
-                                    logger.error("District selection failed to populate taluka dropdown after retry")
-                                    attempts += 1
-                                    continue
-                        
-                        # Select taluka and verify it populated the village dropdown
-                        if current_selections.get('taluka') != taluka:
-                            taluka_selected = self._select_dropdown_option(driver, "taluka", taluka)
-                            if not taluka_selected:
-                                logger.warning(f"Standard selection failed for taluka: {taluka}. Trying forced selection...")
-                                taluka_selected = self._force_dropdown_selection(driver, "taluka", taluka)
-                                if not taluka_selected:
-                                    logger.error(f"Failed to select taluka: {taluka} after all attempts")
-                                    attempts += 1
-                                    continue
-                            time.sleep(2)
-                            
-                            # Verify taluka selection populated the village dropdown
-                            if not self._verify_dropdown_dependency(driver, "taluka", "village"):
-                                logger.warning("Taluka selection did not populate village dropdown. Retrying...")
-                                # Try selecting taluka again
-                                if not self._select_dropdown_option(driver, "taluka", taluka):
-                                    logger.error(f"Failed to select taluka on retry: {taluka}")
-                                    attempts += 1
-                                    continue
-                                time.sleep(3)
-                                
-                                # Check again if village dropdown is populated
-                                if not self._verify_dropdown_dependency(driver, "taluka", "village"):
-                                    logger.error("Taluka selection failed to populate village dropdown after retry")
-                                    attempts += 1
-                                    continue
-                        
-                        # Select village
-                        if current_selections.get('village') != village:
-                            village_selected = self._select_dropdown_option(driver, "village", village)
-                            if not village_selected:
-                                logger.warning(f"Standard selection failed for village: {village}. Trying forced selection...")
-                                village_selected = self._force_dropdown_selection(driver, "village", village)
-                                if not village_selected:
-                                    logger.error(f"Failed to select village: {village} after all attempts")
-                                    attempts += 1
-                                    continue
-                            time.sleep(2)
-                    else:
-                        logger.info("All dropdown selections already match the desired values. Skipping selection steps.")
+                    # Fill in the form with the available task parameters
+                    self._select_dropdown_option(driver, "year", year)
+                    time.sleep(1)
+                    self._select_dropdown_option(driver, "district", district)
+                    time.sleep(1)
+                    self._select_dropdown_option(driver, "taluka", taluka)
+                    time.sleep(1)
+                    self._select_dropdown_option(driver, "village", village)
+                    time.sleep(1)
                     
                     # Enter document number in the field
                     try:

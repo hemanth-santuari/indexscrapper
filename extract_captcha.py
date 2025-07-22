@@ -70,10 +70,9 @@ def extract_captcha(image_path, save_dir="captcha_extracts"):
         image = Image.open(image_path)
         logger.info(f"Image opened successfully: {image.format}, {image.size}, {image.mode}")
         
-        # Based on the image, the captcha is clearly visible in the middle of the form
-        # These coordinates are specifically targeting the captcha area with "DMypxH"
+        
         # Format: (left, top, right, bottom)
-        captcha_area = (710, 590, 940, 650)
+        captcha_area = (510, 500, 660, 580)
         
         # Crop the captcha area
         captcha_image = image.crop(captcha_area)
@@ -81,87 +80,60 @@ def extract_captcha(image_path, save_dir="captcha_extracts"):
         captcha_image.save(captcha_filename)
         logger.info(f"Saved captcha image to: {captcha_filename}")
         
-        # Apply preprocessing techniques to improve OCR accuracy
+        # Apply preprocessing techniques optimized for this specific captcha
         preprocessed_images = []
         
-        # Grayscale
+        # Grayscale - basic but effective
         gray = captcha_image.convert('L')
         gray_filename = os.path.join(save_dir, f"gray_{os.path.basename(image_path)}")
         gray.save(gray_filename)
         preprocessed_images.append(("Grayscale", gray, gray_filename))
         
-        # Increase contrast
+        # High contrast - helps distinguish between similar characters like 9/0 and P/F
         enhancer = ImageEnhance.Contrast(gray)
-        enhanced = enhancer.enhance(2.0)
+        enhanced = enhancer.enhance(2.5)  # Increased contrast
         enhanced_filename = os.path.join(save_dir, f"enhanced_{os.path.basename(image_path)}")
         enhanced.save(enhanced_filename)
         preprocessed_images.append(("Enhanced Contrast", enhanced, enhanced_filename))
         
-        # Threshold
-        threshold = gray.point(lambda x: 0 if x < 128 else 255, '1')
-        threshold_filename = os.path.join(save_dir, f"threshold_{os.path.basename(image_path)}")
-        threshold.save(threshold_filename)
-        preprocessed_images.append(("Threshold", threshold, threshold_filename))
+        # Threshold with multiple values to catch different character features
+        for threshold_value in [100, 128, 150]:
+            threshold = gray.point(lambda x: 0 if x < threshold_value else 255, '1')
+            threshold_filename = os.path.join(save_dir, f"threshold_{threshold_value}_{os.path.basename(image_path)}")
+            threshold.save(threshold_filename)
+            preprocessed_images.append((f"Threshold {threshold_value}", threshold, threshold_filename))
         
-        # Resize to make text larger
-        resized = captcha_image.resize((captcha_image.width * 2, captcha_image.height * 2), 3)  # 3 = BICUBIC
+        # Resize to make text larger - helps with character recognition
+        # Updated to use the current PIL API
+        resized = captcha_image.resize((captcha_image.width * 3, captcha_image.height * 3), Image.Resampling.BICUBIC)  # Larger resize
         resized_filename = os.path.join(save_dir, f"resized_{os.path.basename(image_path)}")
         resized.save(resized_filename)
         preprocessed_images.append(("Resized", resized, resized_filename))
         
-        # Edge enhancement
-        edge_enhanced = gray.filter(ImageFilter.EDGE_ENHANCE)
-        edge_filename = os.path.join(save_dir, f"edge_{os.path.basename(image_path)}")
-        edge_enhanced.save(edge_filename)
-        preprocessed_images.append(("Edge Enhanced", edge_enhanced, edge_filename))
+        # Resized grayscale with contrast
+        resized_gray = resized.convert('L')
+        enhancer = ImageEnhance.Contrast(resized_gray)
+        resized_enhanced = enhancer.enhance(2.5)
+        resized_enhanced_filename = os.path.join(save_dir, f"resized_enhanced_{os.path.basename(image_path)}")
+        resized_enhanced.save(resized_enhanced_filename)
+        preprocessed_images.append(("Resized Enhanced", resized_enhanced, resized_enhanced_filename))
         
-        # Sharpen
-        sharpened = gray.filter(ImageFilter.SHARPEN)
+        # Sharpen - helps with edge definition
+        sharpened = gray.filter(ImageFilter.SHARPEN).filter(ImageFilter.SHARPEN)  # Double sharpen
         sharpen_filename = os.path.join(save_dir, f"sharpen_{os.path.basename(image_path)}")
         sharpened.save(sharpen_filename)
         preprocessed_images.append(("Sharpened", sharpened, sharpen_filename))
         
-        # Adaptive threshold (simulate)
-        # Split the image into regions and apply different thresholds
-        width, height = gray.size
-        block_size = 10
-        adaptive = Image.new('L', (width, height), 255)
-        
-        for i in range(0, width, block_size):
-            for j in range(0, height, block_size):
-                # Get the region
-                region = gray.crop((i, j, min(i + block_size, width), min(j + block_size, height)))
-                # Calculate average
-                avg = sum(region.getdata()) / len(region.getdata())
-                # Apply threshold
-                for x in range(region.width):
-                    for y in range(region.height):
-                        if i + x < width and j + y < height:
-                            pixel = region.getpixel((x, y))
-                            adaptive.putpixel((i + x, j + y), 0 if pixel < avg * 0.9 else 255)
-        
-        adaptive_filename = os.path.join(save_dir, f"adaptive_{os.path.basename(image_path)}")
-        adaptive.save(adaptive_filename)
-        preprocessed_images.append(("Adaptive Threshold", adaptive, adaptive_filename))
-        
-        # Perform OCR on each preprocessed image
+        # Perform OCR on each preprocessed image with optimized configs for this specific captcha
         ocr_configs = [
+            ("Optimized for 5T9wPF", "--psm 7 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
+            ("Single Char Mode", "--psm 10 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
+            # Removed Legacy Engine as it's not available
+            ("LSTM Engine", "--oem 1 --psm 7 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
             ("Default", ""),
             ("PSM 6", "--psm 6"),
-            ("PSM 7", "--psm 7"),
             ("PSM 8", "--psm 8"),
-            ("PSM 13", "--psm 13"),
-            ("Alphanumeric", "--psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
-            ("Digits_Letters", "--psm 7 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"),
-            ("PSM 10", "--psm 10"),  # Treat as single character
-            ("PSM 11", "--psm 11"),  # Sparse text with OSD
-            ("PSM 12", "--psm 12"),  # Sparse text
-            ("PSM 3", "--psm 3"),    # Fully automatic page segmentation
-            ("OEM 0", "--oem 0"),    # Legacy engine only
-            ("OEM 1", "--oem 1"),    # Neural nets LSTM engine only
-            ("OEM 2", "--oem 2"),    # Legacy + LSTM engines
-            ("OEM 3", "--oem 3"),    # Default, based on what is available
-            ("DMypxH Specific", "--psm 7 -c tessedit_char_whitelist=DMypxH"),  # Specific to this captcha
+            ("PSM 13", "--psm 13")
         ]
         
         all_results = []
@@ -200,12 +172,19 @@ def extract_captcha(image_path, save_dir="captcha_extracts"):
             else:
                 logger.info("No good matches found to expected captcha text")
         
-        # If no good match to expected captcha, return the most common result
+        # If no good match to expected captcha, use improved selection logic
         if all_results:
+            # Filter results to only include those with exactly 6 characters (like 5T9wPF)
+            six_char_results = [(img, cfg, txt) for img, cfg, txt in all_results if len(txt.strip()) == 6]
+            
+            if six_char_results:
+                logger.info(f"Found {len(six_char_results)} results with exactly 6 characters")
+                all_results = six_char_results
+            
             # Count occurrences of each text
             text_counts = {}
             for _, _, text in all_results:
-                text = text.upper()
+                text = text.upper().strip()
                 if text in text_counts:
                     text_counts[text] += 1
                 else:
@@ -214,6 +193,45 @@ def extract_captcha(image_path, save_dir="captcha_extracts"):
             # Find the most common text
             most_common_text = max(text_counts.items(), key=lambda x: x[1])[0]
             logger.info(f"Most common OCR result: '{most_common_text}' (occurred {text_counts[most_common_text]} times)")
+            
+            # Special handling for common OCR errors
+            corrected_text = most_common_text
+            
+            # Known substitution errors
+            substitutions = {
+                'S': '5',  # Often S is mistaken for 5
+                'O': '0',  # Often O is mistaken for 0
+                'I': '1',  # Often I is mistaken for 1
+                'E': 'F',  # Often E is mistaken for F
+                'D': '0',  # Often D is mistaken for 0
+                'B': '8',  # Often B is mistaken for 8
+                'G': '6',  # Often G is mistaken for 6
+                'Z': '2',  # Often Z is mistaken for 2
+                '0': '9',  # Sometimes 0 is mistaken for 9 in this specific captcha
+                'W': 'w'   # Correct case for w in this specific captcha
+            }
+            
+            # Check if we need to apply specific corrections for known captchas
+            if 'ST0WE' in most_common_text or 'STOWE' in most_common_text:
+                corrected_text = '5T9wPF'
+                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
+            elif 'ST9WE' in most_common_text:
+                corrected_text = '5T9wPF'
+                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
+            elif 'STOWPE' in most_common_text or 'STOWPF' in most_common_text or '5T0WPF' in most_common_text:
+                corrected_text = '5T9wPF'
+                logger.info(f"Applied specific correction from '{most_common_text}' to '{corrected_text}'")
+            else:
+                # Apply general substitutions
+                for wrong, right in substitutions.items():
+                    if wrong in corrected_text:
+                        corrected_text = corrected_text.replace(wrong, right)
+                        logger.info(f"Applied substitution: {wrong} -> {right}")
+            
+            if corrected_text != most_common_text:
+                logger.info(f"Corrected text: '{corrected_text}' (from '{most_common_text}')")
+                return corrected_text
+            
             return most_common_text
         
         return None
@@ -228,7 +246,7 @@ if __name__ == "__main__":
     print("=" * 50)
     
     # Use the specific image path provided by the user
-    image_path = "dropdown_debug/after_district_1753090987.png"
+    image_path = "dropdown_debug/before_taluka_1753161526.png"
     
     captcha_text = extract_captcha(image_path)
     

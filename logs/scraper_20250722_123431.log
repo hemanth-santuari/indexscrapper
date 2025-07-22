@@ -1,0 +1,40 @@
+2025-07-22 12:34:31,566 - property_scraper - INFO - Instance ID: local_181fa472
+2025-07-22 12:34:31,566 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 12:34:31,567 - property_scraper - INFO - Running property scraper
+2025-07-22 12:34:31,568 - property_scraper - INFO - Starting property scraper...
+2025-07-22 12:34:31,568 - property_scraper - INFO - Instance ID: local_181fa472
+2025-07-22 12:34:31,568 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 12:34:31,686 - property_scraper - INFO - Using user agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+2025-07-22 12:34:31,687 - property_scraper - INFO - Creating Chrome driver using undetected_chromedriver with enhanced settings
+2025-07-22 12:34:33,090 - property_scraper - INFO - Chrome WebDriver set up successfully
+2025-07-22 12:34:33,091 - property_scraper - INFO - Navigating to https://pay2igr.igrmaharashtra.gov.in/eDisplay/Propertydetails/index
+2025-07-22 12:34:39,660 - property_scraper - INFO - Saved initial page screenshot to captcha_debug/initial_page_1753167879.png
+2025-07-22 12:34:40,843 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 12:34:40,844 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 12:34:40,844 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 12:34:40,990 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753167880.png
+2025-07-22 12:34:52,149 - property_scraper - INFO - Selected Year: 2014
+2025-07-22 12:34:55,429 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753167895.png
+2025-07-22 12:35:06,698 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 12:35:09,940 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753167909.png
+2025-07-22 12:35:30,568 - property_scraper - ERROR - No taluka options found
+2025-07-22 12:35:31,756 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 12:35:31,756 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 12:35:31,756 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 12:35:31,923 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753167931.png
+2025-07-22 12:35:43,103 - property_scraper - INFO - Selected Year: 2019
+2025-07-22 12:35:46,430 - property_scraper - INFO - Saved screenshot after year selection: dropdown_debug/after_year_1753167946.png
+2025-07-22 12:35:57,746 - property_scraper - INFO - Selected District: मुंबई
+2025-07-22 12:36:01,008 - property_scraper - INFO - Saved screenshot after district selection: dropdown_debug/after_district_1753167960.png
+2025-07-22 12:36:11,622 - property_scraper - INFO - Selected Taluka: मुंबई
+2025-07-22 12:36:14,834 - property_scraper - INFO - Saved screenshot after taluka selection: dropdown_debug/after_taluka_1753167974.png
+2025-07-22 12:36:35,420 - property_scraper - ERROR - No village options found
+2025-07-22 12:36:37,156 - property_scraper - INFO - Looking for available tasks...
+2025-07-22 12:36:37,156 - property_scraper - INFO - No current task to continue. Need to get dropdown options from website.
+2025-07-22 12:36:37,157 - property_scraper - INFO - No available tasks found. Getting dropdown options from website...
+2025-07-22 12:36:37,309 - property_scraper - INFO - Saved screenshot before dropdown interactions: dropdown_debug/before_dropdowns_1753167997.png
+2025-07-22 12:36:52,232 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D49CD80CE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/4816cf66084cbd2f4e2ae96e8ff5a8b0/element
+2025-07-22 12:36:56,323 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D49CD80530>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/4816cf66084cbd2f4e2ae96e8ff5a8b0/element
+2025-07-22 12:37:00,400 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D49CD80E30>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/4816cf66084cbd2f4e2ae96e8ff5a8b0/element
+2025-07-22 12:37:04,508 - property_scraper - ERROR - Could not find year dropdown
+2025-07-22 12:37:06,632 - uc - INFO - ensuring close

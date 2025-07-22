@@ -1,0 +1,7 @@
+2025-07-22 12:47:44,558 - property_scraper - INFO - Instance ID: local_cafbcd5d
+2025-07-22 12:47:44,558 - property_scraper - INFO - Tesseract path set to: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-07-22 12:47:44,559 - property_scraper - INFO - Running property scraper
+2025-07-22 12:47:44,560 - property_scraper - INFO - Starting property scraper...
+2025-07-22 12:47:44,560 - property_scraper - INFO - Instance ID: local_cafbcd5d
+2025-07-22 12:47:44,560 - property_scraper - INFO - Setting up Chrome WebDriver...
+2025-07-22 12:47:44,699 - property_scraper - ERROR - Error setting up Chrome WebDriver: No module named 'distutils'
