@@ -1072,20 +1072,20 @@ class PropertyScraper:
                         select.selectedIndex = {option_index};
                         select.value = '{option_value}';
                         
-                        // Trigger multiple events for better compatibility
-                        // 1. change event
+                        
+                        
                         var changeEvent = new Event('change', {{ bubbles: true }});
                         select.dispatchEvent(changeEvent);
                         
-                        // 2. input event
+                        
                         var inputEvent = new Event('input', {{ bubbles: true }});
                         select.dispatchEvent(inputEvent);
                         
-                        // 3. blur event (simulates clicking away)
+                        
                         var blurEvent = new Event('blur', {{ bubbles: true }});
                         select.dispatchEvent(blurEvent);
                         
-                        // 4. Using jQuery change trigger if jQuery is available
+                        
                         if (typeof jQuery !== 'undefined') {{
                             try {{
                                 jQuery(select).trigger('change');
@@ -1115,15 +1115,15 @@ class PropertyScraper:
                         driver.execute_script(f"""
                             var select = document.getElementById('{dropdown_id}');
                             
-                            // Force selection
+                            
                             select.selectedIndex = {option_index};
                             
-                            // Create and dispatch a more complete change event
+                            
                             var evt = document.createEvent("HTMLEvents");
                             evt.initEvent("change", true, true);
                             select.dispatchEvent(evt);
                             
-                            // Also try click on the option directly
+                            
                             if (select.options[{option_index}]) {{
                                 select.options[{option_index}].selected = true;
                                 select.options[{option_index}].click();
@@ -1560,7 +1560,7 @@ class PropertyScraper:
                     }
                     
                     if (!select) {
-                        return null;  // Return null if no year dropdown found
+                        return null;  
                     }
                     
                     var result = [];
@@ -1589,7 +1589,7 @@ class PropertyScraper:
                         var select = document.getElementById('year');
                         select.selectedIndex = {option_index};
                         
-                        // Create and dispatch multiple events
+                        
                         var changeEvent = new Event('change', {{ bubbles: true }});
                         select.dispatchEvent(changeEvent);
                         
@@ -1603,7 +1603,7 @@ class PropertyScraper:
                         }});
                         select.dispatchEvent(clickEvent);
                         
-                        // Also try to click the option directly
+                        
                         if (select.options[{option_index}]) {{
                             select.options[{option_index}].selected = true;
                         }}
@@ -1684,7 +1684,7 @@ class PropertyScraper:
                         
                         if (!yearSelect) return false;
                         
-                        // Find the option with the matching text
+                        
                         var targetIndex = -1;
                         for (var i = 0; i < yearSelect.options.length; i++) {{
                             if (yearSelect.options[i].text === '{year_text}') {{
@@ -1695,22 +1695,22 @@ class PropertyScraper:
                         
                         if (targetIndex === -1) return false;
                         
-                        // Force selection and prevent it from being changed
+                        
                         yearSelect.selectedIndex = targetIndex;
                         
-                        // Create a mutation observer to maintain our selection
+                        
                         var observer = new MutationObserver(function(mutations) {{
                             yearSelect.selectedIndex = targetIndex;
                         }});
                         
-                        // Start observing
+                        
                         observer.observe(yearSelect, {{
                             attributes: true,
                             childList: true,
                             subtree: true
                         }});
                         
-                        // Trigger all possible events
+                        
                         yearSelect.dispatchEvent(new Event('change', {{ bubbles: true }}));
                         yearSelect.dispatchEvent(new Event('input', {{ bubbles: true }}));
                         yearSelect.dispatchEvent(new MouseEvent('click', {{
@@ -1719,7 +1719,7 @@ class PropertyScraper:
                             view: window
                         }}));
                         
-                        // Disconnect observer after 1 second
+                        
                         setTimeout(function() {{
                             observer.disconnect();
                         }}, 1000);
@@ -2035,25 +2035,25 @@ class PropertyScraper:
                     var targetText = "{target_option['text']}";
                     var targetValue = "{target_option['value']}";
                     
-                    // Technique 1: Direct property setting
+                    
                     select.selectedIndex = targetIndex;
                     select.value = targetValue;
                     
-                    // Technique 2: Event dispatching
+                    
                     var events = ['change', 'input', 'blur'];
                     events.forEach(function(eventType) {{
                         var event = new Event(eventType, {{ bubbles: true }});
                         select.dispatchEvent(event);
                     }});
                     
-                    // Technique 3: jQuery if available
+                    
                     if (typeof jQuery !== 'undefined') {{
                         try {{
                             jQuery(select).val(targetValue).trigger('change');
                         }} catch(e) {{}}
                     }}
                     
-                    // Technique 4: Mutation observer to maintain selection
+                    
                     var observer = new MutationObserver(function() {{
                         select.selectedIndex = targetIndex;
                     }});
@@ -2064,12 +2064,12 @@ class PropertyScraper:
                         subtree: false
                     }});
                     
-                    // Disconnect observer after 2 seconds
+                    
                     setTimeout(function() {{
                         observer.disconnect();
                     }}, 2000);
                     
-                    // Verify selection
+                    
                     return {{
                         success: select.selectedIndex === targetIndex,
                         text: select.options[select.selectedIndex].text,
@@ -2121,7 +2121,7 @@ class PropertyScraper:
             # Check if the child dropdown has options
             has_options = driver.execute_script(f"""
                 var select = document.getElementById('{child_dropdown_id}');
-                return select && select.options.length > 1;  // More than just the default option
+                return select && select.options.length > 1;  
             """)
             
             if has_options:
@@ -2135,14 +2135,14 @@ class PropertyScraper:
                 driver.execute_script(f"""
                     var select = document.getElementById('{parent_dropdown_id}');
                     if (select) {{
-                        // Trigger multiple events
+                        
                         var changeEvent = new Event('change', {{ bubbles: true }});
                         select.dispatchEvent(changeEvent);
                         
                         var inputEvent = new Event('input', {{ bubbles: true }});
                         select.dispatchEvent(inputEvent);
                         
-                        // Try jQuery if available
+                        
                         if (typeof jQuery !== 'undefined') {{
                             try {{
                                 jQuery(select).trigger('change');
